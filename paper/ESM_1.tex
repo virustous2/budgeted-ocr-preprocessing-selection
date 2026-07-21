@@ -1,0 +1,249 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{url}
+
+\graphicspath{{figures/}}
+
+\title{Online Resource 1: Additional Reproducibility Details}
+\author{\begin{tabular}{c}Cong Thanh Bui, Anh Nguyen Van, Hung Nguyen The, Tu Nguyen Anh,\\ Quynh Le Thi, Linh Lai Thi, and Dung Nguyen Trung\end{tabular}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Article title:} Budgeted Page-Level Preprocessing Selection for Vietnamese Administrative OCR: A Controlled Comparison of Learned, Retrieval-Based, and Static Shortlists
+
+\noindent\textbf{Journal name:} International Journal on Document Analysis and Recognition
+
+\noindent\textbf{Corresponding author:} Anh Nguyen Van, National Laboratory for Securing Information (NLSI), Vietnam Ministry of Defence, Hanoi, Vietnam. Email: \texttt{nguyenanhbh14@gmail.com}
+
+\bigskip
+\noindent\textbf{Caption:} Additional dataset summary, offline OCR evaluation loop, preprocessing search-space table, surrogate feature groups, nested-CV surrogate model quality, nested GroupKFold protocol details and stepwise algorithm, policy-agnostic headroom controls, Vietnamese best-of-K curves, feature-matched oracle-free selector sensitivity results, omitted SROIE intermediate-budget results, and contour-suppression schematic referenced from the main manuscript.
+
+\section{Dataset Summary}
+
+\begin{table}[h]
+\centering
+\caption{Dataset summary.}
+\begin{tabularx}{\textwidth}{p{3.2cm} X X}
+\toprule
+Aspect & Vietnamese administrative documents & SROIE receipt images \\
+\midrule
+Dataset/domain & Vietnamese government administrative documents & SROIE receipt images \\
+Source & Public Vietnamese Government document portal: \url{https://chinhphu.vn/he-thong-van-ban} & ICDAR 2019 SROIE benchmark \\
+Images & 300 first-page images & 626 images after duplicate removal \\
+Time span & 2015--2024, balanced by year & Not applicable \\
+Reference text & Author-curated \texttt{.docx} transcriptions & Official full-text transcriptions \\
+OCR recognizers & VietOCR, Tesseract, EasyOCR & Tesseract, EasyOCR \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Offline OCR Evaluation Loop}
+
+\noindent\textbf{Input:} Page images and references \(\mathcal{D}\); candidate pool \(\Theta\); recognizer set \(E\); optional contour transform \(C\).
+
+\noindent\textbf{Output:} Collected data table with one row for each page \(i\) and preprocessing setting \(\theta_j\), containing page features, preprocessing settings, and observed CER values as regression targets.
+
+\begin{enumerate}
+    \item For each page \(x_i\), choose the page representation \(\tilde{x}_i\): \(x_i\) for raw experiments or \(C(x_i)\) for contour-suppressed experiments.
+    \item Extract OCR-free page features \(f(\tilde{x}_i)\) once for that page representation.
+    \item For each candidate \(\theta_j \in \Theta\), apply \(P_{\theta_j}\) to \(\tilde{x}_i\).
+    \item For each recognizer \(e \in E\), run the shared-detection OCR pipeline and compute \(y_{i,j,e}\) by page-level CER against \(r_i\).
+    \item Store \(z_{i,j}\), \(\theta_j\), page/fold identifiers, and CER targets \(y_{i,j,e}\).
+\end{enumerate}
+
+\section{Preprocessing Search Space}
+
+\begin{table}[h]
+\centering
+\caption{Page-level preprocessing search space.}
+\begin{tabularx}{\textwidth}{p{3.2cm} p{3.0cm} p{2.2cm} X}
+\toprule
+Parameter & Range & Off value & Role \\
+\midrule
+\texttt{gaussian\_ksize} & \{0, 3, 5, 7\} & 0 & denoising \\
+\texttt{bilateral\_d} & \{0, \ldots, 9\} & 0 & edge-preserving denoising \\
+\texttt{clahe\_clip} & [0, 4.0] & 0 & local contrast enhancement \\
+\texttt{gamma} & [0.5, 1.5] & 1.0 & brightness correction \\
+\texttt{sharpen} & [0, 2.0] & 0 & sharpening strength \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Surrogate Feature Groups}
+
+\begin{table}[h]
+\centering
+\caption{Surrogate feature groups.}
+\begin{tabularx}{\textwidth}{p{3.0cm} p{6.2cm} X}
+\toprule
+Feature group & Features & Purpose \\
+\midrule
+Base image features & blur, contrast, brightness, noise, edge density, entropy, dynamic range & capture low-level image quality, tone, and texture \\
+Document-aware features & text density, skew angle, connected-component count, aspect ratio, estimated line count & capture page structure not represented by intensity statistics alone \\
+Preprocessing parameters & \texttt{gaussian\_ksize}, \texttt{bilateral\_d}, \texttt{clahe\_clip}, \texttt{gamma}, \texttt{sharpen} & describe the candidate preprocessing setting being scored \\
+Interaction terms & blur $\times$ \texttt{gaussian\_ksize}, contrast $\times$ \texttt{clahe\_clip}, brightness $\times$ \texttt{gamma}, noise $\times$ \texttt{bilateral\_d}, entropy $\times$ \texttt{sharpen} & encode predefined relationships between page properties and preprocessing controls \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Nested-CV Surrogate Model Quality}
+
+\begin{table}[h]
+\centering
+\caption{Nested-CV surrogate model quality. Spearman values are reported as mean $\pm$ standard deviation across outer folds. The final refit model is selected and fitted on all available pages for saved inference artifacts; reported metrics are out-of-fold nested-CV results.}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l l l r r r r}
+\toprule
+Setting & Recognizer & Final refit model & MAE & $R^2$ & Global Spearman & Per-image Spearman \\
+\midrule
+Raw & VietOCR & Random Forest & 0.021 & 0.463 & $0.592 \pm 0.123$ & $0.629 \pm 0.029$ \\
+Raw & Tesseract & XGBoost & 0.046 & 0.614 & $0.674 \pm 0.089$ & $0.497 \pm 0.027$ \\
+Raw & EasyOCR & LightGBM & 0.039 & 0.508 & $0.676 \pm 0.062$ & $0.776 \pm 0.013$ \\
+Contour & VietOCR & LightGBM & 0.020 & 0.435 & $0.522 \pm 0.040$ & $0.619 \pm 0.037$ \\
+Contour & Tesseract & Random Forest & 0.047 & 0.576 & $0.586 \pm 0.104$ & $0.527 \pm 0.029$ \\
+Contour & EasyOCR & XGBoost & 0.037 & 0.540 & $0.668 \pm 0.040$ & $0.768 \pm 0.031$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section{Nested GroupKFold Protocol}
+
+\begin{table}[h]
+\centering
+\caption{Nested GroupKFold evaluation protocol.}
+\begin{tabularx}{\textwidth}{p{3.1cm} p{4.2cm} X}
+\toprule
+Component & Setting & Purpose \\
+\midrule
+Outer evaluation split & 5-fold GroupKFold grouped by page image & prevents rows from the same page appearing in both training and test data \\
+Outer test unit & held-out pages, with all 50 candidates kept together & produces out-of-fold page-level evaluation \\
+Inner model selection & 5-fold GroupKFold on each outer training split & selects the surrogate model family by validation MAE without using outer test pages \\
+Reported aggregation & held-out page-level results combined across the five outer folds & provides one out-of-fold result per page for CER summaries and statistical tests \\
+Final refit & model family selected and refit on all available pages & produces saved inference artifacts, not reported cross-validation metrics \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Nested GroupKFold Evaluation Algorithm}
+
+\noindent\textbf{Input:} Collected data table; candidate pool \(\Theta\); recognizer \(e\); \(K\) values \(\{3,5,10,15\}\); model-family set \(\mathcal{H}\).
+
+\noindent\textbf{Output:} Out-of-fold page-level Surrogate K, Random K, FixedTopK, NN-K, FixedBest, NoPre, and sampled-oracle results.
+
+\begin{enumerate}
+    \item Split pages into five outer GroupKFold folds, keeping all 50 candidate rows from the same page in the same fold.
+    \item For each outer fold, select \(h_e \in \mathcal{H}\) by inner GroupKFold validation MAE on the outer-training pages.
+    \item Refit the selected model on all outer-training rows and score all \(\theta_j\in\Theta\) for each held-out page.
+    \item Compute Surrogate K, Random K, FixedTopK, NN-K, FixedBest, NoPre, and sampled-oracle references using the definitions in the main manuscript.
+    \item Pool held-out page-level results across the five outer folds.
+    \item Compute mean CER, bootstrap confidence intervals, and two-sided Wilcoxon signed-rank tests.
+\end{enumerate}
+
+\section{Policy-Agnostic Headroom Controls}
+
+For each held-out page and budget, the main manuscript defines FixedTopK-to-oracle headroom as \(H=F-O\). The coupled outcomes \(F-P\), for policy \(P\), share \(F\) with \(H\) and satisfy \(F-P\leq F-O\). We therefore recomputed the correlation for Surrogate, Random, and NN-K and added direct policy-to-policy controls that do not contain FixedTopK. At every budget, all eight dataset/setting/recognizer configurations have positive significant coupled correlations for all three policies. Table~\ref{tab:headroom_control_breakdown} gives the per-budget breakdown of the additional controls.
+
+\begin{table}[h]
+\centering
+\caption{Per-budget headroom-control breakdown. Random $r>$ Surrogate $r$ compares the two coupled correlations. The remaining columns count positive Spearman correlations with $p<0.05$ for direct policy-to-policy gains that do not contain FixedTopK. Each budget contains eight dataset/setting/recognizer configurations.}
+\label{tab:headroom_control_breakdown}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{r r r r r r}
+\toprule
+\(K\) & Coupled positive, each policy & Random \(r>\) Surrogate \(r\) & Random $-$ Surrogate & Random $-$ NN-K & NN-K $-$ Surrogate \\
+\midrule
+3  & 8/8 & 7/8 & 0/8 & 2/8 & 0/8 \\
+5  & 8/8 & 7/8 & 0/8 & 1/8 & 0/8 \\
+10 & 8/8 & 8/8 & 0/8 & 2/8 & 0/8 \\
+15 & 8/8 & 8/8 & 0/8 & 0/8 & 0/8 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Across all budgets, the coupled relationship is positive and significant in 32/32 configurations for each policy, while Random has the larger correlation in 30/32 Surrogate-versus-Random comparisons. The corresponding direct Random-minus-Surrogate correlation ranges from \(-0.516\) to \(0.022\), with no positive significant result. These controls establish that headroom is a retrospective measure of available improvement in the sampled pool, not evidence specific to learned ranking or an oracle-free policy-selection rule.
+
+\section{Vietnamese Best-of-K Curves}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.48\textwidth]{raw_pareto_multiengine.png}
+\includegraphics[width=0.48\textwidth]{contour_pareto_multiengine.png}
+\caption{Best-of-K CER comparison for raw and contour-suppressed Vietnamese administrative document settings. These curves correspond to the numerical values reported in the main-manuscript Vietnamese best-of-K table.}
+\end{figure}
+
+\section{Feature-Matched Oracle-Free Selector Sensitivity Analysis}
+
+The main selector uses continuous surrogate predictions and prediction margins. NN-K and FixedTopK provide only a candidate order. To make these inputs comparable, we replaced the surrogate prediction features by ranks 1, 2, and 3 while preserving the exact surrogate top-3 candidates and OCR outputs. The nested selector was then rerun. Across the eight setting-recognizer combinations, selector CER changed by -0.03 to +0.09 percentage points relative to the full-feature selector. The signs are mixed because the selector is refit, but the small changes are consistent with removing only prediction-related inputs while preserving the exact top-3 candidates and OCR outputs. The table reports paired mean CER differences in percentage points (feature-matched Surrogate minus baseline), percentile bootstrap confidence intervals, and Holm-adjusted two-sided Wilcoxon p-values across the 14 feature-matched comparisons. Negative differences favor the feature-matched Surrogate.
+
+\begin{table}[h]
+\centering
+\caption{Feature-matched oracle-free selector sensitivity analysis. CER values and differences are percentages. Holm p-values are adjusted across all 14 rows in this sensitivity analysis.}
+\label{tab:feature_matched_selector}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l l l r r r r r}
+\toprule
+Setting & Recognizer & Policy & Matched Surr. & Policy CER & Diff & 95\% CI & Holm $p$ \\
+\midrule
+Raw & VietOCR & NN-K & 4.52 & 4.73 & -0.21 & [-0.35, -0.06] & $5.89{\times}10^{-4}$ \\
+Raw & Tesseract & NN-K & 9.03 & 9.31 & -0.28 & [-0.55, -0.02] & 0.433 \\
+Raw & EasyOCR & NN-K & 14.99 & 15.33 & -0.34 & [-0.55, -0.13] & 0.0332 \\
+Contour & VietOCR & NN-K & 3.15 & 3.27 & -0.12 & [-0.24, 0.00] & 0.458 \\
+Contour & Tesseract & NN-K & 7.13 & 7.12 & +0.01 & [-0.26, 0.29] & 1.000 \\
+Contour & EasyOCR & NN-K & 12.96 & 13.39 & -0.43 & [-0.64, -0.22] & 0.00125 \\
+\midrule
+Raw & VietOCR & FixedTopK & 4.52 & 4.54 & -0.02 & [-0.15, 0.10] & 1.000 \\
+Raw & Tesseract & FixedTopK & 9.03 & 9.12 & -0.09 & [-0.36, 0.19] & 1.000 \\
+Raw & EasyOCR & FixedTopK & 14.99 & 15.18 & -0.19 & [-0.35, -0.03] & 0.346 \\
+Contour & VietOCR & FixedTopK & 3.15 & 3.08 & +0.08 & [-0.02, 0.17] & 0.346 \\
+Contour & Tesseract & FixedTopK & 7.13 & 7.05 & +0.08 & [-0.22, 0.39] & 1.000 \\
+Contour & EasyOCR & FixedTopK & 12.96 & 13.09 & -0.13 & [-0.31, 0.05] & 0.749 \\
+SROIE & Tesseract & FixedTopK & 44.27 & 45.13 & -0.86 & [-1.20, -0.52] & $1.57{\times}10^{-7}$ \\
+SROIE & EasyOCR & FixedTopK & 39.81 & 39.82 & -0.01 & [-0.16, 0.14] & 1.000 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+No SROIE NN-K row is included because the stored NN-K shortlist cannot be reconstructed exactly for three EasyOCR pages. The analysis reduces the Surrogate's numerical prediction-feature advantage, but it does not isolate shortlist quality alone because the selector is refit and retains OCR-output features.
+
+\section{SROIE Intermediate-Budget Results}
+
+\begin{table}[h]
+\centering
+\caption{SROIE receipt-setting intermediate-budget CER results. Values are percentages. These rows complement the main-manuscript SROIE table, which reports $K=3$ and $K=15$.}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l r r r r r}
+\toprule
+Recognizer & $K$ & Surrogate K & NN-K & FixedTopK & Random K \\
+\midrule
+Tesseract & 5 & 42.34 & 42.61 & 43.27 & 44.79 \\
+Tesseract & 10 & 41.39 & 41.55 & 42.06 & 43.02 \\
+EasyOCR & 5 & 38.74 & 38.55 & 38.87 & 39.86 \\
+EasyOCR & 10 & 38.32 & 38.27 & 38.46 & 38.88 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section{Contour-Suppression Schematic}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\linewidth]{contour_suppression_ijdar.pdf}
+\caption{Synthetic illustration of contour suppression. A stamp-like rectangular artifact is identified and white-filled before OCR. The figure is schematic and does not reproduce a real source document.}
+\end{figure}
+
+\end{document}

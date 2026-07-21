@@ -1,0 +1,29 @@
+# Core scientific stack
+numpy>=1.26,<2.0
+pandas>=2.1
+scipy>=1.11
+scikit-learn>=1.3
+matplotlib>=3.7
+seaborn>=0.12
+tqdm>=4.66
+
+# Surrogate models
+xgboost>=2.0
+lightgbm>=4.0
+
+# Image processing and document parsing
+opencv-python>=4.8
+Pillow>=10.0
+python-docx>=1.0
+jiwer>=3.0
+shapely>=2.0
+
+# OCR engines and wrappers
+paddleocr>=3.0.0
+vietocr>=0.3.12
+easyocr>=1.7
+pytesseract>=0.3
+
+# Notes:
+# - Install the Tesseract binary and language packs separately from your OS package manager.
+# - Install PaddlePaddle/PyTorch builds appropriate for your CUDA or CPU environment before OCR runs.

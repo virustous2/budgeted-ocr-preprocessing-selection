@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Private or heavy data that must not be pushed
+raw_data/
+private_data/
+datasets/
+images/
+transcriptions/
+ocr_texts/
+ocr_crops/
+model_artifacts/
+*.pkl
+*.pickle
+*.joblib
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz

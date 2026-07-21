@@ -1,0 +1,14 @@
+{
+  "n_configurations": 32,
+  "positive_significant_coupled": {
+    "NN-K": 32,
+    "Random": 32,
+    "Surrogate": 32
+  },
+  "positive_significant_nonshared": {
+    "NN-K_vs_Random": 5,
+    "Surrogate_vs_NN-K": 0,
+    "Surrogate_vs_Random": 0
+  },
+  "random_rho_larger_than_surrogate": 30
+}

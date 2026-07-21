@@ -1,0 +1,9 @@
+dataset,setting,engine,n,k,spearman_r,p_value_note,source
+Vietnamese,raw,VietOCR,300,3,0.47,<0.001,manuscript_discussion
+Vietnamese,raw,Tesseract,300,3,0.37,<0.001,manuscript_discussion
+Vietnamese,raw,EasyOCR,300,3,0.42,<0.001,manuscript_discussion
+Vietnamese,contour,VietOCR,300,3,0.50,<0.001,manuscript_discussion
+Vietnamese,contour,Tesseract,300,3,0.33,<0.001,manuscript_discussion
+Vietnamese,contour,EasyOCR,300,3,0.46,<0.001,manuscript_discussion
+SROIE,raw,Tesseract,626,3,0.51,<0.001,manuscript_discussion
+SROIE,raw,EasyOCR,626,3,0.59,<0.001,manuscript_discussion

@@ -1,0 +1,28 @@
+# Final Experiment Software Record
+
+This file records the software configuration used for the final candidate-response data and the reported OCR evaluations.
+
+## Runtime and OCR packages
+
+- Python 3.10.19
+- PaddleOCR 3.3.2
+- PaddlePaddle GPU 3.3.0
+- PaddleX 3.3.13
+- VietOCR 0.3.13, using the `vgg_transformer` configuration
+- EasyOCR 1.7.2
+- pytesseract 0.3.13
+- Tesseract 5.3.4 (`tesseract-ocr` package 5.3.4-1build5)
+- Tesseract English and Vietnamese language packages: `eng` and `vie`, package version 1:4.1.0-2
+- OpenCV 4.11.0.86
+
+## OCR configuration
+
+- Vietnamese runs used PaddleOCR detection with `lang='vi'`, Tesseract with `lang='vie'`, and EasyOCR with `['vi']`.
+- SROIE runs used PaddleOCR detection with `lang='en'`, Tesseract with `lang='eng'`, and EasyOCR with `['en']`. VietOCR was not used for SROIE.
+- PaddleOCR document-orientation classification, document unwarping, and text-line orientation classification were disabled.
+- Each returned PaddleOCR `dt_polys` polygon was converted to an axis-aligned bounding-rectangle crop. Crops were processed in the exact returned order; no extra reading-order sorting was applied.
+- Nonempty recognition strings were joined with tab separators in the preserved crop order.
+- VietOCR output was retained only when the predicted confidence was strictly greater than 0.8.
+- Tesseract was called without an additional configuration string, so its default engine and page-segmentation settings were used.
+
+`requirements.txt` specifies compatible dependency ranges for a new installation. This file is the version record for the reported experiments.

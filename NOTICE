@@ -1,0 +1,12 @@
+Budgeted Page-Level Preprocessing Selection for OCR
+Copyright 2026 The Authors
+
+The Apache License, Version 2.0 applies to original software source code in the `code/` directory of this public release.
+
+The license does not grant rights to the following:
+- Vietnamese administrative document images, derived page images, or full reference transcriptions, which are not distributed in this release.
+- The SROIE dataset or any other third-party data, models, or software dependencies, which remain subject to their respective terms.
+- The manuscript and figures in `paper/`, which are supplied for review and reproducibility context and may be subject to separate author, publisher, or third-party rights.
+- Any material explicitly marked with a separate license or notice.
+
+The derived result tables are supplied for research transparency. Cite the associated manuscript when using them.
