@@ -29,11 +29,11 @@ ENGINES = ['vietocr', 'tesseract', 'easyocr']
 DEFAULTS = {
     'raw': {
         'lhs_csv': RELEASE_ROOT / 'data/preprocessing_response_tables/raw_preprocessing_data.csv',
-        'metrics_json': RELEASE_ROOT / 'results/main_metrics/raw_metrics.json',
+        'metrics_json': RELEASE_ROOT / 'results/main_metrics/raw_surrogate_fixedtopk_metrics.json',
     },
     'contour': {
         'lhs_csv': RELEASE_ROOT / 'data/preprocessing_response_tables/contour_preprocessing_data.csv',
-        'metrics_json': RELEASE_ROOT / 'results/main_metrics/contour_metrics.json',
+        'metrics_json': RELEASE_ROOT / 'results/main_metrics/contour_surrogate_fixedtopk_metrics.json',
     },
 }
 

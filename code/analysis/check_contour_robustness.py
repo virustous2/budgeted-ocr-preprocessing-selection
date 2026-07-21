@@ -175,7 +175,17 @@ def run_config(paddle, vietocr, images: list,
 
 # ── main ──────────────────────────────────────────────────────────────────────
 
-def main(device: str, n_per_year: int):
+def main(
+    device: str,
+    n_per_year: int,
+    images_dir: Path,
+    labels_dir: Path,
+    output_dir: Path,
+):
+    global IMAGES_DIR, LABELS_DIR, OUTPUT_DIR
+    IMAGES_DIR = images_dir
+    LABELS_DIR = labels_dir
+    OUTPUT_DIR = output_dir
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     print("Loading PaddleOCR...")
@@ -280,9 +290,18 @@ def main(device: str, n_per_year: int):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--device',   default='cuda', choices=['cpu', 'cuda'])
+    parser = argparse.ArgumentParser(description='One-at-a-time contour-threshold robustness check.')
+    parser.add_argument('--device', default='cuda', choices=['cpu', 'cuda'])
     parser.add_argument('--n-images', type=int, default=3,
-                        help='Images per year (default 3 → 30 total)')
+                        help='Images per year (default: 3)')
+    parser.add_argument('--images-dir', default=str(IMAGES_DIR))
+    parser.add_argument('--labels-dir', default=str(LABELS_DIR))
+    parser.add_argument('--output-dir', default=str(OUTPUT_DIR))
     args = parser.parse_args()
-    main(args.device, args.n_images)
+    main(
+        args.device,
+        args.n_images,
+        Path(args.images_dir),
+        Path(args.labels_dir),
+        Path(args.output_dir),
+    )
