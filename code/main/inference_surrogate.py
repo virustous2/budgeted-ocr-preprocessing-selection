@@ -14,15 +14,15 @@ Pipeline:
 
 Usage:
     # Single image
-    python inference_surrogate.py --image path/to/image.png --model-dir outputs/surrogate_models_topK
+    python inference_surrogate.py --image path/to/image.png --model-dir path/to/surrogate_models
 
     # Directory of images
-    python inference_surrogate.py --image-dir path/to/images --model-dir outputs/surrogate_models_topK
+    python inference_surrogate.py --image-dir path/to/images --model-dir path/to/surrogate_models
 
     # With ground truth (for validation)
-    python inference_surrogate.py --image-dir datasets/300_images/300_images \
-        --labels-dir datasets/300_images_labels/300_images_labels \
-        --model-dir outputs/surrogate_models_topK --top-k 10
+    python inference_surrogate.py --image-dir path/to/images \
+        --labels-dir path/to/references \
+        --model-dir path/to/surrogate_models --top-k 10
 
 Author: Research pipeline for QA-OCR
 """
@@ -43,7 +43,8 @@ os.environ['FLAGS_pir_apply_inplace_pass'] = '1'
 warnings.filterwarnings('ignore')
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-PROJECT_ROOT = SCRIPT_DIR.parent
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
 
 import cv2
 import numpy as np
@@ -508,14 +509,14 @@ def main():
 
     # Output
     parser.add_argument('--output-dir', type=str, default=None,
-                        help='Output directory (default: outputs/inference_TIMESTAMP)')
+                        help='Output directory (default: results/recomputed/inference_TIMESTAMP)')
 
     args = parser.parse_args()
 
     # Output dir
     if args.output_dir is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        args.output_dir = str(PROJECT_ROOT / f'outputs/inference_{timestamp}')
+        args.output_dir = str(RELEASE_ROOT / f'results/recomputed/inference_{timestamp}')
     os.makedirs(args.output_dir, exist_ok=True)
 
     print("=" * 70)

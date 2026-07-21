@@ -37,13 +37,13 @@ from docx import Document
 warnings.filterwarnings('ignore')
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-PROJECT_ROOT = SCRIPT_DIR.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
-DEFAULT_IMAGES  = str(PROJECT_ROOT / 'datasets/300_images/300_images')
-DEFAULT_LABELS  = str(PROJECT_ROOT / 'datasets/300_images_labels/300_images_labels')
-DEFAULT_OUTPUT  = str(SCRIPT_DIR / 'outputs/boundary_check')
-DEFAULT_NOPREC  = str(PROJECT_ROOT / 'outputs/default_output_multiengine_20260410_bbox/default_cer_20260410_053801.csv')
+DEFAULT_IMAGES = str(RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/images')
+DEFAULT_LABELS = str(RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/references')
+DEFAULT_OUTPUT = str(RELEASE_ROOT / 'results/recomputed/boundary_check')
 LABEL_SUFFIX    = '_label'
 
 # ── parameter test configs (one-at-a-time, others at no-op) ──────────────────
@@ -465,8 +465,8 @@ def main():
     parser.add_argument('--images-folder',  default=DEFAULT_IMAGES)
     parser.add_argument('--labels-folder',  default=DEFAULT_LABELS)
     parser.add_argument('--output-folder',  default=DEFAULT_OUTPUT)
-    parser.add_argument('--noprec-csv',     default=DEFAULT_NOPREC,
-                        help='CSV from run_default_multiengine.py (used to select images)')
+    parser.add_argument('--noprec-csv', required=True,
+                        help='Exact NoPre CSV from run_default_multiengine.py, used to select images')
     parser.add_argument('--n-images',       type=int, default=20,
                         help='Number of images to test (default: 20)')
     parser.add_argument('--device',         default='cpu', choices=['cpu', 'cuda'])

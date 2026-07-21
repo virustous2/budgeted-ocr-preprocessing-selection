@@ -26,6 +26,7 @@
 
 - `data/candidate_pools/*.csv`: 50 preprocessing configurations.
 - `data/preprocessing_response_tables/*_preprocessing_data.csv`: page features, candidate parameters, and CER targets.
+- `data/source_documents_not_included/README.md`: required local layout for source documents that are intentionally excluded.
 
 These tables intentionally do not include raw images, reference text, OCR output text, or source PDFs.
 

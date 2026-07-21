@@ -2,14 +2,13 @@
 """
 Compute per-image preprocessing benefit statistics from the corrected pipeline.
 
-By default this script targets the latest raw/contour nested outputs:
-  - sampled-pool oracle from the latest collect CSV
-  - exact NoPre from the rerun-confirmed default CSV
-  - aggregate FixedBest / Surrogate K from the latest nested metrics.json
+This script uses the released response table and aggregate metrics by default.
+It requires an exact NoPre CSV, which is not included because it would expose
+OCR text derived from the non-redistributed source documents.
 
 Usage:
-    python analysis/compute_preprocessing_benefit.py --setting raw
-    python analysis/compute_preprocessing_benefit.py --setting contour
+    python analysis/compute_preprocessing_benefit.py --setting raw --nopre-csv /path/to/nopre.csv
+    python analysis/compute_preprocessing_benefit.py --setting contour --nopre-csv /path/to/nopre.csv
     python analysis/compute_preprocessing_benefit.py --lhs-csv ... --nopre-csv ... --metrics-json ...
 """
 
@@ -22,21 +21,19 @@ from typing import Dict, List
 
 import pandas as pd
 
-PROJECT = Path(__file__).parent.parent
-OUT_DIR = Path(__file__).parent / 'outputs'
-OUT_DIR.mkdir(exist_ok=True)
+CODE_ROOT = Path(__file__).resolve().parents[1]
+RELEASE_ROOT = CODE_ROOT.parent
+OUT_DIR = RELEASE_ROOT / 'results/recomputed/preprocessing_benefit'
 ENGINES = ['vietocr', 'tesseract', 'easyocr']
 
 DEFAULTS = {
     'raw': {
-        'lhs_csv': PROJECT / 'outputs/multiengine_data_level1_fix_raw_g03757_nested/preprocessing_data.csv',
-        'nopre_csv': PROJECT / 'outputs/default_output_multiengine_20260410_bbox/default_cer_20260410_053801.csv',
-        'metrics_json': PROJECT / 'outputs/surrogate_multiengine_kfold_level1_fix_raw_g03757_nested/metrics.json',
+        'lhs_csv': RELEASE_ROOT / 'data/preprocessing_response_tables/raw_preprocessing_data.csv',
+        'metrics_json': RELEASE_ROOT / 'results/main_metrics/raw_metrics.json',
     },
     'contour': {
-        'lhs_csv': PROJECT / 'outputs_contour/multiengine_data_level1_fix_contour_g13757_nested/preprocessing_data.csv',
-        'nopre_csv': PROJECT / 'outputs_contour/default_output_contour_bbox_20260410/default_cer_20260410_053815.csv',
-        'metrics_json': PROJECT / 'outputs_contour/surrogate_multiengine_kfold_level1_fix_contour_g13757_nested/metrics.json',
+        'lhs_csv': RELEASE_ROOT / 'data/preprocessing_response_tables/contour_preprocessing_data.csv',
+        'metrics_json': RELEASE_ROOT / 'results/main_metrics/contour_metrics.json',
     },
 }
 
@@ -44,7 +41,7 @@ DEFAULTS = {
 def resolve_paths(args: argparse.Namespace) -> Dict[str, Path]:
     defaults = DEFAULTS[args.setting]
     lhs_csv = Path(args.lhs_csv) if args.lhs_csv else defaults['lhs_csv']
-    nopre_csv = Path(args.nopre_csv) if args.nopre_csv else defaults['nopre_csv']
+    nopre_csv = Path(args.nopre_csv)
     metrics_json = Path(args.metrics_json) if args.metrics_json else defaults['metrics_json']
 
     for path in [lhs_csv, nopre_csv, metrics_json]:
@@ -107,7 +104,8 @@ def main():
     parser = argparse.ArgumentParser(description="Compute per-image preprocessing benefit stats.")
     parser.add_argument('--setting', choices=sorted(DEFAULTS.keys()), default='raw')
     parser.add_argument('--lhs-csv', type=str, default=None)
-    parser.add_argument('--nopre-csv', type=str, default=None)
+    parser.add_argument('--nopre-csv', type=str, required=True,
+                        help='Exact NoPre per-image CSV; not included in the public release')
     parser.add_argument('--metrics-json', type=str, default=None)
     parser.add_argument('--output-dir', type=str, default=str(OUT_DIR))
     args = parser.parse_args()

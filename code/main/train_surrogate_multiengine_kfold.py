@@ -18,7 +18,8 @@ outer folds with nested model selection; they do not use this final refit model.
 
 Usage:
     python main/train_surrogate_multiengine_kfold.py \
-        --data-path outputs/multiengine_data_*/preprocessing_data.csv
+        --data-path data/preprocessing_response_tables/raw_preprocessing_data.csv \
+        --nopre-path /path/to/exact_nopre_per_image.csv
 """
 
 import os
@@ -48,7 +49,8 @@ import xgboost as xgb
 import lightgbm as lgb
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-PROJECT_ROOT = SCRIPT_DIR.parent
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
 
 GROUP_COL = 'image_name'
 
@@ -132,40 +134,16 @@ def prepare_data(df: pd.DataFrame) -> List[str]:
 
 
 def resolve_exact_nopre_csv(data_path: str, explicit_path: Optional[str] = None) -> Path:
-    if explicit_path:
-        csv_path = Path(explicit_path)
-        if not csv_path.exists():
-            raise FileNotFoundError(f"Exact NoPre CSV not found: {csv_path}")
-        return csv_path
-
-    data_path_obj = Path(data_path)
-    is_sroie = 'sroie' in str(data_path_obj).lower()
-    is_contour = 'contour' in str(data_path_obj).lower()
-
-    search_dirs = []
-    if is_sroie:
-        sroie_root = PROJECT_ROOT / 'SROIRE_COMPARISON/output_sroire'
-        search_dirs.extend(sorted(sroie_root.glob('default_output_sroie*')))
-    elif is_contour:
-        search_dirs.extend([
-            PROJECT_ROOT / 'outputs_contour/default_output_contour_bbox',
-            PROJECT_ROOT / 'outputs_contour/default_output_contour',
-        ])
-    else:
-        search_dirs.append(PROJECT_ROOT / 'outputs/default_output_multiengine')
-
-    candidates = []
-    for directory in search_dirs:
-        if directory.exists():
-            candidates.extend(sorted(directory.glob('default_cer_*.csv')))
-
-    if not candidates:
-        raise FileNotFoundError(
-            "Could not locate exact NoPre CSV. "
-            "Use --nopre-path or generate default CER outputs first."
+    if not explicit_path:
+        raise ValueError(
+            "The public release requires --nopre-path with the exact NoPre "
+            "per-image CSV; source OCR outputs are not bundled."
         )
 
-    return sorted(candidates)[-1]
+    csv_path = Path(explicit_path)
+    if not csv_path.exists():
+        raise FileNotFoundError(f"Exact NoPre CSV not found: {csv_path}")
+    return csv_path
 
 
 def load_exact_nopre_maps(csv_path: Path, engine_list: List[str]) -> Dict[str, Dict[str, float]]:
@@ -965,13 +943,13 @@ if __name__ == "__main__":
     parser.add_argument('--engines', nargs='+', default=None)
     parser.add_argument('--n-folds', type=int, default=5,
                         help='Number of outer CV folds (default: 5)')
-    parser.add_argument('--nopre-path', type=str, default=None,
-                        help='Optional exact NoPre CSV override')
+    parser.add_argument('--nopre-path', type=str, required=True,
+                        help='Exact NoPre per-image CSV generated for this run')
     args = parser.parse_args()
 
     if args.output_dir is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         args.output_dir = str(
-            PROJECT_ROOT / f'outputs/surrogate_multiengine_kfold_{timestamp}')
+            RELEASE_ROOT / f'results/recomputed/surrogate_multiengine_kfold_{timestamp}')
 
     main(args.data_path, args.output_dir, args.engines, args.n_folds, args.nopre_path)

@@ -5,13 +5,16 @@ This script is not part of the reported evaluation. The manuscript's reported
 CER protocol uses whitespace normalization only; the NFC branch below is kept
 solely as a synthetic diagnostic of a possible alternative protocol.
 """
+import argparse
 import sys
 import unicodedata
 from pathlib import Path
 from docx import Document
 
-PROJECT_ROOT = Path(__file__).parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+SCRIPT_DIR = Path(__file__).parent.resolve()
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
 # ── two formulas ──────────────────────────────────────────────────────────────
 
@@ -86,8 +89,7 @@ def run_vietocr(img_path: str) -> str:
 
 # ── main ──────────────────────────────────────────────────────────────────────
 
-def main():
-    labels_root = PROJECT_ROOT / 'datasets/300_images_labels/300_images_labels'
+def main(labels_root: Path):
     label_files = sorted(labels_root.rglob('*.docx'))[:2]
 
     print("=" * 60)
@@ -133,4 +135,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description='Explore whitespace-only and NFC-normalized CER.')
+    parser.add_argument('--labels-dir', default=str(RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/references'))
+    args = parser.parse_args()
+    main(Path(args.labels_dir))

@@ -263,7 +263,7 @@ def save_cache(cache: Dict[Tuple, Dict], cache_path: Path) -> None:
 
 def init_ocr(setting: str, device: str, engines: List[str]):
     if setting == "sroie":
-        from SROIRE_COMPARISON.sroie_scripts.collect_lhs_sroie import (
+        from sroie_scripts.collect_lhs_sroie import (
             ImagePreprocessor,
             SROIEOCRRunner,
         )

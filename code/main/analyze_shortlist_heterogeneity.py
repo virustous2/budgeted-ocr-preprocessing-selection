@@ -12,13 +12,13 @@ pipeline. For each dataset it reports:
 
 Example:
     python main/analyze_shortlist_heterogeneity.py \
-      --dataset raw=outputs/multiengine_data_level1_fix_raw_g03757_nested/preprocessing_data.csv \
-      --dataset contour=outputs_contour/multiengine_data_level1_fix_contour_g13757_nested/preprocessing_data.csv \
-      --dataset sroie=SROIRE_COMPARISON/output_sroire/lhs_data_sroie_level1_fix_all626_g1/preprocessing_data.csv \
-      --metrics raw=outputs/surrogate_multiengine_kfold_level1_fix_raw_g03757_nested_fixedtopk/metrics.json \
-      --metrics contour=outputs_contour/surrogate_multiengine_kfold_level1_fix_contour_g13757_nested_fixedtopk/metrics.json \
-      --metrics sroie=SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_level1_fix_all626_g1_nested_fixedtopk/metrics.json \
-      --output-dir outputs/shortlist_heterogeneity_analysis
+      --dataset raw=/path/to/raw/preprocessing_data.csv \
+      --dataset contour=/path/to/contour/preprocessing_data.csv \
+      --dataset sroie=/path/to/sroie/preprocessing_data.csv \
+      --metrics raw=/path/to/raw/metrics.json \
+      --metrics contour=/path/to/contour/metrics.json \
+      --metrics sroie=/path/to/sroie/metrics.json \
+      --output-dir results/recomputed/shortlist_heterogeneity_analysis
 """
 
 import argparse

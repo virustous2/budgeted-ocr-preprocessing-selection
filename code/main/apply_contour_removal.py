@@ -10,8 +10,9 @@ Contour removal logic from OCR_backend/preprocessing.py:
 
 Usage:
     python main/apply_contour_removal.py
-    python main/apply_contour_removal.py --input-dir datasets/300_images/300_images \
-                                          --output-dir datasets/300_images_contour/300_images
+    python main/apply_contour_removal.py \
+        --input-dir data/source_documents_not_included/vietnamese/images \
+        --output-dir results/recomputed/contour_suppressed_images
 """
 
 import os
@@ -25,10 +26,12 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-PROJECT_ROOT = Path(__file__).parent.parent
+SCRIPT_DIR = Path(__file__).parent.resolve()
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
 
-DEFAULT_INPUT  = str(PROJECT_ROOT / 'datasets/300_images/300_images')
-DEFAULT_OUTPUT = str(PROJECT_ROOT / 'datasets/300_images_contour/300_images')
+DEFAULT_INPUT = str(RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/images')
+DEFAULT_OUTPUT = str(RELEASE_ROOT / 'results/recomputed/contour_suppressed_images')
 
 
 # ── contour removal ───────────────────────────────────────────────────────────

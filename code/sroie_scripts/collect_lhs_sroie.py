@@ -9,7 +9,7 @@ Adapted from main/collect_multiengine_data.py for SROIE English receipts:
   - Tesseract lang=eng
   - EasyOCR lang=en
   - No VietOCR
-  - Output: SROIRE_COMPARISON/output_sroire/lhs_data_sroie/
+  - Output: results/recomputed/lhs_data_sroie/
 
 Pipeline: Image → Preprocess → PaddleOCR detect → crop lines → recognize:
   1. Tesseract (lang=eng)
@@ -42,10 +42,10 @@ from typing import Dict, List, Tuple, Optional
 os.environ['FLAGS_pir_apply_inplace_pass'] = '1'
 warnings.filterwarnings('ignore')
 
-SCRIPT_DIR   = Path(__file__).parent.resolve()
-SROIE_ROOT   = SCRIPT_DIR.parent
-PROJECT_ROOT = SROIE_ROOT.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+SCRIPT_DIR = Path(__file__).parent.resolve()
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
 import cv2
 import numpy as np
@@ -69,9 +69,9 @@ except ImportError:
         validate_executed_params,
     )
 
-DEFAULT_IMAGES  = str(SROIE_ROOT / 'sroie_dataset/images')
-DEFAULT_LABELS  = str(SROIE_ROOT / 'sroie_dataset/ground_truth')
-DEFAULT_OUTPUT  = str(SROIE_ROOT / 'output_sroire/lhs_data_sroie')
+DEFAULT_IMAGES = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/images')
+DEFAULT_LABELS = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/ground_truth')
+DEFAULT_OUTPUT = str(RELEASE_ROOT / 'results/recomputed/lhs_data_sroie')
 
 shutdown_requested = False
 
@@ -594,7 +594,7 @@ if __name__ == "__main__":
     if args.output_folder is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         args.output_folder = str(
-            SROIE_ROOT / f'output_sroire/lhs_data_sroie_{timestamp}')
+            RELEASE_ROOT / f'results/recomputed/lhs_data_sroie_{timestamp}')
 
     collect_data(
         images_folder      = args.images_folder,

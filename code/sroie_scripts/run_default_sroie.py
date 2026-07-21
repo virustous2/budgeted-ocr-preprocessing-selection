@@ -26,13 +26,13 @@ from jiwer import cer
 from paddleocr import PaddleOCR
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-SROIE_ROOT = SCRIPT_DIR.parent
-PROJECT_ROOT = SROIE_ROOT.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
-DEFAULT_IMAGES = str(SROIE_ROOT / 'sroie_dataset/images')
-DEFAULT_LABELS = str(SROIE_ROOT / 'sroie_dataset/ground_truth')
-DEFAULT_OUTPUT = str(SROIE_ROOT / 'output_sroire/default_output_sroie')
+DEFAULT_IMAGES = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/images')
+DEFAULT_LABELS = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/ground_truth')
+DEFAULT_OUTPUT = str(RELEASE_ROOT / 'results/recomputed/default_output_sroie')
 
 
 def read_txt_gt(path: str) -> str:

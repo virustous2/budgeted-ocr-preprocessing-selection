@@ -23,8 +23,9 @@ from typing import Dict, List, Tuple
 
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+CODE_ROOT = Path(__file__).resolve().parents[1]
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
 from main.train_surrogate_multiengine_kfold import (  # noqa: E402
     FEATURE_COLS_BASE,
@@ -40,14 +41,12 @@ from main.train_surrogate_multiengine_kfold import (  # noqa: E402
 
 DEFAULTS = {
     'raw': {
-        'data_path': PROJECT_ROOT / 'outputs/multiengine_data_level1_fix_raw_g03757_nested/preprocessing_data.csv',
-        'nopre_path': PROJECT_ROOT / 'outputs/default_output_multiengine_20260410_bbox/default_cer_20260410_053801.csv',
-        'output_dir': PROJECT_ROOT / 'outputs/ablation_nested_raw',
+        'data_path': RELEASE_ROOT / 'data/preprocessing_response_tables/raw_preprocessing_data.csv',
+        'output_dir': RELEASE_ROOT / 'results/recomputed/ablation_nested_raw',
     },
     'contour': {
-        'data_path': PROJECT_ROOT / 'outputs_contour/multiengine_data_level1_fix_contour_g13757_nested/preprocessing_data.csv',
-        'nopre_path': PROJECT_ROOT / 'outputs_contour/default_output_contour_bbox_20260410/default_cer_20260410_053815.csv',
-        'output_dir': PROJECT_ROOT / 'outputs_contour/ablation_nested_contour',
+        'data_path': RELEASE_ROOT / 'data/preprocessing_response_tables/contour_preprocessing_data.csv',
+        'output_dir': RELEASE_ROOT / 'results/recomputed/ablation_nested_contour',
     },
 }
 
@@ -73,7 +72,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument('--setting', choices=sorted(DEFAULTS.keys()), default='raw')
     parser.add_argument('--data-path', type=str, default=None)
-    parser.add_argument('--nopre-path', type=str, default=None)
+    parser.add_argument('--nopre-path', type=str, required=True,
+                        help='Exact NoPre per-image CSV; not included in the public release')
     parser.add_argument('--output-dir', type=str, default=None)
     parser.add_argument('--engines', nargs='+', default=None)
     parser.add_argument('--n-folds', type=int, default=5)
@@ -89,7 +89,7 @@ def parse_args() -> argparse.Namespace:
 def resolve_run_paths(args: argparse.Namespace) -> Dict[str, Path]:
     defaults = DEFAULTS[args.setting]
     data_path = Path(args.data_path) if args.data_path else defaults['data_path']
-    nopre_path = Path(args.nopre_path) if args.nopre_path else defaults['nopre_path']
+    nopre_path = Path(args.nopre_path)
     output_dir = Path(args.output_dir) if args.output_dir else defaults['output_dir']
 
     for path in [data_path, nopre_path]:

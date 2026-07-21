@@ -25,8 +25,10 @@ from itertools import product
 os.environ['FLAGS_pir_apply_inplace_pass'] = '1'
 warnings.filterwarnings('ignore')
 
-PROJECT_ROOT = Path(__file__).parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+SCRIPT_DIR = Path(__file__).parent.resolve()
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
 import cv2
 import numpy as np
@@ -36,9 +38,9 @@ from tqdm import tqdm
 from docx import Document
 from jiwer import cer as jiwer_cer
 
-IMAGES_DIR = PROJECT_ROOT / 'datasets/300_images/300_images'
-LABELS_DIR = PROJECT_ROOT / 'datasets/300_images_labels/300_images_labels'
-OUTPUT_DIR = PROJECT_ROOT / 'analysis/outputs/contour_robustness'
+IMAGES_DIR = RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/images'
+LABELS_DIR = RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/references'
+OUTPUT_DIR = RELEASE_ROOT / 'results/recomputed/contour_robustness'
 
 # Default thresholds (updated: area=500 based on visualization)
 DEFAULT = {

@@ -9,7 +9,7 @@ Adapted from analysis/check_range_boundaries.py for SROIE:
   - PaddleOCR: lang=en
   - Image selection: random (no noprec_csv filtering)
 
-Output: SROIRE_COMPARISON/output_sroire/boundary_check_sroie/
+Output: results/recomputed/boundary_check_sroie/
     - boundary_check_TIMESTAMP.csv
     - summary_TIMESTAMP.txt
 
@@ -35,14 +35,14 @@ from tqdm import tqdm
 
 warnings.filterwarnings('ignore')
 
-SCRIPT_DIR   = Path(__file__).parent.resolve()
-SROIE_ROOT   = SCRIPT_DIR.parent
-PROJECT_ROOT = SROIE_ROOT.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+SCRIPT_DIR = Path(__file__).parent.resolve()
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
-DEFAULT_IMAGES  = str(SROIE_ROOT / 'sroie_dataset/images')
-DEFAULT_LABELS  = str(SROIE_ROOT / 'sroie_dataset/ground_truth')
-DEFAULT_OUTPUT  = str(SROIE_ROOT / 'output_sroire/boundary_check_sroie')
+DEFAULT_IMAGES = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/images')
+DEFAULT_LABELS = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/ground_truth')
+DEFAULT_OUTPUT = str(RELEASE_ROOT / 'results/recomputed/boundary_check_sroie')
 
 # ── parameter test configs (same ranges as Vietnamese pipeline) ──────────────
 PARAM_TESTS = {

@@ -8,7 +8,7 @@ PaddleOCR detected polygons and SROIE GT quadrilaterals.
 GT format (gt_boxes/*.txt): x1,y1,x2,y2,x3,y3,x4,y4,text  (one line per box)
 PaddleOCR output: dt_polys — list of quadrilateral arrays
 
-Output: SROIRE_COMPARISON/output_sroire/detection_quality/
+Output: results/recomputed/detection_quality/
     - detection_quality_TIMESTAMP.csv  (per-image precision, recall, F1)
     - summary_TIMESTAMP.txt
 
@@ -33,13 +33,13 @@ from tqdm import tqdm
 warnings.filterwarnings('ignore')
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-SROIE_ROOT = SCRIPT_DIR.parent
-PROJECT_ROOT = SROIE_ROOT.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
+sys.path.insert(0, str(CODE_ROOT))
 
-DEFAULT_IMAGES   = str(SROIE_ROOT / 'sroie_dataset/images')
-DEFAULT_GT_BOXES = str(SROIE_ROOT / 'sroie_dataset/gt_boxes')
-DEFAULT_OUTPUT   = str(SROIE_ROOT / 'output_sroire/detection_quality')
+DEFAULT_IMAGES = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/images')
+DEFAULT_GT_BOXES = str(RELEASE_ROOT / 'data/source_documents_not_included/sroie/gt_boxes')
+DEFAULT_OUTPUT = str(RELEASE_ROOT / 'results/recomputed/detection_quality')
 IOU_THRESHOLD    = 0.5
 
 

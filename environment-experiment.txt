@@ -14,6 +14,7 @@ This file records the software configuration used for the final candidate-respon
 - Tesseract 5.3.4 (`tesseract-ocr` package 5.3.4-1build5)
 - Tesseract English and Vietnamese language packages: `eng` and `vie`, package version 1:4.1.0-2
 - OpenCV 4.11.0.86
+- RapidFuzz 3.14.3
 
 ## OCR configuration
 

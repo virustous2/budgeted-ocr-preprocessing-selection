@@ -68,10 +68,10 @@ python code/analysis/plot_oracle_gap_diagnostic.py
 To rerun OCR data collection from scratch, you need your own local copies of:
 
 - Vietnamese administrative document images and matching reference transcriptions, or an equivalent dataset.
-- The SROIE images and ground-truth text files from the official benchmark distribution.
+- The SROIE images, ground-truth text files, and optional ground-truth boxes from the official benchmark distribution.
 - OCR dependencies listed in `requirements.txt`. Consult `environment-experiment.txt` for the exact package versions and OCR configuration used in the reported experiments.
 
-Most scripts expose command-line arguments for input/output paths. Some older research scripts may still use project-default directory names; update paths as needed before running on a new machine.
+The default external-data layout is documented in `data/source_documents_not_included/README.md`. All locally generated outputs are written under `results/recomputed/` by default. Scripts that require an exact NoPre OCR table make that input explicit because those OCR outputs are intentionally excluded from the release.
 
 ## Suggested Citation
 

@@ -37,7 +37,8 @@ os.environ['FLAGS_pir_apply_inplace_pass'] = '1'
 warnings.filterwarnings('ignore')
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
-PROJECT_ROOT = SCRIPT_DIR.parent
+CODE_ROOT = SCRIPT_DIR.parent
+RELEASE_ROOT = CODE_ROOT.parent
 
 import cv2
 import numpy as np
@@ -634,10 +635,10 @@ if __name__ == "__main__":
         description="Multi-Engine Data Collection for Surrogate Model")
 
     parser.add_argument('--images-folder', type=str,
-                        default=str(PROJECT_ROOT / 'datasets/300_images/300_images'),
+                        default=str(RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/images'),
                         help='Path to images folder')
     parser.add_argument('--labels-folder', type=str,
-                        default=str(PROJECT_ROOT / 'datasets/300_images_labels/300_images_labels'),
+                        default=str(RELEASE_ROOT / 'data/source_documents_not_included/vietnamese/references'),
                         help='Path to labels folder')
     parser.add_argument('--output-folder', type=str, default=None,
                         help='Output folder')
@@ -658,7 +659,7 @@ if __name__ == "__main__":
     if args.output_folder is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         args.output_folder = str(
-            PROJECT_ROOT / f'outputs/multiengine_data_{timestamp}')
+            RELEASE_ROOT / f'results/recomputed/multiengine_data_{timestamp}')
 
     collect_data(
         images_folder=args.images_folder,

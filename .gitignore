@@ -30,3 +30,8 @@ model_artifacts/
 *.log
 *.out
 *.synctex.gz
+
+# Local source documents and outputs regenerated from them
+/data/source_documents_not_included/*
+!/data/source_documents_not_included/README.md
+/results/recomputed/
