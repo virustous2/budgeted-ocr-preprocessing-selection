@@ -8,11 +8,11 @@ The original Vietnamese administrative document images and full reference transc
 
 ## What Is Included
 
-- `code/`: scripts for candidate sampling, OCR data collection, surrogate training, shortlist evaluation, nearest-neighbor baselines, bootstrap confidence intervals, ablations, and oracle-free top-3 selection.
+- `code/`: scripts for candidate sampling, OCR data collection, surrogate training, shortlist evaluation, nearest-neighbor baselines, bootstrap confidence intervals, ablations, Top1Pred, policy-matched and feature-matched oracle-free selector analyses, and Figure 2 generation.
 - `data/candidate_pools/`: fixed 50-candidate preprocessing pools used in the experiments.
 - `data/preprocessing_response_tables/`: OCR-free page features, preprocessing parameters, and observed CER values. These tables do not include page images, reference transcriptions, or OCR output text.
-- `results/`: nested-CV metrics, per-page best-of-K results, nearest-neighbor baseline outputs, bootstrap summaries, feature-ablation summaries, policy-agnostic headroom controls, sanitized oracle-free selector scores, and recomputed two-sided statistical tests.
-- `paper/`: current LaTeX manuscript and Online Resource 1 sources, the compiled Online Resource PDF, bibliography, Springer template files, and non-data figures used by the manuscript.
+- `results/`: nested-CV metrics, per-page best-of-K results, nearest-neighbor baseline outputs, bootstrap summaries, feature-ablation summaries, default-parameter sensitivity and Top1Pred summaries, policy-agnostic headroom controls, sanitized surrogate, policy-matched, and feature-matched selector scores, plus recomputed two-sided statistical tests.
+- `paper/`: current LaTeX manuscript and compiled manuscript PDF, Online Resource 1 source and PDF, bibliography, Springer template files, and non-data figures used by the manuscript.
 - `environment-experiment.txt`: exact OCR software versions and crop-handling configuration for the reported experiments.
 
 ## What Is Excluded
@@ -25,7 +25,7 @@ The original Vietnamese administrative document images and full reference transc
 - Trained model pickle files.
 - Private local paths and temporary run caches.
 
-For the oracle-free selector, the original result file contained an `ocr_text` column. The public copy keeps only the numeric/metadata features and drops `ocr_text`; see files named `nested_selector_candidate_scores_sanitized.csv`.
+For the oracle-free selector, the original candidate-score files contained OCR output text. The public copies keep only numeric and derived metadata features; see files named `nested_selector_candidate_scores_sanitized.csv`.
 
 ## Reproducing Results
 
@@ -46,6 +46,24 @@ python code/analysis/compute_oracle_gap_quartiles.py
 ```
 
 This writes the coupled Surrogate/Random/NN-K summaries, quartile summaries, direct policy-to-policy controls, and headline report under `results/headroom_controls/`. The script verifies that the duplicated Surrogate, Random, and FixedTopK values in the NN-K cache match the authoritative per-page tables before computing the controls.
+
+To recompute the policy-matched and feature-matched top-3 selector comparisons from the sanitized public candidate-score tables, run:
+
+```bash
+python code/analysis/compare_policy_matched_top3_selectors.py \
+  --feature-matched-raw results/oracle_free_selector/feature_matched/raw/nested_selector_candidate_scores_sanitized.csv \
+  --feature-matched-contour results/oracle_free_selector/feature_matched/contour/nested_selector_candidate_scores_sanitized.csv \
+  --feature-matched-sroie results/oracle_free_selector/feature_matched/sroie/nested_selector_candidate_scores_sanitized.csv \
+  --output-dir /tmp/ijdar_policy_selector_recomputed
+```
+
+This reproduces the 28 paired policy-comparison and feature-matched sensitivity rows in `results/oracle_free_selector/policy_comparisons/` without OCR runs. The selector-training scripts are also included, but rerunning them requires source documents and OCR output text that are intentionally excluded from the public release.
+
+To regenerate Figure 2 from the public headroom-control tables, run:
+
+```bash
+python code/analysis/plot_oracle_gap_diagnostic.py
+```
 
 To rerun OCR data collection from scratch, you need your own local copies of:
 

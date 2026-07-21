@@ -1,0 +1,122 @@
+================================================================================
+TOP-1 DEPLOYABLE SURROGATE EVALUATION
+================================================================================
+
+Top1Pred: candidate with lowest out-of-fold predicted CER; no ground truth
+BestOfK: best actual CER within top-K predicted shortlist; upper bound
+Random1: one random candidate averaged over reproducible trials per image
+
+--------------------------------------------------------------------------------
+Engine: easyocr
+Images: 300
+Model selection: Stacking×3, LightGBM×1, XGBoost×1
+
+Mean CER
+  NoPre       : 15.44%
+  FixedBest   : 15.19%
+  Random1     : 18.61%
+  Top1Pred    : 15.06%
+  BestOf3    : 14.26%
+  BestOf5    : 13.93%
+  BestOf10   : 13.60%
+  BestOf15   : 13.41%
+  SampOracle  : 13.19%
+
+Gaps
+  Top1Pred - BestOf3 : 0.80 pp
+  Top1Pred - BestOf5 : 1.14 pp
+  Top1Pred - BestOf10: 1.46 pp
+  Top1Pred - BestOf15: 1.65 pp
+  Top1Pred - SampOracle: 1.87 pp
+
+Wilcoxon one-sided tests (alternative: Top1Pred < baseline)
+  top1_vs_random1   : p=7.88716e-50, stat=327.000, n=300
+  top1_vs_fixedbest : p=0.197769, stat=2468.000, n=300
+  top1_vs_nopre     : p=0.00129685, stat=17413.000, n=300
+
+Reverse / two-sided checks for FixedBest
+  fixedbest_vs_top1           : p=0.802231, stat=2992.000, n=300
+  top1_vs_fixedbest_two_sided : p=0.395539, stat=2468.000, n=300
+
+Pairwise Top1Pred differences and win rates
+  (diff = Top1Pred CER - baseline CER; win = Top1Pred lower CER)
+  vs random1   : mean=-3.55 pp, median=-3.57 pp, win=95.0%, tie=0.0%, loss=5.0%
+  vs fixedbest : mean=-0.13 pp, median=0.00 pp, win=18.7%, tie=65.3%, loss=16.0%
+  vs nopre     : mean=-0.37 pp, median=-0.25 pp, win=56.3%, tie=1.7%, loss=42.0%
+
+--------------------------------------------------------------------------------
+Engine: tesseract
+Images: 300
+Model selection: LightGBM×3, RandomForest×2
+
+Mean CER
+  NoPre       : 9.82%
+  FixedBest   : 9.29%
+  Random1     : 11.54%
+  Top1Pred    : 9.46%
+  BestOf3    : 8.29%
+  BestOf5    : 7.87%
+  BestOf10   : 7.47%
+  BestOf15   : 7.20%
+  SampOracle  : 6.85%
+
+Gaps
+  Top1Pred - BestOf3 : 1.17 pp
+  Top1Pred - BestOf5 : 1.60 pp
+  Top1Pred - BestOf10: 2.00 pp
+  Top1Pred - BestOf15: 2.26 pp
+  Top1Pred - SampOracle: 2.61 pp
+
+Wilcoxon one-sided tests (alternative: Top1Pred < baseline)
+  top1_vs_random1   : p=5.24992e-35, stat=4039.000, n=300
+  top1_vs_fixedbest : p=0.837649, stat=15017.000, n=300
+  top1_vs_nopre     : p=0.00133225, stat=17425.000, n=300
+
+Reverse / two-sided checks for FixedBest
+  fixedbest_vs_top1           : p=0.162351, stat=12949.000, n=300
+  top1_vs_fixedbest_two_sided : p=0.324703, stat=12949.000, n=300
+
+Pairwise Top1Pred differences and win rates
+  (diff = Top1Pred CER - baseline CER; win = Top1Pred lower CER)
+  vs random1   : mean=-2.08 pp, median=-1.97 pp, win=84.7%, tie=0.3%, loss=15.0%
+  vs fixedbest : mean=0.17 pp, median=0.00 pp, win=42.7%, tie=21.3%, loss=36.0%
+  vs nopre     : mean=-0.36 pp, median=-0.28 pp, win=58.7%, tie=1.7%, loss=39.7%
+
+--------------------------------------------------------------------------------
+Engine: vietocr
+Images: 300
+Model selection: LightGBM×2, RandomForest×1, Stacking×1, XGBoost×1
+
+Mean CER
+  NoPre       : 4.70%
+  FixedBest   : 4.63%
+  Random1     : 5.94%
+  Top1Pred    : 4.69%
+  BestOf3    : 4.25%
+  BestOf5    : 4.10%
+  BestOf10   : 3.87%
+  BestOf15   : 3.80%
+  SampOracle  : 3.61%
+
+Gaps
+  Top1Pred - BestOf3 : 0.43 pp
+  Top1Pred - BestOf5 : 0.59 pp
+  Top1Pred - BestOf10: 0.82 pp
+  Top1Pred - BestOf15: 0.89 pp
+  Top1Pred - SampOracle: 1.08 pp
+
+Wilcoxon one-sided tests (alternative: Top1Pred < baseline)
+  top1_vs_random1   : p=1.75503e-40, stat=2622.000, n=300
+  top1_vs_fixedbest : p=0.70867, stat=18036.500, n=300
+  top1_vs_nopre     : p=0.194453, stat=19866.000, n=300
+
+Reverse / two-sided checks for FixedBest
+  fixedbest_vs_top1           : p=0.29133, stat=16679.500, n=300
+  top1_vs_fixedbest_two_sided : p=0.58266, stat=16679.500, n=300
+
+Pairwise Top1Pred differences and win rates
+  (diff = Top1Pred CER - baseline CER; win = Top1Pred lower CER)
+  vs random1   : mean=-1.25 pp, median=-1.21 pp, win=90.0%, tie=0.0%, loss=10.0%
+  vs fixedbest : mean=0.06 pp, median=0.00 pp, win=45.3%, tie=12.3%, loss=42.3%
+  vs nopre     : mean=-0.01 pp, median=-0.05 pp, win=52.3%, tie=3.3%, loss=44.3%
+

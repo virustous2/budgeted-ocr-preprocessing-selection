@@ -1,0 +1,67 @@
+[
+  {
+    "engine": "tesseract",
+    "n_images": 626,
+    "n_features": 36,
+    "selector_choice_counts": {
+      "logreg_cls": 2,
+      "gbr_reg": 2,
+      "ridge_reg": 1
+    },
+    "selected_rank_counts": {
+      "1": 247,
+      "2": 218,
+      "3": 161
+    },
+    "selector_mean": 0.4427064437585362,
+    "top1_mean": 0.462135303446166,
+    "agreement_mean": 0.4568377252480941,
+    "fixedbest_mean": 0.4680073541620029,
+    "nopre_mean": 0.505248003732991,
+    "bestof3_mean": 0.43217734888482207,
+    "selector_minus_top1": -0.0194288596876297,
+    "selector_minus_agreement": -0.014131281489557846,
+    "selector_minus_fixedbest": -0.025300910403466794,
+    "selector_minus_bestof3": 0.010529094873714132,
+    "p_selector_less_top1": 2.913186416201468e-29,
+    "p_top1_less_selector": 1.0,
+    "p_selector_less_agreement": 3.702144632203923e-24,
+    "p_agreement_less_selector": 1.0,
+    "p_selector_less_fixedbest": 3.3299541985271684e-38,
+    "p_selector_less_nopre": 5.761632381101691e-65,
+    "selected_best_accuracy": 0.6900958466453674,
+    "policy": "surrogate_feature_matched"
+  },
+  {
+    "engine": "easyocr",
+    "n_images": 626,
+    "n_features": 36,
+    "selector_choice_counts": {
+      "ridge_reg": 4,
+      "rf_reg": 1
+    },
+    "selected_rank_counts": {
+      "3": 195,
+      "1": 223,
+      "2": 208
+    },
+    "selector_mean": 0.39809381334678307,
+    "top1_mean": 0.4012848075425622,
+    "agreement_mean": 0.4002947431115658,
+    "fixedbest_mean": 0.4005669851505583,
+    "nopre_mean": 0.40854076023816427,
+    "bestof3_mean": 0.391411640494546,
+    "selector_minus_top1": -0.0031909941957790895,
+    "selector_minus_agreement": -0.0022009297647827596,
+    "selector_minus_fixedbest": -0.002473171803775188,
+    "selector_minus_bestof3": 0.006682172852237007,
+    "p_selector_less_top1": 3.2391171357015957e-06,
+    "p_top1_less_selector": 0.9999967608828643,
+    "p_selector_less_agreement": 0.0002999585981435956,
+    "p_agreement_less_selector": 0.9997000414018564,
+    "p_selector_less_fixedbest": 0.0003217837631928345,
+    "p_selector_less_nopre": 4.0243682769674367e-23,
+    "selected_best_accuracy": 0.4744408945686901,
+    "policy": "surrogate_feature_matched"
+  }
+]

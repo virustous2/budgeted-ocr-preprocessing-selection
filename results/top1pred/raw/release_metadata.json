@@ -1,0 +1,6 @@
+{
+  "policy": "Top1Pred",
+  "setting": "raw",
+  "protocol": "The candidate with the lowest out-of-fold predicted CER is selected without reference text at inference time.",
+  "source_documents_and_ocr_output_text": "Not distributed in this release."
+}

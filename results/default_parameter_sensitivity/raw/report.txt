@@ -1,0 +1,108 @@
+======================================================================
+MULTI-ENGINE SURROGATE COMPARISON REPORT
+Date: 2026-04-10 15:51:17
+======================================================================
+
+Engines: ['vietocr', 'tesseract', 'easyocr']
+Input features: 22
+
+1. BEST MODEL PER ENGINE
+--------------------------------------------------
+  vietocr     : LightGBM
+  tesseract   : Stacking
+  easyocr     : Stacking
+
+2. TEST SET METRICS
+  Engine            MAE       R²   Spearman    Pearson
+  ------------------------------------------------
+  vietocr        0.0196   0.5583     0.6595     0.7534
+  tesseract      0.0506   0.7399     0.7627     0.8655
+  easyocr        0.0385   0.6144     0.7608     0.8058
+
+2b. TRAIN vs TEST MAE (Overfitting Check)
+  Engine        Train MAE   Test MAE    Ratio     Status
+  ----------------------------------------------------
+  vietocr          0.0098     0.0196     2.01x   OVERFIT?
+  tesseract        0.0191     0.0506     2.65x   OVERFIT?
+  easyocr          0.0126     0.0385     3.04x   OVERFIT?
+
+3. BASELINE CERs
+  Engine         Oracle  FixedBest    NoPre
+  ------------------------------------------
+  vietocr        0.0325     0.0433   0.0439
+  tesseract      0.0784     0.1029   0.1060
+  easyocr        0.1278     0.1470   0.1511
+
+3b. SURROGATE FILTER vs FIXED BEST-AVERAGE
+  (Fixed best-average = best single combo from training, applied uniformly)
+
+  K=3:
+    Engine        FixedBest     Surr     Diff
+    ------------------------------------------
+    vietocr          0.0433   0.0386  -0.0047
+    tesseract        0.1029   0.0910  -0.0119
+    easyocr          0.1470   0.1392  -0.0078
+
+  K=5:
+    Engine        FixedBest     Surr     Diff
+    ------------------------------------------
+    vietocr          0.0433   0.0364  -0.0069
+    tesseract        0.1029   0.0865  -0.0164
+    easyocr          0.1470   0.1355  -0.0115
+
+  K=10:
+    Engine        FixedBest     Surr     Diff
+    ------------------------------------------
+    vietocr          0.0433   0.0354  -0.0079
+    tesseract        0.1029   0.0836  -0.0192
+    easyocr          0.1470   0.1333  -0.0137
+
+  K=15:
+    Engine        FixedBest     Surr     Diff
+    ------------------------------------------
+    vietocr          0.0433   0.0342  -0.0091
+    tesseract        0.1029   0.0816  -0.0213
+    easyocr          0.1470   0.1313  -0.0157
+
+4. SURROGATE FILTER vs RANDOM SEARCH
+  (Mean CER, lower is better)
+
+  K=3:
+    Engine           Surr     Rand     Diff    p-value   Sig
+    -----------------------------------------------------
+    vietocr        0.0386   0.0424  -0.0038   0.000001   ***
+    tesseract      0.0910   0.0995  -0.0085   0.000009   ***
+    easyocr        0.1392   0.1538  -0.0146   0.000000   ***
+
+  K=5:
+    Engine           Surr     Rand     Diff    p-value   Sig
+    -----------------------------------------------------
+    vietocr        0.0364   0.0394  -0.0030   0.000001   ***
+    tesseract      0.0865   0.0939  -0.0074   0.000009   ***
+    easyocr        0.1355   0.1482  -0.0127   0.000000   ***
+
+  K=10:
+    Engine           Surr     Rand     Diff    p-value   Sig
+    -----------------------------------------------------
+    vietocr        0.0354   0.0366  -0.0013   0.000071   ***
+    tesseract      0.0836   0.0874  -0.0037   0.000223   ***
+    easyocr        0.1333   0.1403  -0.0070   0.000000   ***
+
+  K=15:
+    Engine           Surr     Rand     Diff    p-value   Sig
+    -----------------------------------------------------
+    vietocr        0.0342   0.0354  -0.0012   0.000027   ***
+    tesseract      0.0816   0.0847  -0.0031   0.000189   ***
+    easyocr        0.1313   0.1370  -0.0056   0.000000   ***
+
+5. CROSS-ENGINE SUMMARY
+--------------------------------------------------
+  vietocr     : R²=0.558, Significant K: 4/4
+  tesseract   : R²=0.740, Significant K: 4/4
+  easyocr     : R²=0.614, Significant K: 4/4
+
+CONCLUSION
+--------------------------------------------------
+  Surrogate filter significantly beats random search
+  at ALL K values for ALL engines.
+  → Strong evidence for cross-engine generalization.

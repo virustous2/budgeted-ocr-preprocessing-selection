@@ -1,0 +1,5 @@
+{
+  "setting": "contour",
+  "protocol": "Supplementary default-regressor sensitivity rerun used to assess whether the Surrogate-versus-Random conclusion depends on predefined regressor hyperparameters.",
+  "trained_model_files": "Not distributed in this release."
+}

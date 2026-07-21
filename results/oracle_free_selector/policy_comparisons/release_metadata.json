@@ -1,0 +1,11 @@
+{
+  "k": 3,
+  "bootstrap_replicates": 10000,
+  "seed": 42,
+  "tests": "Paired two-sided Wilcoxon signed-rank tests; the CSV includes effective sample size after zero differences and Holm/BH adjustments.",
+  "analysis_sets": [
+    "primary_policy_comparison",
+    "feature_matched_sensitivity"
+  ],
+  "sroie_nn_k": "Omitted because the historical NN-K top-3 provenance cannot be reconstructed exactly for three EasyOCR pages."
+}

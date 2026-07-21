@@ -1,0 +1,8 @@
+{
+  "policy": "surrogate_feature_matched",
+  "setting": "contour",
+  "k": 3,
+  "candidate_scores": "Sanitized: OCR transcript field removed.",
+  "prediction_feature_transform": "Continuous surrogate predicted-CER and prediction-margin features were replaced by within-shortlist ranks 1, 2, and 3; the exact surrogate top-3 candidates and remaining selector features were retained.",
+  "source_documents_and_ocr_output_text": "Not distributed in this release."
+}

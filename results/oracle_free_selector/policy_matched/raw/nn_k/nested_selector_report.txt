@@ -1,0 +1,17 @@
+================================================================================
+NESTED ORACLE-FREE TOP-3 SELECTOR
+================================================================================
+
+Selector families: rf_cls, logreg_cls, rf_reg, gbr_reg, ridge_reg
+Missing OCR cache rows: 0
+
+Engine      Chosen  Top1   Agree  Fixed  NoPre  Best3  Sel-Top1 Sel-Agree Sel-Fixed p<Top1 p<Agree p<Fixed Choices
+------------------------------------------------------------------------------------------------------------------
+vietocr       4.73%  5.05%  4.73%  4.63%  4.70%  4.20%  -0.32pp   -0.01pp   +0.10pp 1.98e-05 0.6 0.789 {'gbr_reg': 1, 'ridge_reg': 4}
+tesseract     9.31%  9.96%  9.42%  9.29%  9.82%  8.40%  -0.65pp   -0.11pp   +0.02pp 1.73e-07 0.119 0.401 {'ridge_reg': 4, 'gbr_reg': 1}
+easyocr      15.33% 16.06% 15.54% 15.19% 15.44% 14.52%  -0.73pp   -0.21pp   +0.13pp 3.25e-08 0.0115 0.946 {'rf_cls': 3, 'logreg_cls': 2}
+
+Selected rank counts
+  vietocr: {'3': 113, '1': 100, '2': 87}
+  tesseract: {'2': 97, '1': 120, '3': 83}
+  easyocr: {'1': 75, '3': 107, '2': 118}

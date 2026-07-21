@@ -1,0 +1,4 @@
+engine,required_candidate_engine_rows,complete_cached_rows,missing_candidate_engine_rows,coverage_pct
+easyocr,900,900,0,100.0
+tesseract,900,900,0,100.0
+vietocr,900,900,0,100.0

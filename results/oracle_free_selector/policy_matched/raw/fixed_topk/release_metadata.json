@@ -1,0 +1,9 @@
+{
+  "policy": "fixed-topk",
+  "setting": "raw",
+  "k": 3,
+  "candidate_scores": "Sanitized: OCR transcript field removed.",
+  "selector_protocol": "The same nested selector protocol was refit for this policy-specific top-3 shortlist.",
+  "policy_score": "Within-policy order 1, 2, 3, not a continuous CER prediction.",
+  "source_documents_and_ocr_output_text": "Not distributed in this release."
+}
