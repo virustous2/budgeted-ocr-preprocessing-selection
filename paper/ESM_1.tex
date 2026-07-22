@@ -23,7 +23,7 @@
 \noindent\textbf{Corresponding author:} Anh Nguyen Van, National Laboratory for Securing Information (NLSI), Vietnam Ministry of Defence, Hanoi, Vietnam. Email: \texttt{nguyenanhbh14@gmail.com}
 
 \bigskip
-\noindent\textbf{Caption:} Additional dataset summary, offline OCR evaluation loop, preprocessing search-space table, surrogate feature groups, nested-CV surrogate model quality, nested GroupKFold protocol details and stepwise algorithm, policy-agnostic headroom controls, Vietnamese best-of-K curves, feature-matched oracle-free selector sensitivity results, omitted SROIE intermediate-budget results, and contour-suppression schematic referenced from the main manuscript.
+\noindent\textbf{Caption:} Additional dataset summary, offline OCR evaluation loop, preprocessing search-space table, surrogate feature groups, nested-CV surrogate model quality, nested GroupKFold protocol details and stepwise algorithm, policy-agnostic headroom controls, Vietnamese best-of-K curves, feature-matched oracle-free selector sensitivity results, SROIE intermediate-budget results omitted from the main manuscript, and contour-suppression schematic referenced from the main manuscript.
 
 \section{Dataset Summary}
 
@@ -171,7 +171,7 @@ For each held-out page and budget, the main manuscript defines FixedTopK-to-orac
 }
 \end{table}
 
-Across all budgets, the coupled relationship is positive and significant in 32/32 configurations for each policy, while Random has the larger correlation in 30/32 Surrogate-versus-Random comparisons. The corresponding direct Random-minus-Surrogate correlation ranges from \(-0.516\) to \(0.022\), with no positive significant result. These controls establish that headroom is a retrospective measure of available improvement in the sampled pool, not evidence specific to learned ranking or an oracle-free policy-selection rule.
+Across all budgets, the coupled relationship is positive and significant in 32/32 configurations for each policy, while Random has the larger correlation in 30/32 Surrogate-versus-Random comparisons. The corresponding direct Random-minus-Surrogate correlation ranges from \(-0.516\) to \(0.022\), with no positive significant result. These controls show that headroom is a retrospective measure of available improvement in the sampled pool, not evidence specific to learned ranking or an oracle-free policy-selection rule.
 
 \section{Vietnamese Best-of-K Curves}
 
