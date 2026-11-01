@@ -1,0 +1,33 @@
+\begin{table}[htbp]
+\centering\small
+\caption{Standalone Laplacian-standard-deviation removal: range of Drop-minus-Full mean best-of-$K$ CER differences across engines and budgets (pp). Negative is lower CER after removal. The final column counts Holm-significant lower/higher results in each separate direct-comparison family. All 64 comparisons, including CIs, are released.}
+\label{tab:noise_direct_ranges}
+\begin{tabular}{llrrrr}\toprule
+Setting & Policy & Minimum & Maximum & Tests & Lower/Higher \\\midrule
+VN contour & NN-K & -0.03 & +0.02 & 12 & 0/0 \\
+VN contour & Surrogate & -0.04 & +0.04 & 12 & 0/0 \\
+VN raw & NN-K & -0.05 & +0.02 & 12 & 0/0 \\
+VN raw & Surrogate & -0.06 & +0.04 & 12 & 0/0 \\
+SROIE & NN-K & -0.06 & +0.07 & 8 & 0/0 \\
+SROIE & Surrogate & -0.18 & +0.01 & 8 & 1/0 \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\caption{All ten policy comparisons whose Holm-adjusted significance classification changes after removing only the standalone column. Differences are first policy minus second (pp); negative favors the first. $p_H$ uses the same prespecified block/contrast family in each condition (12 tests for each Vietnamese block, eight for SROIE). These threshold crossings are not formal tests of a difference between contrasts. Full-precision results for all 160 comparisons per condition are released.}
+\label{tab:noise_changed_conclusions}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lll l rrrr}\toprule
+Setting & Engine & $K$ & Contrast & Full $\Delta$ & Drop $\Delta$ & Full $p_H$ & Drop $p_H$ \\\midrule
+VN contour & EasyOCR & 15 & Surr.--FixedTopK & -0.07 & -0.07 & 0.0384 & 0.104 \\
+VN contour & VietOCR & 3 & Surr.--FixedTopK & +0.09 & +0.09 & 0.0361 & 0.181 \\
+VN contour & VietOCR & 10 & NN-K--FixedTopK & -0.12 & -0.12 & 0.0445 & 0.0507 \\
+VN contour & VietOCR & 10 & NN-K--Surr. & -0.10 & -0.09 & 0.0371 & 0.138 \\
+VN contour & VietOCR & 15 & NN-K--FixedTopK & -0.11 & -0.10 & 0.0189 & 0.0507 \\
+VN raw & VietOCR & 10 & NN-K--FixedTopK & -0.13 & -0.13 & 0.0355 & 0.0656 \\
+SROIE & EasyOCR & 3 & NN-K--Surr. & -0.13 & -0.14 & 0.250 & 0.00603 \\
+SROIE & EasyOCR & 5 & NN-K--Surr. & -0.09 & -0.10 & 0.995 & 0.0491 \\
+SROIE & Tesseract & 10 & NN-K--Surr. & +0.14 & +0.31 & 0.0865 & 0.000441 \\
+SROIE & Tesseract & 15 & NN-K--Surr. & +0.06 & +0.12 & 0.250 & 0.0430 \\
+\bottomrule\end{tabular}}
+\end{table}

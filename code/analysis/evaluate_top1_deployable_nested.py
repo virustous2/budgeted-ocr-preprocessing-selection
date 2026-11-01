@@ -246,7 +246,8 @@ def evaluate_engine(
             if image_name not in exact_nopre_by_image:
                 raise KeyError(f"Missing exact NoPre CER for image '{image_name}'")
 
-            ranked = group.sort_values("pred_cer", ascending=True)
+            # Match surrogate nsmallest(..., keep="first") for tied predictions.
+            ranked = group.sort_values("pred_cer", ascending=True, kind="mergesort")
             top1 = ranked.iloc[0]
 
             row = {
@@ -255,10 +256,7 @@ def evaluate_engine(
                 "image_name": image_name,
                 "top1_pred_cer": float(top1["pred_cer"]),
                 "top1_actual_cer": float(top1[target_col]),
-                "random1_actual_cer": float(np.mean([
-                    group.sample(1, random_state=s)[target_col].iloc[0]
-                    for s in range(random_trials)
-                ])),
+                "random1_actual_cer": float(group[target_col].mean()),
                 "fixedbest_actual_cer": _get_fixedbest_for_group(group, best_combo_vals, target_col),
                 "nopre_cer": float(exact_nopre_by_image[image_name]),
                 "samporacle_cer": float(group[target_col].min()),

@@ -7,42 +7,42 @@ Holm/BH are reported within comparator family and within the analysis set.
 
 surrogate_vs_nn_k
 -----------------
-Vietnamese / raw / easyocr: Surrogate=14.978%, NN-K=15.326%, diff=-0.348 pp, 95% CI [-0.558, -0.139], n=300 (eff=189, ties=111), p=0.00354, Holm(family)=0.0142, BH(family)=0.00709, Holm(analysis)=0.0354, BH(analysis)=0.00992
-Vietnamese / raw / tesseract: Surrogate=8.965%, NN-K=9.311%, diff=-0.345 pp, 95% CI [-0.611, -0.094], n=300 (eff=257, ties=43), p=0.106, Holm(family)=0.318, BH(family)=0.159, Holm(analysis)=0.742, BH(analysis)=0.185
-Vietnamese / raw / vietocr: Surrogate=4.522%, NN-K=4.728%, diff=-0.205 pp, 95% CI [-0.351, -0.063], n=300 (eff=267, ties=33), p=8.04e-05, Holm(family)=0.000402, BH(family)=0.000241, Holm(analysis)=0.000965, BH(analysis)=0.000375
-Vietnamese / contour / easyocr: Surrogate=12.918%, NN-K=13.385%, diff=-0.467 pp, 95% CI [-0.675, -0.262], n=300 (eff=211, ties=89), p=1.16e-05, Holm(family)=6.98e-05, BH(family)=6.98e-05, Holm(analysis)=0.000151, BH(analysis)=8.14e-05
-Vietnamese / contour / tesseract: Surrogate=7.042%, NN-K=7.123%, diff=-0.082 pp, 95% CI [-0.364, +0.207], n=300 (eff=257, ties=43), p=0.481, Holm(family)=0.481, BH(family)=0.481, Holm(analysis)=1, BH(analysis)=0.518
-Vietnamese / contour / vietocr: Surrogate=3.188%, NN-K=3.274%, diff=-0.086 pp, 95% CI [-0.211, +0.039], n=300 (eff=274, ties=26), p=0.205, Holm(family)=0.411, BH(family)=0.246, Holm(analysis)=1, BH(analysis)=0.32
+Vietnamese / raw / easyocr: Surrogate=15.199%, NN-K=15.406%, diff=-0.206 pp, 95% CI [-0.456, +0.040], n=300 (eff=223, ties=77), p=0.119, Holm(family)=0.237, BH(family)=0.139, Holm(analysis)=0.711, BH(analysis)=0.168
+Vietnamese / raw / tesseract: Surrogate=8.795%, NN-K=9.165%, diff=-0.370 pp, 95% CI [-0.658, -0.080], n=300 (eff=270, ties=30), p=0.00547, Holm(family)=0.0274, BH(family)=0.0164, Holm(analysis)=0.0602, BH(analysis)=0.0192
+Vietnamese / raw / vietocr: Surrogate=4.558%, NN-K=4.730%, diff=-0.172 pp, 95% CI [-0.302, -0.042], n=300 (eff=262, ties=38), p=0.00187, Holm(family)=0.0112, BH(family)=0.0112, Holm(analysis)=0.0225, BH(analysis)=0.00875
+Vietnamese / contour / easyocr: Surrogate=13.066%, NN-K=13.336%, diff=-0.271 pp, 95% CI [-0.506, -0.032], n=300 (eff=217, ties=83), p=0.0162, Holm(family)=0.0545, BH(family)=0.0244, Holm(analysis)=0.146, BH(analysis)=0.0379
+Vietnamese / contour / tesseract: Surrogate=6.593%, NN-K=6.988%, diff=-0.395 pp, 95% CI [-0.661, -0.142], n=300 (eff=264, ties=36), p=0.0136, Holm(family)=0.0545, BH(family)=0.0244, Holm(analysis)=0.136, BH(analysis)=0.0379
+Vietnamese / contour / vietocr: Surrogate=3.305%, NN-K=3.190%, diff=+0.114 pp, 95% CI [-0.001, +0.238], n=300 (eff=263, ties=37), p=0.139, Holm(family)=0.237, BH(family)=0.139, Holm(analysis)=0.711, BH(analysis)=0.177
 
 surrogate_vs_fixed_topk
 -----------------------
-Vietnamese / raw / easyocr: Surrogate=14.978%, FixedTopK=15.178%, diff=-0.200 pp, 95% CI [-0.358, -0.044], n=300 (eff=108, ties=192), p=0.0289, Holm(family)=0.173, BH(family)=0.0758, Holm(analysis)=0.26, BH(analysis)=0.0673
-Vietnamese / raw / tesseract: Surrogate=8.965%, FixedTopK=9.120%, diff=-0.154 pp, 95% CI [-0.431, +0.108], n=300 (eff=256, ties=44), p=0.253, Holm(family)=0.995, BH(family)=0.337, Holm(analysis)=1, BH(analysis)=0.322
-Vietnamese / raw / vietocr: Surrogate=4.522%, FixedTopK=4.542%, diff=-0.020 pp, 95% CI [-0.154, +0.103], n=300 (eff=247, ties=53), p=0.874, Holm(family)=0.995, BH(family)=0.874, Holm(analysis)=1, BH(analysis)=0.874
-Vietnamese / contour / easyocr: Surrogate=12.918%, FixedTopK=13.088%, diff=-0.169 pp, 95% CI [-0.346, +0.010], n=300 (eff=128, ties=172), p=0.0379, Holm(family)=0.189, BH(family)=0.0758, Holm(analysis)=0.303, BH(analysis)=0.0758
-Vietnamese / contour / tesseract: Surrogate=7.042%, FixedTopK=7.054%, diff=-0.012 pp, 95% CI [-0.302, +0.287], n=300 (eff=270, ties=30), p=0.249, Holm(family)=0.995, BH(family)=0.337, Holm(analysis)=1, BH(analysis)=0.322
-Vietnamese / contour / vietocr: Surrogate=3.188%, FixedTopK=3.077%, diff=+0.111 pp, 95% CI [+0.011, +0.212], n=300 (eff=237, ties=63), p=0.00181, Holm(family)=0.0127, BH(family)=0.00723, Holm(analysis)=0.0199, BH(analysis)=0.00633
-SROIE / receipt / easyocr: Surrogate=39.801%, FixedTopK=39.824%, diff=-0.023 pp, 95% CI [-0.170, +0.124], n=626 (eff=541, ties=85), p=0.438, Holm(family)=0.995, BH(family)=0.5, Holm(analysis)=1, BH(analysis)=0.511
-SROIE / receipt / tesseract: Surrogate=44.289%, FixedTopK=45.131%, diff=-0.842 pp, 95% CI [-1.168, -0.503], n=626 (eff=418, ties=208), p=3.69e-08, Holm(family)=2.95e-07, BH(family)=2.95e-07, Holm(analysis)=5.16e-07, BH(analysis)=5.16e-07
+Vietnamese / raw / easyocr: Surrogate=15.199%, FixedTopK=14.986%, diff=+0.214 pp, 95% CI [-0.005, +0.427], n=300 (eff=180, ties=120), p=0.0401, Holm(family)=0.241, BH(family)=0.107, Holm(analysis)=0.321, BH(analysis)=0.0802
+Vietnamese / raw / tesseract: Surrogate=8.795%, FixedTopK=8.742%, diff=+0.053 pp, 95% CI [-0.194, +0.296], n=300 (eff=248, ties=52), p=0.803, Holm(family)=1, BH(family)=0.803, Holm(analysis)=1, BH(analysis)=0.803
+Vietnamese / raw / vietocr: Surrogate=4.558%, FixedTopK=4.521%, diff=+0.037 pp, 95% CI [-0.069, +0.144], n=300 (eff=237, ties=63), p=0.452, Holm(family)=1, BH(family)=0.602, Holm(analysis)=1, BH(analysis)=0.527
+Vietnamese / contour / easyocr: Surrogate=13.066%, FixedTopK=12.936%, diff=+0.129 pp, 95% CI [-0.070, +0.327], n=300 (eff=145, ties=155), p=0.12, Holm(family)=0.48, BH(family)=0.192, Holm(analysis)=0.711, BH(analysis)=0.168
+Vietnamese / contour / tesseract: Surrogate=6.593%, FixedTopK=6.746%, diff=-0.153 pp, 95% CI [-0.347, +0.038], n=300 (eff=245, ties=55), p=0.0564, Holm(family)=0.282, BH(family)=0.113, Holm(analysis)=0.395, BH(analysis)=0.0987
+Vietnamese / contour / vietocr: Surrogate=3.305%, FixedTopK=3.098%, diff=+0.207 pp, 95% CI [+0.087, +0.330], n=300 (eff=255, ties=45), p=0.00022, Holm(family)=0.00154, BH(family)=0.000882, Holm(analysis)=0.00287, BH(analysis)=0.00154
+SROIE / receipt / easyocr: Surrogate=39.689%, FixedTopK=39.755%, diff=-0.065 pp, 95% CI [-0.211, +0.082], n=616 (eff=499, ties=117), p=0.529, Holm(family)=1, BH(family)=0.605, Holm(analysis)=1, BH(analysis)=0.57
+SROIE / receipt / tesseract: Surrogate=44.234%, FixedTopK=45.093%, diff=-0.859 pp, 95% CI [-1.320, -0.438], n=616 (eff=405, ties=211), p=1.19e-05, Holm(family)=9.49e-05, BH(family)=9.49e-05, Holm(analysis)=0.000166, BH(analysis)=0.000166
 
 feature_matched_surrogate_vs_nn_k
 ---------------------------------
-Vietnamese / raw / easyocr: Feature-matched Surrogate=14.989%, NN-K=15.326%, diff=-0.337 pp, 95% CI [-0.553, -0.130], n=300 (eff=183, ties=117), p=0.00301, Holm(family)=0.0121, BH(family)=0.00603, Holm(analysis)=0.0332, BH(analysis)=0.0105
-Vietnamese / raw / tesseract: Feature-matched Surrogate=9.031%, NN-K=9.311%, diff=-0.280 pp, 95% CI [-0.550, -0.020], n=300 (eff=262, ties=38), p=0.0541, Holm(family)=0.162, BH(family)=0.0786, Holm(analysis)=0.433, BH(analysis)=0.108
-Vietnamese / raw / vietocr: Feature-matched Surrogate=4.522%, NN-K=4.728%, diff=-0.206 pp, 95% CI [-0.350, -0.064], n=300 (eff=266, ties=34), p=4.53e-05, Holm(family)=0.000272, BH(family)=0.000272, Holm(analysis)=0.000589, BH(analysis)=0.000317
-Vietnamese / contour / easyocr: Feature-matched Surrogate=12.960%, NN-K=13.385%, diff=-0.426 pp, 95% CI [-0.637, -0.220], n=300 (eff=210, ties=90), p=0.000104, Holm(family)=0.00052, BH(family)=0.000312, Holm(analysis)=0.00125, BH(analysis)=0.000486
-Vietnamese / contour / tesseract: Feature-matched Surrogate=7.131%, NN-K=7.123%, diff=+0.008 pp, 95% CI [-0.260, +0.292], n=300 (eff=255, ties=45), p=0.934, Holm(family)=0.934, BH(family)=0.934, Holm(analysis)=1, BH(analysis)=0.955
-Vietnamese / contour / vietocr: Feature-matched Surrogate=3.154%, NN-K=3.274%, diff=-0.120 pp, 95% CI [-0.242, +0.003], n=300 (eff=272, ties=28), p=0.0655, Holm(family)=0.162, BH(family)=0.0786, Holm(analysis)=0.458, BH(analysis)=0.115
+Vietnamese / raw / easyocr: Feature-matched Surrogate=15.140%, NN-K=15.406%, diff=-0.266 pp, 95% CI [-0.517, -0.021], n=300 (eff=229, ties=71), p=0.0392, Holm(family)=0.0783, BH(family)=0.047, Holm(analysis)=0.274, BH(analysis)=0.0685
+Vietnamese / raw / tesseract: Feature-matched Surrogate=8.787%, NN-K=9.165%, diff=-0.379 pp, 95% CI [-0.668, -0.094], n=300 (eff=270, ties=30), p=0.00332, Holm(family)=0.0133, BH(family)=0.00664, Holm(analysis)=0.0332, BH(analysis)=0.00929
+Vietnamese / raw / vietocr: Feature-matched Surrogate=4.552%, NN-K=4.730%, diff=-0.179 pp, 95% CI [-0.303, -0.051], n=300 (eff=260, ties=40), p=0.00175, Holm(family)=0.00874, BH(family)=0.00524, Holm(analysis)=0.0192, BH(analysis)=0.00612
+Vietnamese / contour / easyocr: Feature-matched Surrogate=13.073%, NN-K=13.336%, diff=-0.264 pp, 95% CI [-0.500, -0.032], n=300 (eff=216, ties=84), p=0.0197, Holm(family)=0.0592, BH(family)=0.0296, Holm(analysis)=0.158, BH(analysis)=0.0395
+Vietnamese / contour / tesseract: Feature-matched Surrogate=6.514%, NN-K=6.988%, diff=-0.474 pp, 95% CI [-0.741, -0.228], n=300 (eff=259, ties=41), p=0.00103, Holm(family)=0.00618, BH(family)=0.00524, Holm(analysis)=0.0124, BH(analysis)=0.0048
+Vietnamese / contour / vietocr: Feature-matched Surrogate=3.301%, NN-K=3.190%, diff=+0.111 pp, 95% CI [-0.007, +0.232], n=300 (eff=261, ties=39), p=0.126, Holm(family)=0.126, BH(family)=0.126, Holm(analysis)=0.755, BH(analysis)=0.18
 
 feature_matched_surrogate_vs_fixed_topk
 ---------------------------------------
-Vietnamese / raw / easyocr: Feature-matched Surrogate=14.989%, FixedTopK=15.178%, diff=-0.189 pp, 95% CI [-0.352, -0.031], n=300 (eff=104, ties=196), p=0.035, Holm(family)=0.243, BH(family)=0.0935, Holm(analysis)=0.346, BH(analysis)=0.0818
-Vietnamese / raw / tesseract: Feature-matched Surrogate=9.031%, FixedTopK=9.120%, diff=-0.089 pp, 95% CI [-0.364, +0.185], n=300 (eff=260, ties=40), p=0.386, Holm(family)=1, BH(family)=0.611, Holm(analysis)=1, BH(analysis)=0.54
-Vietnamese / raw / vietocr: Feature-matched Surrogate=4.522%, FixedTopK=4.542%, diff=-0.021 pp, 95% CI [-0.146, +0.097], n=300 (eff=246, ties=54), p=0.955, Holm(family)=1, BH(family)=0.955, Holm(analysis)=1, BH(analysis)=0.955
-Vietnamese / contour / easyocr: Feature-matched Surrogate=12.960%, FixedTopK=13.088%, diff=-0.128 pp, 95% CI [-0.309, +0.050], n=300 (eff=118, ties=182), p=0.125, Holm(family)=0.624, BH(family)=0.25, Holm(analysis)=0.749, BH(analysis)=0.194
-Vietnamese / contour / tesseract: Feature-matched Surrogate=7.131%, FixedTopK=7.054%, diff=+0.078 pp, 95% CI [-0.224, +0.390], n=300 (eff=275, ties=25), p=0.484, Holm(family)=1, BH(family)=0.611, Holm(analysis)=1, BH(analysis)=0.617
-Vietnamese / contour / vietocr: Feature-matched Surrogate=3.154%, FixedTopK=3.077%, diff=+0.077 pp, 95% CI [-0.020, +0.172], n=300 (eff=237, ties=63), p=0.0346, Holm(family)=0.243, BH(family)=0.0935, Holm(analysis)=0.346, BH(analysis)=0.0818
-SROIE / receipt / easyocr: Feature-matched Surrogate=39.809%, FixedTopK=39.824%, diff=-0.014 pp, 95% CI [-0.164, +0.137], n=626 (eff=545, ties=81), p=0.535, Holm(family)=1, BH(family)=0.611, Holm(analysis)=1, BH(analysis)=0.624
-SROIE / receipt / tesseract: Feature-matched Surrogate=44.271%, FixedTopK=45.131%, diff=-0.861 pp, 95% CI [-1.195, -0.519], n=626 (eff=415, ties=211), p=1.12e-08, Holm(family)=9e-08, BH(family)=9e-08, Holm(analysis)=1.57e-07, BH(analysis)=1.57e-07
+Vietnamese / raw / easyocr: Feature-matched Surrogate=15.140%, FixedTopK=14.986%, diff=+0.154 pp, 95% CI [-0.061, +0.370], n=300 (eff=191, ties=109), p=0.141, Holm(family)=0.691, BH(family)=0.226, Holm(analysis)=0.755, BH(analysis)=0.18
+Vietnamese / raw / tesseract: Feature-matched Surrogate=8.787%, FixedTopK=8.742%, diff=+0.044 pp, 95% CI [-0.200, +0.294], n=300 (eff=251, ties=49), p=0.772, Holm(family)=1, BH(family)=0.772, Holm(analysis)=1, BH(analysis)=0.772
+Vietnamese / raw / vietocr: Feature-matched Surrogate=4.552%, FixedTopK=4.521%, diff=+0.030 pp, 95% CI [-0.072, +0.133], n=300 (eff=242, ties=58), p=0.309, Holm(family)=0.926, BH(family)=0.412, Holm(analysis)=0.926, BH(analysis)=0.36
+Vietnamese / contour / easyocr: Feature-matched Surrogate=13.073%, FixedTopK=12.936%, diff=+0.136 pp, 95% CI [-0.066, +0.335], n=300 (eff=152, ties=148), p=0.138, Holm(family)=0.691, BH(family)=0.226, Holm(analysis)=0.755, BH(analysis)=0.18
+Vietnamese / contour / tesseract: Feature-matched Surrogate=6.514%, FixedTopK=6.746%, diff=-0.232 pp, 95% CI [-0.421, -0.044], n=300 (eff=253, ties=47), p=0.00435, Holm(family)=0.0261, BH(family)=0.0116, Holm(analysis)=0.0391, BH(analysis)=0.0101
+Vietnamese / contour / vietocr: Feature-matched Surrogate=3.301%, FixedTopK=3.098%, diff=+0.203 pp, 95% CI [+0.085, +0.324], n=300 (eff=252, ties=48), p=6.01e-05, Holm(family)=0.00042, BH(family)=0.00024, Holm(analysis)=0.000781, BH(analysis)=0.00042
+SROIE / receipt / easyocr: Feature-matched Surrogate=39.687%, FixedTopK=39.755%, diff=-0.067 pp, 95% CI [-0.214, +0.079], n=616 (eff=503, ties=113), p=0.522, Holm(family)=1, BH(family)=0.596, Holm(analysis)=1, BH(analysis)=0.562
+SROIE / receipt / tesseract: Feature-matched Surrogate=44.202%, FixedTopK=45.093%, diff=-0.891 pp, 95% CI [-1.356, -0.467], n=616 (eff=408, ties=208), p=9.08e-06, Holm(family)=7.26e-05, BH(family)=7.26e-05, Holm(analysis)=0.000127, BH(analysis)=0.000127
 
 SROIE NN-K is unavailable because exact historical shortlist provenance is incomplete for three EasyOCR pages.

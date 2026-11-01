@@ -1,0 +1,15 @@
+{
+  "primary": "wilcox unchanged; alternatives post hoc sensitivity",
+  "sources": {
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_vietocr.csv": "d5090c8fc4362cdd8bf03557ae2a7ca63766496edfc7acd365b09f0d6705c68d",
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_tesseract.csv": "c354fd5450729c386279034d8861320822cfd617fd1f27d5c2769e205777eebd",
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_easyocr.csv": "354cea3cdc502091068b489cd39571733fd070e08170ea19f855a36f0cddd194",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_vietocr.csv": "74ed86793b719bf071311845de36f460d7e3e820b7966bc78050c730b6e9f3da",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_tesseract.csv": "344de346effc0b205c22907910b41c5378e601b59cf7b491e681e7f348099823",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_easyocr.csv": "1bb096856af6dea81b9494a1127ae07cedb5ec523421f72202c17f114c926abb"
+  },
+  "config_sha256": "1ad9a76351e8a831b07e39095f8bd4311313263ca2f5fd8b1717577ae2abca31",
+  "script_sha256": "2f0f8d991567f6f1e01731e8382cd8f3d9aa0a3bd59243d3a54687daec03cba1",
+  "dependency_sha256": "f6060f6318c6aedd1cf27d4a76822596eb16d1a61529b2484f29dbd2a52e0ff9",
+  "output_sha256": "f3c520f073930ece255f746d22a755f306db80fc4d4da3aa8408c0988b59eeed"
+}

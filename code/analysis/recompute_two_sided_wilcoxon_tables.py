@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import csv
 import math
+from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, List, Sequence, Tuple
 
@@ -47,7 +48,7 @@ def wilcoxon_two_sided(a: Iterable[float], b: Iterable[float]) -> Tuple[float, f
         return math.nan, math.nan, 0
     if np.allclose(x, y):
         return math.nan, 1.0, int(len(x))
-    stat, p_value = wilcoxon(x, y, alternative="two-sided")
+    stat, p_value = wilcoxon(x, y, alternative="two-sided", zero_method="wilcox")
     return float(stat), float(p_value), int(len(x))
 
 
@@ -166,9 +167,9 @@ def selector_page_values(rows: List[Dict[str, str]], engine: str) -> Dict[str, L
 
 def collect_selector(root: Path, out_rows: List[Dict[str, object]]) -> None:
     specs = [
-        ("Vietnamese", "raw", root / "results/oracle_free_selector/raw", ("vietocr", "tesseract", "easyocr")),
-        ("Vietnamese", "contour", root / "results/oracle_free_selector/contour", ("vietocr", "tesseract", "easyocr")),
-        ("SROIE", "raw", root / "results/oracle_free_selector/sroie", ("tesseract", "easyocr")),
+        ("Vietnamese", "raw", root / "results/oracle_free_selector/strict/full/raw", ("vietocr", "tesseract", "easyocr")),
+        ("Vietnamese", "contour", root / "results/oracle_free_selector/strict/full/contour", ("vietocr", "tesseract", "easyocr")),
+        ("SROIE", "raw", root / "results/oracle_free_selector/strict/full/sroie", ("tesseract", "easyocr")),
     ]
     for dataset, setting, folder, engines in specs:
         rows = read_rows(folder / "nested_selector_candidate_scores_sanitized.csv")
@@ -189,6 +190,49 @@ def collect_selector(root: Path, out_rows: List[Dict[str, object]]) -> None:
                 )
 
 
+def holm_adjust(p_values: Sequence[float]) -> List[float]:
+    """Return Holm-adjusted p-values in the original row order."""
+    order = sorted(range(len(p_values)), key=lambda index: p_values[index])
+    adjusted = [math.nan] * len(p_values)
+    running_max = 0.0
+    for rank, index in enumerate(order):
+        candidate = min(1.0, (len(p_values) - rank) * float(p_values[index]))
+        running_max = max(running_max, candidate)
+        adjusted[index] = running_max
+    return adjusted
+
+
+def holm_family(row: Dict[str, object]) -> str:
+    """Define the scientific comparison family used for multiplicity control.
+
+    Best-of-K tests form one family per policy contrast and evaluation block
+    (raw Vietnamese, contour-suppressed Vietnamese, or SROIE). Selector tests
+    form one family per comparator across the eight evaluated settings.
+    """
+    comparison_family = str(row["comparison_family"])
+    contrast = f"{row['method_a']}_vs_{row['method_b']}"
+    if comparison_family in {"best_of_k", "nn_best_of_k"}:
+        block = f"{row['dataset']}_{row['setting']}"
+        return f"{comparison_family}:{contrast}:{block}"
+    if comparison_family == "oracle_free_top3_selector":
+        return f"{comparison_family}:{contrast}:all_settings"
+    raise ValueError(f"No Holm-family rule for {comparison_family!r}")
+
+
+def add_holm_adjustments(rows: List[Dict[str, object]]) -> None:
+    grouped: Dict[str, List[int]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        family = holm_family(row)
+        row["holm_family"] = family
+        grouped[family].append(index)
+
+    for indices in grouped.values():
+        adjusted = holm_adjust([float(rows[index]["p_two_sided"]) for index in indices])
+        for index, p_holm in zip(indices, adjusted):
+            rows[index]["p_holm"] = p_holm
+            rows[index]["significant_holm_0_05"] = p_holm < 0.05
+
+
 def write_csv(path: Path, rows: List[Dict[str, object]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
@@ -206,6 +250,9 @@ def write_csv(path: Path, rows: List[Dict[str, object]]) -> None:
         "direction_from_mean",
         "wilcoxon_statistic",
         "p_two_sided",
+        "holm_family",
+        "p_holm",
+        "significant_holm_0_05",
         "alternative",
     ]
     with path.open("w", newline="", encoding="utf-8") as f:
@@ -234,6 +281,7 @@ def main() -> None:
     collect_main_bestk(root, rows)
     collect_nn(root, rows)
     collect_selector(root, rows)
+    add_holm_adjustments(rows)
     write_csv(output, rows)
     print(f"Wrote {len(rows)} two-sided Wilcoxon tests to {output}")
 

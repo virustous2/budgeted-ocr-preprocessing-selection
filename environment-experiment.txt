@@ -1,6 +1,8 @@
 # Final Experiment Software Record
 
-This file records the software configuration used for the final candidate-response data and the reported OCR evaluations.
+This file records retained software metadata and OCR configuration. The OpenCV
+section distinguishes package metadata from the imported runtime. This is not
+a complete environment lockfile or proof of each historical OCR runtime.
 
 ## Runtime and OCR packages
 
@@ -13,7 +15,15 @@ This file records the software configuration used for the final candidate-respon
 - pytesseract 0.3.13
 - Tesseract 5.3.4 (`tesseract-ocr` package 5.3.4-1build5)
 - Tesseract English and Vietnamese language packages: `eng` and `vie`, package version 1:4.1.0-2
-- OpenCV 4.11.0.86
+- OpenCV: historical strict-selector manifests record the opencv-python
+  distribution metadata as 4.11.0.86, not cv2.__version__.
+- A direct check on 2026-10-11 imports cv2 runtime 4.10.0. Installed metadata
+  simultaneously lists opencv-contrib-python 4.10.0.84, opencv-python 4.11.0.86,
+  and opencv-python-headless 4.11.0.86. These share the cv2 namespace; the
+  environment is not a clean single-distribution OpenCV installation.
+- The saved projection-profile diagnostic separately records runtime 4.10.0.
+  Neither today's import nor package metadata proves the runtime of every
+  earlier candidate-response OCR run. Historical manifests are retained as-is.
 - RapidFuzz 3.14.3
 
 ## OCR configuration
@@ -26,4 +36,28 @@ This file records the software configuration used for the final candidate-respon
 - VietOCR output was retained only when the predicted confidence was strictly greater than 0.8.
 - Tesseract was called without an additional configuration string, so its default engine and page-segmentation settings were used.
 
-`requirements.txt` specifies compatible dependency ranges for a new installation. This file is the version record for the reported experiments.
+## OpenCV reproduction guard (CHG-20261011-07)
+
+Inspect the current interpreter without installing or removing anything:
+
+    python code/analysis/check_opencv_environment.py
+
+For a prospective clean environment, after installing its OCR dependencies:
+
+    python code/analysis/check_opencv_environment.py --require-single-distribution
+
+The second command returns exit 2 for missing/mismatched metadata or multiple
+OpenCV distributions, even when one metadata version matches the runtime. It
+does not change the environment. Use a separate fresh environment for future
+installation validation; do not alter the active experimental venv or retrofit
+existing checkpoint manifests. The observed runtime target is 4.10.0, not a
+validated lockfile for all OCR dependencies.
+
+OpenCV's official wheel instructions require selecting only one of its four
+packages because they share cv2:
+https://pypi.org/project/opencv-python/#installation-and-usage
+
+`requirements.txt` specifies broad dependency ranges, not a bit-exact
+reproduction recipe. Installing OCR dependencies can add another OpenCV wheel;
+validate the final installed set and imported runtime rather than assuming the
+range file or pip package metadata alone guarantees historical compatibility.

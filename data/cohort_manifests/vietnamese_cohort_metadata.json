@@ -1,0 +1,40 @@
+{
+  "dataset": "Vietnamese administrative-document first-page cohort",
+  "n_pages": 300,
+  "years": {
+    "2015": 30,
+    "2016": 30,
+    "2017": 30,
+    "2018": 30,
+    "2019": 30,
+    "2020": 30,
+    "2021": 30,
+    "2022": 30,
+    "2023": 30,
+    "2024": 30
+  },
+  "image_id_set_sha256": "85480915b4c63763c75cae821011131aec49afe1290399c7a5927ac9c86d8b49",
+  "manifest": "vietnamese_cohort_manifest.csv",
+  "source_documents_included": false,
+  "cohort_correction": {
+    "removed_after_exact_duplicate_audit": [
+      "242_2018",
+      "602_2024"
+    ],
+    "added_replacements": [
+      "12799_2018",
+      "64_2024"
+    ],
+    "year_mapping": {
+      "2018": {
+        "removed": "242_2018",
+        "added": "12799_2018"
+      },
+      "2024": {
+        "removed": "602_2024",
+        "added": "64_2024"
+      }
+    },
+    "resulting_design": "30 pages per year for 2015--2024"
+  }
+}

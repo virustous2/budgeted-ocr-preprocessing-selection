@@ -1,13 +1,13 @@
 ======================================================================
 PER-IMAGE ORACLE GAP vs SURROGATE ADVANTAGE CORRELATION
-Computed: 2026-04-30 12:47
+Updated from authoritative all616 controls: 2026-08-21
 ======================================================================
 
 HOW IT IS COMPUTED
 ----------------------------------------
 Source: per_page_results_{engine}.csv from nested kfold run
   (surrogate_multiengine_kfold_level1_fix_raw_g03757_nested_fixedtopk_perpage_v2)
-  (surrogate_kfold_sroie_level1_fix_all626_g1_nested_fixedtopk_perpage_v2)
+  (surrogate_kfold_sroie_level1_fix_all616_g1_nested_fixedtopk_perpage_v2)
 
 For each held-out page i (from the same outer fold):
   oracle_gap_i  = fixed_topk_k3_i - oracle_i
@@ -33,8 +33,8 @@ Vietnamese     vietocr        300        0.470      0.0000   ***       0.66pp   
 Vietnamese     tesseract      300        0.371      0.0000   ***       1.26pp      -0.19pp
 Vietnamese     easyocr        300        0.415      0.0000   ***       1.13pp       0.05pp
 
-SROIE          tesseract      626        0.514      0.0000   ***       4.11pp       1.04pp
-SROIE          easyocr        626        0.594      0.0000   ***       1.34pp       0.14pp
+SROIE          tesseract      616        0.498      0.0000   ***       4.07pp       0.99pp
+SROIE          easyocr        616        0.563      0.0000   ***       1.32pp       0.17pp
 
 
 QUARTILE BREAKDOWN (K=3, Tesseract)
@@ -51,21 +51,21 @@ Vietnamese:
 SROIE:
   Quartile    Mean oracle gap   Mean surr adv
   ---------------------------------------------
-  Q1 (small)            0.15pp          -0.87pp
-  Q2                    1.88pp          -0.10pp
-  Q3                    4.25pp           1.20pp
-  Q4 (large)           10.12pp           3.94pp
+  Q1 (small)            0.14pp          -0.92pp
+  Q2                    1.89pp          -0.10pp
+  Q3                    4.20pp           1.12pp
+  Q4 (large)           10.07pp           3.84pp
 
 INTERPRETATION
 ----------------------------------------
 The per-image oracle gap significantly predicts surrogate advantage
-on ALL 5 engine-dataset combinations (Spearman r=0.37-0.59, p<0.001).
+on ALL 5 engine-dataset combinations (Spearman r=0.37-0.56, p<0.001).
 
 The Vietnamese/SROIE difference is NOT a different mechanism — the
 correlation structure is similar. The difference is in the DISTRIBUTION
 of gap values:
   Vietnamese mean gap: 0.66-1.26pp → surrogate adv ≈ 0pp
-  SROIE Tesseract mean gap: 4.11pp → surrogate adv +1.04pp
+  SROIE Tesseract mean gap: 4.07pp → surrogate adv +0.99pp
 
 On Vietnamese Q4 pages (large gap, mean ~2.8pp),
 surrogate DOES win: +0.52pp for Tesseract.

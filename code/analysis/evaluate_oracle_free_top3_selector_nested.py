@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Nested, paper-safe oracle-free selector for surrogate-ranked top-3 OCR outputs.
+Legacy pooled-OOF selector; not an end-to-end nested submission evaluation.
+
+The upstream predictions used for selector training can depend on the selector
+test fold. Use evaluate_top3_selector_strict_nested.py for corrected evaluation.
 
 The exploratory selector showed that text/agreement features can choose a
 deployable output from the top-3 shortlist. This script removes the main
@@ -246,7 +249,12 @@ def main() -> None:
     parser.add_argument("--engines", default="vietocr,tesseract,easyocr")
     parser.add_argument("--selectors", default=",".join(DEFAULT_SELECTORS))
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--allow-legacy-pooled-oof", action="store_true",
+                        help="Historical reproduction only; NOT submission-safe nested evaluation")
     args = parser.parse_args()
+    if not args.allow_legacy_pooled_oof:
+        parser.error("Pooled-OOF upstream leakage: use evaluate_top3_selector_strict_nested.py. "
+                     "Historical reproduction requires --allow-legacy-pooled-oof.")
 
     engines = parse_engines(args.engines)
     selectors = parse_engines(args.selectors)

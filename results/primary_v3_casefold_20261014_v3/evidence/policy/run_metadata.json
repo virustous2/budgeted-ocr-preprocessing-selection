@@ -1,0 +1,77 @@
+{
+  "protocol": "strict_selector_policy_comparison_v1",
+  "tests": {
+    "primary_policy_comparison": 16,
+    "rank_only_sensitivity": 16
+  },
+  "holm_rule": "Holm across all 16 two-sided tests separately within each analysis_set",
+  "sensitivity": "Surrogate rank-only inputs retain the same candidate shortlists",
+  "test": "paired two-sided Wilcoxon signed-rank, scipy default zero_method=wilcox",
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 42,
+    "interval": "percentile CI for mean paired CER difference"
+  },
+  "sources": {
+    "raw": {
+      "surrogate_full": {
+        "path": "outputs/strict_nested_selector_raw_v3_20261006_v1/full/nested_selector_candidate_scores.csv",
+        "sha256": "df61ac003a29e73bd86e7e2200b931ce12fa8b2ae970fdc908cd08430643cc95"
+      },
+      "surrogate_rank": {
+        "path": "outputs/strict_nested_selector_raw_v3_20261006_v1/rank_only/nested_selector_candidate_scores.csv",
+        "sha256": "20a23270c22f12fa65f4630d2152e7bb81467d3e3f92434c82026b85fd09fad4"
+      },
+      "nn_k": {
+        "path": "outputs/strict_nested_policy_controls_raw_v3_20261008_v1/nn_k/nested_selector_candidate_scores.csv",
+        "sha256": "dfacc117c9f445bc3fb965e3dbc4b2f3274563418dc71af363f494cf8de5e7be"
+      },
+      "fixed_topk": {
+        "path": "outputs/strict_nested_policy_controls_raw_v3_20261008_v1/fixed_topk/nested_selector_candidate_scores.csv",
+        "sha256": "cd921773daaae0fc826e4a024a6db54f2aab2272dfcfd5cf05fe9c882a003423"
+      }
+    },
+    "contour": {
+      "surrogate_full": {
+        "path": "outputs_contour/strict_nested_selector_contour_v3_20261006_v1/full/nested_selector_candidate_scores.csv",
+        "sha256": "027d7970a8c38b0e0a9521b72d6c87b9a0ca3eb553354f91c125f964a2d56e08"
+      },
+      "surrogate_rank": {
+        "path": "outputs_contour/strict_nested_selector_contour_v3_20261006_v1/rank_only/nested_selector_candidate_scores.csv",
+        "sha256": "d599ddc1faa67008aac332e0a8f81c9c6fdb6f096edd5c3222a79e3990c93fb0"
+      },
+      "nn_k": {
+        "path": "outputs_contour/strict_nested_policy_controls_contour_v3_20261008_v1/nn_k/nested_selector_candidate_scores.csv",
+        "sha256": "7c8ee9ce5b2f90474485ab57fde554b05d167a986d9112366bd01990dafdab79"
+      },
+      "fixed_topk": {
+        "path": "outputs_contour/strict_nested_policy_controls_contour_v3_20261008_v1/fixed_topk/nested_selector_candidate_scores.csv",
+        "sha256": "10d6d485f0aeffdccdfdb67e04279e1a645926896cb9aa3a3cbe489e962e07b6"
+      }
+    },
+    "sroie": {
+      "surrogate_full": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_casefold_20261008_v1/full/nested_selector_candidate_scores.csv",
+        "sha256": "58e1fd675d2c7ba1446da47b849652e13d72da105a2e245f974a33ad6a56fd50"
+      },
+      "surrogate_rank": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_casefold_20261008_v1/rank_only/nested_selector_candidate_scores.csv",
+        "sha256": "bce52a80ee60d5c2273b801f48c7b192a39b234fa9bbc8f73f4b1e0176c73ac6"
+      },
+      "nn_k": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_policy_controls_sroie_casefold_20261009_v1/nn_k/nested_selector_candidate_scores.csv",
+        "sha256": "8076b5c5f8dd9d8e2e4ae14aa73d2021c7674092a7fa4a7ad8ab5e2cdf38494d"
+      },
+      "fixed_topk": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_policy_controls_sroie_casefold_20261009_v1/fixed_topk/nested_selector_candidate_scores.csv",
+        "sha256": "da3ab14f27f05d96de2d0595fc48fb8735cb6a031c51a35f0dbebd11b858c982"
+      }
+    }
+  },
+  "script_sha256": "6bc523d96dc5e700f3ec8d0436c589a1f3c09e3f242a33d534be43813068209c",
+  "helper_sha256": "eef61e284ea2acbd25a79c3ffb3a34296d72d23b124fcea1d5dfd9e7f4126753",
+  "config": {
+    "path": "analysis/strict_selector_comparison_v3_casefold_20261010.json",
+    "sha256": "0c59ecb321d908a4a01810c8b9d7ae98b38e610a33f724092d37b9561d3d1161"
+  }
+}

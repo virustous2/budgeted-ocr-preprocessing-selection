@@ -1,0 +1,36 @@
+{
+  "bootstrap": "10000 paired-page percentile draws; seed rule in seed_for; per-comparison 95%, not simultaneous",
+  "change_id": "CHG-20260926-14",
+  "counts": {
+    "comparisons": 40,
+    "paired_rows": 9856,
+    "statistical_rows": 80
+  },
+  "holm": "8 tests per metric and policy contrast; reverse duplicates excluded",
+  "inputs_sha256": {
+    "casefold_easyocr.csv": "4de17801bd18cb4ec6a8de7e64b84d8f2e3eeb895bdb036242e7ff4ebbf8a3f0",
+    "casefold_nn.csv": "6322bb7c04b513901c0d21923f6d65c5110a26af00f5221743e10813ab775867",
+    "casefold_tesseract.csv": "81dbcb3b7c05169a4db5413d7461233626785655898afee803dcde27478fa332",
+    "primary_easyocr.csv": "edc6a055b050cc71ab1f5290c89f1aeffca952f6b2fc86e862289df23afbc534",
+    "primary_nn.csv": "c0ced01308bdacb0cc575a32b5a637dffa41fe9715024272741b942054416230",
+    "primary_statistics.csv": "ec65641dc512db3b415e0d8d930d348e10ba8b831e48d1254ccd6ce8a2e9c98a",
+    "primary_tesseract.csv": "d73d9bddd70ffa5a337f502fd687a530231daa02e3de16e6dea1b80b105ea363"
+  },
+  "limitations": "No test of metric-by-policy interaction; no selector sensitivity; saved OOF surrogate rankings not reconstructed",
+  "normalization": "NFC + whitespace collapse; CF additionally casefolds prediction and reference",
+  "outputs_sha256": {
+    "baseline_means.csv": "2e48958172d10e6200db90adc5a7dcc36fd22aef9ccada1246cba0b4418f63b4",
+    "paired_values.csv": "8e18865d7132f2d7051264ec8c7246ec2082f699f8926649e24b6598e631c0e1",
+    "primary_casefold_comparison.csv": "558eddc898109032eb0010f10d4be0692d2d0478b5de6ecf048d319b8e574bae",
+    "sroie_casefold_tables.tex": "28c07569ff06f21ae306f649c518a43bd3f5c1d4b4fe7a0d90332b4c779ef807",
+    "statistics.csv": "932ae4a50c2e86ee19b1547c9ec3653f4207abbe23ce9190fdd82ddcf2253f0b",
+    "zero_method_sensitivity.csv": "f520b91cad4f1f451329502825ba72c0ec33d2dbad25fcc7a4052154cf8832e0"
+  },
+  "scope": "post_hoc_SROIE_best_of_K_only",
+  "script_sha256": "f6060f6318c6aedd1cf27d4a76822596eb16d1a61529b2484f29dbd2a52e0ff9",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3"
+  }
+}

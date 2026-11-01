@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, Sequence, Tuple
 
@@ -62,6 +63,35 @@ def safe_spearman(x: np.ndarray, y: np.ndarray) -> Tuple[float, float]:
         return float("nan"), float("nan")
     rho, p_value = spearmanr(x[mask], y[mask])
     return float(rho), float(p_value)
+
+
+def holm_adjust(p_values: Sequence[float]) -> List[float]:
+    """Return Holm-adjusted p-values in the original row order."""
+    order = sorted(range(len(p_values)), key=lambda index: p_values[index])
+    adjusted = [float("nan")] * len(p_values)
+    running_max = 0.0
+    for rank, index in enumerate(order):
+        candidate = min(1.0, (len(p_values) - rank) * float(p_values[index]))
+        running_max = max(running_max, candidate)
+        adjusted[index] = running_max
+    return adjusted
+
+
+def add_holm_adjustments(
+    rows: List[Dict[str, object]], family_key: str, family_prefix: str
+) -> None:
+    grouped: Dict[str, List[int]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        family = f"{family_prefix}:{row[family_key]}:all_32_configurations"
+        row["holm_family"] = family
+        grouped[family].append(index)
+    for indices in grouped.values():
+        adjusted = holm_adjust(
+            [float(rows[index]["spearman_p_value"]) for index in indices]
+        )
+        for index, p_holm in zip(indices, adjusted):
+            rows[index]["spearman_p_holm"] = p_holm
+            rows[index]["significant_holm_0_05"] = p_holm < 0.05
 
 
 def assert_close(label: str, a: np.ndarray, b: np.ndarray) -> None:
@@ -310,12 +340,24 @@ def write_report(
             )
             for policy, rows in by_policy.items()
         },
+        "positive_significant_coupled_holm": {
+            policy: count_positive_significant(
+                rows, "spearman_headroom_vs_advantage", "spearman_p_holm"
+            )
+            for policy, rows in by_policy.items()
+        },
         "random_rho_larger_than_surrogate": sum(
             item["Random"] > item["Surrogate"] for item in paired_rho
         ),
         "positive_significant_nonshared": {
             comparison: count_positive_significant(
                 rows, "spearman_headroom_vs_gain", "spearman_p_value"
+            )
+            for comparison, rows in by_comparison.items()
+        },
+        "positive_significant_nonshared_holm": {
+            comparison: count_positive_significant(
+                rows, "spearman_headroom_vs_gain", "spearman_p_holm"
             )
             for comparison, rows in by_comparison.items()
         },
@@ -340,7 +382,9 @@ def write_report(
         rhos = [float(row["spearman_headroom_vs_gain"]) for row in rows]
         lines.append(
             f"{comparison}: rho range [{min(rhos):.3f}, {max(rhos):.3f}], "
-            f"positive significant={headline['positive_significant_nonshared'][comparison]}/{len(rows)}"
+            f"positive significant raw/Holm="
+            f"{headline['positive_significant_nonshared'][comparison]}/"
+            f"{headline['positive_significant_nonshared_holm'][comparison]}/{len(rows)}"
         )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -361,6 +405,8 @@ def main() -> None:
 
     release_root = args.release_root.resolve()
     summaries, quartiles, nonshared = collect(release_root, args.k_values)
+    add_holm_adjustments(summaries, "policy", "coupled_headroom")
+    add_holm_adjustments(nonshared, "comparison", "nonshared_headroom")
     output_dir = (
         args.output_dir.resolve()
         if args.output_dir is not None

@@ -91,7 +91,13 @@ def main() -> None:
     ap.add_argument("--engines", required=True)
     ap.add_argument("--selectors", default="rf_cls,logreg_cls,rf_reg,gbr_reg,ridge_reg")
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--allow-legacy-pooled-oof", action="store_true",
+                    help="Historical reproduction only; NOT submission-safe nested evaluation")
     args = ap.parse_args()
+    if not args.allow_legacy_pooled_oof:
+        ap.error("Legacy pooled-OOF sensitivity is not end-to-end nested. "
+                 "Use the rank_only output of evaluate_top3_selector_strict_nested.py, "
+                 "or explicitly opt into --allow-legacy-pooled-oof for historical reproduction.")
 
     engines = parse_engines(args.engines)
     selectors = parse_engines(args.selectors)

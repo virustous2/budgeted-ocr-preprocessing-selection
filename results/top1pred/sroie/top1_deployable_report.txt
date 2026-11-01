@@ -8,77 +8,32 @@ Random1: one random candidate averaged over reproducible trials per image
 
 --------------------------------------------------------------------------------
 Engine: easyocr
-Images: 626
-Model selection: XGBoost×3, LightGBM×2
-
-Mean CER
-  NoPre       : 40.85%
-  FixedBest   : 40.06%
-  Random1     : 45.28%
-  Top1Pred    : 40.07%
-  BestOf3    : 39.08%
-  BestOf5    : 38.74%
-  BestOf10   : 38.32%
-  BestOf15   : 38.17%
-  SampOracle  : 37.88%
-
-Gaps
-  Top1Pred - BestOf3 : 0.99 pp
-  Top1Pred - BestOf5 : 1.33 pp
-  Top1Pred - BestOf10: 1.75 pp
-  Top1Pred - BestOf15: 1.90 pp
-  Top1Pred - SampOracle: 2.19 pp
-
-Wilcoxon one-sided tests (alternative: Top1Pred < baseline)
-  top1_vs_random1   : p=2.09974e-88, stat=7952.000, n=626
-  top1_vs_fixedbest : p=0.558236, stat=72753.500, n=626
-  top1_vs_nopre     : p=2.13444e-13, stat=61849.500, n=626
-
-Reverse / two-sided checks for FixedBest
-  fixedbest_vs_top1           : p=0.441764, stat=71699.500, n=626
-  top1_vs_fixedbest_two_sided : p=0.883528, stat=71699.500, n=626
-
-Pairwise Top1Pred differences and win rates
-  (diff = Top1Pred CER - baseline CER; win = Top1Pred lower CER)
-  vs random1   : mean=-5.21 pp, median=-3.41 pp, win=88.5%, tie=0.2%, loss=11.3%
-  vs fixedbest : mean=0.01 pp, median=0.00 pp, win=42.3%, tie=14.2%, loss=43.5%
-  vs nopre     : mean=-0.79 pp, median=-0.61 pp, win=62.5%, tie=2.4%, loss=35.1%
-
---------------------------------------------------------------------------------
-Engine: tesseract
-Images: 626
+Images: 616
 Model selection: XGBoost×4, LightGBM×1
 
 Mean CER
-  NoPre       : 50.52%
-  FixedBest   : 46.80%
-  Random1     : 52.99%
-  Top1Pred    : 46.24%
-  BestOf3    : 43.23%
-  BestOf5    : 42.34%
-  BestOf10   : 41.39%
-  BestOf15   : 40.99%
+  NoPre       : 40.79%
+  FixedBest   : 40.02%
+  Random1     : 45.21%
+  Top1Pred    : 39.99%
+  BestOf3     : 39.00%
+  BestOf5     : 38.64%
+  BestOf10    : 38.28%
+  BestOf15    : 38.10%
+  SampOracle  : 37.85%
+
+--------------------------------------------------------------------------------
+Engine: tesseract
+Images: 616
+Model selection: XGBoost×4, LightGBM×1
+
+Mean CER
+  NoPre       : 50.58%
+  FixedBest   : 46.83%
+  Random1     : 53.03%
+  Top1Pred    : 46.35%
+  BestOf3     : 43.26%
+  BestOf5     : 42.35%
+  BestOf10    : 41.40%
+  BestOf15    : 40.96%
   SampOracle  : 40.17%
-
-Gaps
-  Top1Pred - BestOf3 : 3.01 pp
-  Top1Pred - BestOf5 : 3.89 pp
-  Top1Pred - BestOf10: 4.85 pp
-  Top1Pred - BestOf15: 5.24 pp
-  Top1Pred - SampOracle: 6.07 pp
-
-Wilcoxon one-sided tests (alternative: Top1Pred < baseline)
-  top1_vs_random1   : p=8.16234e-81, stat=12106.000, n=626
-  top1_vs_fixedbest : p=0.00194274, stat=43366.000, n=626
-  top1_vs_nopre     : p=6.99233e-39, stat=38466.000, n=626
-
-Reverse / two-sided checks for FixedBest
-  fixedbest_vs_top1           : p=0.998057, stat=59465.000, n=626
-  top1_vs_fixedbest_two_sided : p=0.00388548, stat=43366.000, n=626
-
-Pairwise Top1Pred differences and win rates
-  (diff = Top1Pred CER - baseline CER; win = Top1Pred lower CER)
-  vs random1   : mean=-6.75 pp, median=-6.44 pp, win=87.9%, tie=0.0%, loss=12.1%
-  vs fixedbest : mean=-0.56 pp, median=0.00 pp, win=41.1%, tie=27.6%, loss=31.3%
-  vs nopre     : mean=-4.29 pp, median=-3.46 pp, win=70.6%, tie=0.8%, loss=28.6%
-

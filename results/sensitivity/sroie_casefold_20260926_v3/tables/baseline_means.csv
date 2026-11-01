@@ -1,0 +1,13 @@
+metric,engine,policy,mean_cer_pct
+primary,tesseract,no_preprocessing,50.578092613171556
+primary,tesseract,oracle,40.172426827276766
+primary,tesseract,fixed_best,46.82730919229201
+primary,easyocr,no_preprocessing,40.79152756662787
+primary,easyocr,oracle,37.84559705848391
+primary,easyocr,fixed_best,40.018445935036276
+casefold,tesseract,no_preprocessing,31.987752748702608
+casefold,tesseract,oracle,20.84657474649277
+casefold,tesseract,fixed_best,28.12587853334873
+casefold,easyocr,no_preprocessing,21.207971438841465
+casefold,easyocr,oracle,17.732067051329974
+casefold,easyocr,fixed_best,19.957015026940137

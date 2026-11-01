@@ -1,6 +1,8 @@
 {
   "policy": "Top1Pred",
   "setting": "sroie",
+  "n_pages": 616,
   "protocol": "The candidate with the lowest out-of-fold predicted CER is selected without reference text at inference time.",
+  "cohort_audit_manifest": "data/cohort_manifests/sroie_excluded_exact_duplicate_clusters.csv",
   "source_documents_and_ocr_output_text": "Not distributed in this release."
 }

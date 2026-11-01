@@ -14,6 +14,7 @@ import sys
 import time
 import argparse
 import csv
+import unicodedata
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional, Tuple
@@ -26,6 +27,8 @@ from PIL import Image
 from tqdm import tqdm
 from docx import Document
 from jiwer import cer
+
+from vietocr_offline import load_vietocr_config
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
 RELEASE_ROOT = SCRIPT_DIR.parents[1]
@@ -53,8 +56,8 @@ def read_txt_file(path: str) -> str:
 
 def calc_cer(gt: str, pred: str) -> Optional[float]:
     try:
-        gt_n   = " ".join(gt.split())
-        pred_n = " ".join(pred.split())
+        gt_n = " ".join(unicodedata.normalize("NFC", gt).split())
+        pred_n = " ".join(unicodedata.normalize("NFC", pred).split())
         if len(gt_n) == 0:
             return 1.0 if len(pred_n) > 0 else 0.0
         return cer(gt_n, pred_n)
@@ -106,10 +109,7 @@ def load_models(engines: List[str], device: str):
     if 'vietocr' in engines:
         print("Loading VietOCR...")
         from vietocr.tool.predictor import Predictor
-        from vietocr.tool.config import Cfg
-        cfg = Cfg.load_config_from_name('vgg_transformer')
-        cfg['cnn']['pretrained'] = False
-        cfg['device'] = device
+        cfg = load_vietocr_config(device)
         models['vietocr'] = Predictor(cfg)
 
     if 'tesseract' in engines:
@@ -191,13 +191,26 @@ def recognize(engine_name: str, model, crops: List[np.ndarray],
 # ── main processing ───────────────────────────────────────────────────────────
 
 def run(images_folder: str, labels_folder: str, output_folder: str,
-        engines: List[str], device: str):
+        engines: List[str], device: str,
+        image_names: Optional[List[str]] = None):
 
     os.makedirs(output_folder, exist_ok=True)
     models  = load_models(engines, device)
     paddle  = models['paddle']
     images  = collect_images(images_folder)
+    if image_names:
+        requested = set(image_names)
+        available = {Path(path).stem for path, _ in images}
+        missing = sorted(requested - available)
+        if missing:
+            raise ValueError(f"Requested images not found: {missing}")
+        images = [
+            (path, year) for path, year in images
+            if Path(path).stem in requested
+        ]
     print(f"\nFound {len(images)} images. Engines: {engines}\n")
+    if image_names:
+        print(f"Requested image names: {sorted(requested)}\n")
 
     rows = []
     for img_path, year in tqdm(images, desc="Processing"):
@@ -266,10 +279,12 @@ def main():
     parser.add_argument('--images-folder',  default=DEFAULT_IMAGES)
     parser.add_argument('--labels-folder',  default=DEFAULT_LABELS)
     parser.add_argument('--output-folder',  default=DEFAULT_OUTPUT)
+    parser.add_argument('--image-names', nargs='+', default=None,
+                        help='Optional image stems to process, e.g. 27_2019 27_2023')
     args = parser.parse_args()
 
     run(args.images_folder, args.labels_folder, args.output_folder,
-        args.engines, args.device)
+        args.engines, args.device, image_names=args.image_names)
 
 
 if __name__ == '__main__':

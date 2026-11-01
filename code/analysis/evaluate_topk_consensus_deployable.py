@@ -283,8 +283,7 @@ def run_ocr_with_metadata(runner, image: np.ndarray, engines: List[str]) -> Tupl
     try:
         crops = runner._detect(image)
     except Exception as exc:
-        metadata["detect_error"] = repr(exc)
-        return outputs, metadata
+        raise RuntimeError("Top-K OCR detection failed; result was not cached") from exc
 
     metadata["n_detected_crops"] = int(len(crops))
     if not crops:
@@ -293,8 +292,7 @@ def run_ocr_with_metadata(runner, image: np.ndarray, engines: List[str]) -> Tupl
     recognizers = getattr(runner, "recognizers", {})
     for engine_name in engines:
         if engine_name not in recognizers:
-            metadata[f"error_{engine_name}"] = "engine_not_loaded"
-            continue
+            raise RuntimeError(f"OCR engine not loaded: {engine_name}")
         try:
             if engine_name == "vietocr":
                 outputs[engine_name] = runner._recognize_vietocr(crops)
@@ -303,10 +301,11 @@ def run_ocr_with_metadata(runner, image: np.ndarray, engines: List[str]) -> Tupl
             elif engine_name == "easyocr":
                 outputs[engine_name] = runner._recognize_easyocr(crops)
             else:
-                metadata[f"error_{engine_name}"] = "unknown_engine"
+                raise ValueError(f"Unknown OCR engine: {engine_name}")
         except Exception as exc:
-            metadata[f"error_{engine_name}"] = repr(exc)
-            outputs[engine_name] = ""
+            raise RuntimeError(
+                f"Top-K recognition failed for {engine_name}; result was not cached"
+            ) from exc
 
     return outputs, metadata
 
@@ -477,6 +476,7 @@ def evaluate_engine(
     selected_models = []
     fold_metrics = []
     per_image_rows = []
+    candidate_prediction_rows = []
     new_ocr_count = 0
 
     for fold_idx, (train_idx, test_idx) in enumerate(gkf.split(X_all, y_all, groups), start=1):
@@ -509,12 +509,22 @@ def evaluate_engine(
             if image_name not in exact_nopre_by_image:
                 raise KeyError(f"Missing exact NoPre CER for image '{image_name}'")
 
-            ranked = group.sort_values("pred_cer", ascending=True)
+            # Match surrogate nsmallest(..., keep="first") for tied predictions.
+            ranked = group.sort_values("pred_cer", ascending=True, kind="mergesort")
             top1 = ranked.iloc[0]
             top_k = ranked.head(min(k, len(ranked)))
 
             consensus_rows = []
-            for rank, (_, candidate) in enumerate(top_k.iterrows(), start=1):
+            for rank, (candidate_idx, candidate) in enumerate(top_k.iterrows(), start=1):
+                candidate_prediction_rows.append({
+                    "engine": engine,
+                    GROUP_COL: image_name,
+                    "outer_fold": fold_idx,
+                    "candidate_id": int(candidate_idx),
+                    "actual_cer": float(candidate[target_col]),
+                    "pred_cer": float(candidate["pred_cer"]),
+                    **{param: candidate[param] for param in PARAM_COLS},
+                })
                 before_cached = make_param_key(candidate) in cache
                 ocr_record = ensure_ocr_texts(
                     candidate,
@@ -546,10 +556,7 @@ def evaluate_engine(
                 GROUP_COL: image_name,
                 "top1_pred_cer": float(top1["pred_cer"]),
                 "top1_actual_cer": float(top1[target_col]),
-                "random1_actual_cer": float(np.mean([
-                    group.sample(1, random_state=s)[target_col].iloc[0]
-                    for s in range(random_trials)
-                ])),
+                "random1_actual_cer": float(group[target_col].mean()),
                 "fixedbest_actual_cer": get_fixedbest_for_group(group, best_combo_vals, target_col),
                 "nopre_cer": float(exact_nopre_by_image[image_name]),
                 "samporacle_cer": float(group[target_col].min()),
@@ -573,10 +580,12 @@ def evaluate_engine(
 
     save_cache(cache, cache_path)
     per_image = pd.DataFrame(per_image_rows)
+    candidate_predictions = pd.DataFrame(candidate_prediction_rows)
     summary = summarize_per_image(per_image, k, selected_models, fold_metrics)
     summary.update({
         "engine": engine,
         "per_image": per_image,
+        "candidate_predictions": candidate_predictions,
     })
     return summary
 
@@ -669,7 +678,10 @@ def write_report(results: Dict[str, Dict], output_dir: Path, k: int) -> None:
 def to_jsonable_results(results: Dict[str, Dict]) -> Dict:
     serializable = {}
     for engine, result in results.items():
-        serializable[engine] = {k: v for k, v in result.items() if k != "per_image"}
+        serializable[engine] = {
+            k: v for k, v in result.items()
+            if k not in {"per_image", "candidate_predictions"}
+        }
     return serializable
 
 
@@ -727,6 +739,7 @@ def main(args: argparse.Namespace) -> None:
 
     results = {}
     all_per_image = []
+    all_candidate_predictions = []
     for engine in engines:
         print(f"\nEvaluating Top{args.k}Consensus for {engine}")
         result = evaluate_engine(
@@ -748,12 +761,16 @@ def main(args: argparse.Namespace) -> None:
         )
         results[engine] = result
         all_per_image.append(result["per_image"])
+        all_candidate_predictions.append(result["candidate_predictions"])
 
     per_image_df = pd.concat(all_per_image, ignore_index=True)
+    candidate_predictions_df = pd.concat(all_candidate_predictions, ignore_index=True)
     per_image_path = output_dir / f"top{args.k}_consensus_per_image.csv"
+    candidate_predictions_path = output_dir / f"top{args.k}_candidate_predictions_oof.csv"
     metrics_path = output_dir / f"top{args.k}_consensus_metrics.json"
 
     per_image_df.to_csv(per_image_path, index=False)
+    candidate_predictions_df.to_csv(candidate_predictions_path, index=False)
     metrics_path.write_text(
         json.dumps(to_jsonable_results(results), indent=2),
         encoding="utf-8",
@@ -763,6 +780,7 @@ def main(args: argparse.Namespace) -> None:
 
     print(f"\nReport   : {output_dir / f'top{args.k}_consensus_report.txt'}")
     print(f"Per-image: {per_image_path}")
+    print(f"Candidates: {candidate_predictions_path}")
     print(f"Metrics  : {metrics_path}")
     print(f"OCR cache: {cache_path}")
 

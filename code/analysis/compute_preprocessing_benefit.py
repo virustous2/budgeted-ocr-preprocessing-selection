@@ -76,6 +76,21 @@ def load_nopre(nopre_csv: Path, engines: List[str]) -> pd.DataFrame:
     return df
 
 
+def within_image_cv(lhs_csv: Path, engines: List[str]) -> Dict[str, Dict[str, float]]:
+    """Mean page-level sample CV across the 50 evaluated candidates."""
+    df = pd.read_csv(lhs_csv)
+    results = {}
+    for engine in engines:
+        grouped = df.groupby('image_name')[f'cer_{engine}']
+        means = grouped.mean()
+        cv = (grouped.std(ddof=1) / means).where(means > 0).dropna()
+        results[engine] = {
+            'n_pages': int(len(cv)),
+            'mean_cv_pct': float(cv.mean() * 100),
+        }
+    return results
+
+
 def per_image_stats(merged: pd.DataFrame, engine: str) -> Dict[str, float]:
     oracle_col = f'oracle_{engine}'
     nopre_col = f'nopre_{engine}'
@@ -120,6 +135,7 @@ def main():
 
     oracle = load_oracle(paths['lhs_csv'], engines)
     nopre = load_nopre(paths['nopre_csv'], engines)
+    variation = within_image_cv(paths['lhs_csv'], engines)
     merged = oracle.merge(nopre, on='image_name', how='inner')
     if merged.empty:
         raise ValueError("No matched images between oracle and NoPre inputs.")
@@ -138,6 +154,21 @@ def main():
         "Sources:",
         *format_sources(paths),
         "=" * 72,
+        "",
+        "0. WITHIN-IMAGE CER VARIATION ACROSS THE 50-CANDIDATE POOL",
+        "   (page-level sample CV = sample standard deviation / mean; ddof=1)",
+        "",
+        f"{'Engine':<12} {'Pages':>8} {'Mean CV':>12}",
+        "-" * 36,
+    ]
+
+    for eng in engines:
+        stats = variation[eng]
+        lines.append(
+            f"  {eng:<10} {stats['n_pages']:>8d} {stats['mean_cv_pct']:>11.1f}%"
+        )
+
+    lines += [
         "",
         "1. PER-IMAGE: Sampled-Pool Oracle vs Exact NoPre",
         "   (oracle = best CER across the sampled 50-candidate pool; NoPre = exact default run)",

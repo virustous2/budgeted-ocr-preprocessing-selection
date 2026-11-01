@@ -12,6 +12,7 @@ configuration. Inputs are cached page-level results; no OCR is rerun.
 """
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import matplotlib
@@ -24,9 +25,9 @@ import numpy as np
 import pandas as pd
 
 
-RELEASE_ROOT = Path(__file__).resolve().parents[2]
-INPUT_DIR = RELEASE_ROOT / "results" / "headroom_controls"
-OUTPUT_STEM = RELEASE_ROOT / "paper" / "figures" / "headroom_policy_controls"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+INPUT_DIR = PROJECT_ROOT / "outputs/headroom_policy_controls_cohort300_v2"
+OUTPUT_STEM = PROJECT_ROOT / "IJDAR_overleaf/figures/headroom_policy_controls"
 
 POLICY_ORDER = ["Surrogate", "Random", "NN-K"]
 COMPARISON_ORDER = [
@@ -93,8 +94,13 @@ def draw_distribution(ax, data, category_col, categories, value_col, labels, tit
 
 
 def main() -> None:
-    summary = pd.read_csv(INPUT_DIR / "headroom_policy_summary_allK.csv")
-    controls = pd.read_csv(INPUT_DIR / "headroom_nonshared_controls_allK.csv")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input-dir", type=Path, default=INPUT_DIR)
+    parser.add_argument("--output-stem", type=Path, default=OUTPUT_STEM,
+                        help="Output path without extension; writes PDF and PNG")
+    args = parser.parse_args()
+    summary = pd.read_csv(args.input_dir / "headroom_policy_summary_allK.csv")
+    controls = pd.read_csv(args.input_dir / "headroom_nonshared_controls_allK.csv")
 
     coupled = summary[["policy", "spearman_headroom_vs_advantage"]].copy()
     nonshared = controls[["comparison", "spearman_headroom_vs_gain"]].copy()
@@ -119,11 +125,12 @@ def main() -> None:
         "(b) Non-shared policy-gain controls",
     )
 
-    OUTPUT_STEM.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUTPUT_STEM.with_suffix(".pdf"), bbox_inches="tight")
-    fig.savefig(OUTPUT_STEM.with_suffix(".png"), dpi=300, bbox_inches="tight")
-    print(f"Wrote {OUTPUT_STEM.with_suffix('.pdf')}")
-    print(f"Wrote {OUTPUT_STEM.with_suffix('.png')}")
+    args.output_stem.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(args.output_stem.with_suffix(".pdf"), bbox_inches="tight")
+    fig.savefig(args.output_stem.with_suffix(".png"), dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {args.output_stem.with_suffix('.pdf')}")
+    print(f"Wrote {args.output_stem.with_suffix('.png')}")
 
 
 if __name__ == "__main__":

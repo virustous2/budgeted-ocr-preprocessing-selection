@@ -34,6 +34,7 @@ import pickle
 import argparse
 import time
 import signal
+import unicodedata
 import warnings
 from pathlib import Path
 from datetime import datetime
@@ -92,8 +93,8 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 def compute_cer(prediction: str, ground_truth: str) -> float:
     from jiwer import cer as compute_cer_jiwer
-    pred = " ".join(prediction.split())
-    gt   = " ".join(ground_truth.split())
+    pred = " ".join(unicodedata.normalize("NFC", prediction).split())
+    gt = " ".join(unicodedata.normalize("NFC", ground_truth).split())
     if len(gt) == 0:
         return 1.0 if len(pred) > 0 else 0.0
     return compute_cer_jiwer(gt, pred)
@@ -316,8 +317,8 @@ class SROIEOCRRunner:
                 if cropped.size > 0 and cropped.shape[0] > 0 and cropped.shape[1] > 0:
                     crops.append(cropped)
             return crops
-        except Exception:
-            return []
+        except Exception as exc:
+            raise RuntimeError("SROIE PaddleOCR detection failed") from exc
         finally:
             if os.path.exists(temp_path):
                 os.remove(temp_path)
@@ -331,8 +332,8 @@ class SROIEOCRRunner:
                 text = pytesseract.image_to_string(pil_img, lang='eng').strip()
                 if text:
                     texts.append(" ".join(text.split()))
-            except Exception:
-                continue
+            except Exception as exc:
+                raise RuntimeError("SROIE Tesseract recognition failed") from exc
         return "\t".join(texts)
 
     def _recognize_easyocr(self, crops: List[np.ndarray]) -> str:
@@ -344,8 +345,8 @@ class SROIEOCRRunner:
                     text = text.strip()
                     if text:
                         texts.append(text)
-            except Exception:
-                continue
+            except Exception as exc:
+                raise RuntimeError("SROIE EasyOCR recognition failed") from exc
         return "\t".join(texts)
 
     def run_ocr(self, image: np.ndarray) -> Dict[str, str]:
@@ -584,7 +585,7 @@ if __name__ == "__main__":
                         default=['tesseract', 'easyocr'],
                         choices=['tesseract', 'easyocr'])
     parser.add_argument('--n-images',       type=int, default=None,
-                        help='Limit to N randomly selected images (default: all 626)')
+                        help='Limit to N randomly selected images (default: all available images)')
     parser.add_argument('--seed',           type=int, default=42)
     parser.add_argument('--checkpoint-interval', type=int, default=10)
     parser.add_argument('--resume',         action='store_true')

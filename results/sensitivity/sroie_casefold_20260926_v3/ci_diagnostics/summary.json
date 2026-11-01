@@ -1,0 +1,38 @@
+{
+  "bca_changed_zero_exclusion": 0,
+  "bca_max_endpoint_change_pp": 0.01645086801315898,
+  "bootstrap_replicates": 10000,
+  "change_id": "CHG-20260926-14",
+  "input_sha256": {
+    "paired_values.csv": "8e18865d7132f2d7051264ec8c7246ec2082f699f8926649e24b6598e631c0e1",
+    "statistics.csv": "932ae4a50c2e86ee19b1547c9ec3653f4207abbe23ce9190fdd82ddcf2253f0b"
+  },
+  "limitations": "No CI coverage validation, no model-refit uncertainty, no multiplicity-adjusted CI; finite seed checks do not establish invariance for every seed.",
+  "mcse_max_pp": 0.005475917161238741,
+  "mcse_median_pp": 0.002060780879097942,
+  "mcse_method": "quantile asymptotic formula; Gaussian KDE, Scott bandwidth; approximate standard errors, not absolute bounds",
+  "outputs_sha256": {
+    "bca_comparison.csv": "460f1bdb2d8ac3818a113323ab19f7b73eb8696aa30f29b3002a071543888137",
+    "seed_checks.csv": "7dfdd7cdbbf6d2b435a49c81952c0d0e2245a1f397c624640b1e74e5676ed48a"
+  },
+  "scope": "post_hoc_CI_diagnostics_only",
+  "script_sha256": "52b4b180321ad136a9940c6e8830e45bf9fd601ee877bfe9947e2fea9d18e7f6",
+  "seed_checks": {
+    "3": {
+      "upper_negative": 0,
+      "upper_positive": 200,
+      "upper_sd_pp": 0.0018345748931121871
+    },
+    "5": {
+      "upper_negative": 184,
+      "upper_positive": 16,
+      "upper_sd_pp": 0.0012700775073617389
+    }
+  },
+  "seed_set": "integers 0..199 for K3/K5",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3"
+  }
+}

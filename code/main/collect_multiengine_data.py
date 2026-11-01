@@ -28,6 +28,7 @@ import time
 import json
 import signal
 import shutil
+import unicodedata
 import warnings
 from pathlib import Path
 from datetime import datetime
@@ -62,6 +63,11 @@ except ImportError:
         validate_executed_params,
     )
 
+try:
+    from vietocr_offline import load_vietocr_config
+except ImportError:
+    from main.vietocr_offline import load_vietocr_config
+
 shutdown_requested = False
 
 
@@ -81,8 +87,8 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 def compute_cer(prediction: str, ground_truth: str) -> float:
     from jiwer import cer as compute_cer_jiwer
-    pred = " ".join(prediction.split())
-    gt = " ".join(ground_truth.split())
+    pred = " ".join(unicodedata.normalize("NFC", prediction).split())
+    gt = " ".join(unicodedata.normalize("NFC", ground_truth).split())
     if len(gt) == 0:
         return 1.0 if len(pred) > 0 else 0.0
     return compute_cer_jiwer(gt, pred)
@@ -292,10 +298,7 @@ class MultiEngineOCRRunner:
         if 'vietocr' in self.engines:
             print(f"  Loading VietOCR...")
             from vietocr.tool.predictor import Predictor
-            from vietocr.tool.config import Cfg
-            config = Cfg.load_config_from_name('vgg_transformer')
-            config['cnn']['pretrained'] = False
-            config['device'] = device
+            config = load_vietocr_config(device)
             self.recognizers['vietocr'] = Predictor(config)
 
         if 'tesseract' in self.engines:
@@ -336,8 +339,8 @@ class MultiEngineOCRRunner:
                 if cropped.size > 0 and cropped.shape[0] > 0 and cropped.shape[1] > 0:
                     crops.append(cropped)
             return crops
-        except:
-            return []
+        except Exception as exc:
+            raise RuntimeError("PaddleOCR detection failed") from exc
         finally:
             if os.path.exists(temp_path):
                 os.remove(temp_path)
@@ -352,8 +355,8 @@ class MultiEngineOCRRunner:
                 text, prob = predictor.predict(pil_img, return_prob=True)
                 if prob > confidence_threshold and text.strip():
                     texts.append(text.strip())
-            except:
-                continue
+            except Exception as exc:
+                raise RuntimeError("VietOCR recognition failed") from exc
         return "\t".join(texts)
 
     def _recognize_tesseract(self, crops: List[np.ndarray]) -> str:
@@ -367,8 +370,8 @@ class MultiEngineOCRRunner:
                     # Clean tesseract output: remove excessive whitespace
                     text = " ".join(text.split())
                     texts.append(text)
-            except:
-                continue
+            except Exception as exc:
+                raise RuntimeError("Tesseract recognition failed") from exc
         return "\t".join(texts)
 
     def _recognize_easyocr(self, crops: List[np.ndarray]) -> str:
@@ -381,8 +384,8 @@ class MultiEngineOCRRunner:
                     text = text.strip()
                     if text:
                         texts.append(text)
-            except:
-                continue
+            except Exception as exc:
+                raise RuntimeError("EasyOCR recognition failed") from exc
         return "\t".join(texts)
 
     def run_ocr(self, image: np.ndarray) -> Dict[str, str]:
@@ -423,6 +426,7 @@ def collect_data(
     label_suffix: str = '_label',
     checkpoint_interval: int = 10,
     resume: bool = False,
+    image_names: Optional[List[str]] = None,
 ):
     global shutdown_requested
 
@@ -446,7 +450,20 @@ def collect_data(
 
     valid_images = [(path, year) for path, year in all_images
                     if Path(path).stem in gt_dict]
+    if image_names:
+        requested = set(image_names)
+        available = {Path(path).stem for path, _ in valid_images}
+        missing = sorted(requested - available)
+        if missing:
+            raise ValueError(f"Requested images missing or without GT: {missing}")
+        valid_images = [
+            (path, year)
+            for path, year in valid_images
+            if Path(path).stem in requested
+        ]
     print(f"   Valid images with GT: {len(valid_images)}")
+    if image_names:
+        print(f"   Requested image names: {sorted(requested)}")
 
     # Initialize components
     print("\n Initializing components...")
@@ -653,6 +670,8 @@ if __name__ == "__main__":
     parser.add_argument('--label-suffix', type=str, default='_label')
     parser.add_argument('--checkpoint-interval', type=int, default=10)
     parser.add_argument('--resume', action='store_true')
+    parser.add_argument('--image-names', nargs='+', default=None,
+                        help='Optional image stems to process, e.g. 27_2019 27_2023')
 
     args = parser.parse_args()
 
@@ -671,4 +690,5 @@ if __name__ == "__main__":
         label_suffix=args.label_suffix,
         checkpoint_interval=args.checkpoint_interval,
         resume=args.resume,
+        image_names=args.image_names,
     )

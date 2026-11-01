@@ -1,0 +1,38 @@
+{
+  "change": "CHG-20261016-01",
+  "scope": "figure labels, pipeline supervision annotation, ESM layout/caption",
+  "bundle_manifest_sha256": "44625836a5894072cd9f9456356b139a2e89e857eabe1507b4f5649ce5a74656",
+  "prior_figures_manifest_sha256": "5362b7d88061d4928cdb02013be74e52d0a1914ab720c60cda4523a74eeaf7ca",
+  "pipeline_base_sha256": "d45bdeb4ba77bedf40b61e227be97015e66fbe7d25564b6e5acd4933c3f866d2",
+  "script_path": "analysis/export_figure_clarity.py",
+  "script_sha256": "4f930e1bc4937bafba4fa96f8d23f93d5cbc967073895014b2e0394a8d57123e",
+  "plot_helper_path": "analysis/plot_oracle_gap_diagnostic.py",
+  "plot_helper_sha256": "1693634637bee0e053a1b7f73b121d605f8573b4677ac933955d92263b2441eb",
+  "paper_assets": [
+    "raw_pareto_multiengine.png",
+    "contour_pareto_multiengine.png",
+    "headroom_policy_controls.pdf",
+    "headroom_policy_controls.png",
+    "pipeline_flowchart_2_5.pdf"
+  ],
+  "headroom_gain_labels": {
+    "Surrogate_vs_Random": "Random \u2212 Surr.",
+    "NN-K_vs_Random": "Random \u2212 NN-K",
+    "Surrogate_vs_NN-K": "NN-K \u2212 Surr."
+  },
+  "files": {
+    "raw_pareto_multiengine.png": "f77b2651feb1c340af18be00a7b6f28e80af275c820c04d574cab55b298a7a60",
+    "contour_pareto_multiengine.png": "fbdc8ccc8a8637de759347bbf6f9d2ba228a7d020ec74de38d94d2308faf8453",
+    "headroom_policy_controls.pdf": "c3b9fb7277c4858a189c8c49bba316acfa04bce03552eb397d90fe50972283a0",
+    "headroom_policy_controls.png": "3a7c23ec6362e5ef77574b6f2b0866c539e7d08d42b8ecd8728f580a4bbf3cf1",
+    "pipeline_flowchart_2_5.pdf": "a216b83d6c7ac4896359a7bc5101ebebd377b247984e4851b695689dc11d7a0a",
+    "curve_points.csv": "c8371f5f9087e772423d94718f6cc697c6c8b0b273645fd7a727628358566f22",
+    "headroom_policy_summary_allK.csv": "6bd120c250517476ef9aba296cd4091d916632e8ddde29d7441bce111726687f",
+    "headroom_nonshared_controls_allK.csv": "c8e8e8354b91a0242e1e67de73430e1bb900509bdf67a86e0bda51267d9c7995",
+    "pipeline_base.pdf": "d45bdeb4ba77bedf40b61e227be97015e66fbe7d25564b6e5acd4933c3f866d2",
+    "pipeline_flowchart_2_5.tex": "a86a49dd2621b9567f06fd13bda791884666108186b624816be6bb79f435dc7a",
+    "pipeline_flowchart.drawio": "e12da5d89ab473770e83eb40be017002772065eb33e7545d0159582e2228076a",
+    "README.md": "48b8a08f2f4b26ccb8edda812c422118f7dcfc69cdba367bb52d5624b07a1452"
+  },
+  "numerical_impact": "none; copied curve means and headroom distributions"
+}

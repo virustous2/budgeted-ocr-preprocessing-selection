@@ -1,0 +1,15 @@
+{
+  "setting": "raw",
+  "data_path": "outputs/multiengine_data_level1_fix_raw_g03757_nested_cohort300_v2/preprocessing_data.csv",
+  "nopre_path": "outputs/default_output_multiengine_20260821_cohort300_v2/default_cer_vn_cohort300_v2.csv",
+  "images_folder": "datasets/300_images/300_images",
+  "seed_cache": "outputs/top3_consensus_raw_g03757_cohort300_v2_nfc_exactrandom_stable_20260906/top3_consensus_ocr_cache.csv",
+  "output_dir": "outputs/strict_nested_selector_raw_cohort300_v2_20260906",
+  "engines": [
+    "vietocr",
+    "tesseract",
+    "easyocr"
+  ],
+  "n_folds": 5,
+  "seed": 42
+}

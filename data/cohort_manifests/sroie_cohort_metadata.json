@@ -1,0 +1,22 @@
+{
+  "source_response_directory": "SROIRE_COMPARISON/output_sroire/lhs_data_sroie_level1_fix_all616_g1",
+  "analysis_cohort_images": 616,
+  "candidates_per_image": 50,
+  "excluded_records": 10,
+  "exclusion_manifest": "SROIRE_COMPARISON/sroie_dataset/excluded_exact_duplicate_clusters.csv",
+  "filter_rule": "exclude every image_id listed in the exact-duplicate-cluster manifest before fold construction",
+  "response_tables": {
+    "preprocessing_data.csv": {
+      "kept_rows": 30800,
+      "removed_rows": 500
+    },
+    "preprocessing_data_tesseract.csv": {
+      "kept_rows": 30800,
+      "removed_rows": 500
+    },
+    "preprocessing_data_easyocr.csv": {
+      "kept_rows": 30800,
+      "removed_rows": 500
+    }
+  }
+}

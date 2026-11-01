@@ -48,6 +48,11 @@ from sklearn.pipeline import Pipeline
 import xgboost as xgb
 import lightgbm as lgb
 
+try:
+    from random_baseline import expected_minimum_without_replacement
+except ImportError:
+    from main.random_baseline import expected_minimum_without_replacement
+
 SCRIPT_DIR = Path(__file__).parent.resolve()
 CODE_ROOT = SCRIPT_DIR.parent
 RELEASE_ROOT = CODE_ROOT.parent
@@ -385,11 +390,9 @@ def train_one_engine_kfold(
                     pooled_surr_params[k][img_name] = best_row[PARAM_COLS].to_dict()
 
             for img_name, group in test_df.groupby(GROUP_COL):
-                trial_cers = [
-                    group.sample(min(k, len(group)), random_state=s)[target_col].min()
-                    for s in range(20)
-                ]
-                pooled_rand[k][img_name] = np.mean(trial_cers)
+                pooled_rand[k][img_name] = expected_minimum_without_replacement(
+                    group[target_col].to_numpy(dtype=float), min(k, len(group))
+                )
 
     # Aggregate fold metrics
     cv_metrics = {

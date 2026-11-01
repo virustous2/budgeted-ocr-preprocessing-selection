@@ -11,8 +11,18 @@ A positive correlation is descriptive and is not learned-specific evidence.
     "Random": 32,
     "Surrogate": 32
   },
+  "positive_significant_coupled_holm": {
+    "NN-K": 32,
+    "Random": 32,
+    "Surrogate": 32
+  },
   "positive_significant_nonshared": {
-    "NN-K_vs_Random": 5,
+    "NN-K_vs_Random": 2,
+    "Surrogate_vs_NN-K": 0,
+    "Surrogate_vs_Random": 0
+  },
+  "positive_significant_nonshared_holm": {
+    "NN-K_vs_Random": 0,
     "Surrogate_vs_NN-K": 0,
     "Surrogate_vs_Random": 0
   },
@@ -24,6 +34,6 @@ Non-shared outcomes do not contain FixedTopK:
   NN-K_vs_Random      = Random - NN-K
   Surrogate_vs_NN-K   = NN-K - Surrogate
 
-Surrogate_vs_Random: rho range [-0.516, 0.022], positive significant=0/32
-NN-K_vs_Random: rho range [-0.286, 0.191], positive significant=5/32
-Surrogate_vs_NN-K: rho range [-0.370, -0.066], positive significant=0/32
+Surrogate_vs_Random: rho range [-0.465, -0.022], positive significant raw/Holm=0/0/32
+NN-K_vs_Random: rho range [-0.265, 0.163], positive significant raw/Holm=2/0/32
+Surrogate_vs_NN-K: rho range [-0.388, -0.089], positive significant raw/Holm=0/0/32

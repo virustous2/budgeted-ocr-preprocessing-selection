@@ -5,11 +5,11 @@ NESTED ORACLE-FREE TOP-3 SELECTOR
 Selector families: rf_cls, logreg_cls, rf_reg, gbr_reg, ridge_reg
 Missing OCR cache rows: 0
 
-Engine      Chosen  Top1   Agree  Fixed  NoPre  Best3  Sel-Top1 Sel-Agree Sel-Fixed p<Top1 p<Agree p<Fixed Choices
-------------------------------------------------------------------------------------------------------------------
-tesseract    45.13% 46.80% 46.32% 46.80% 50.52% 44.27%  -1.67pp   -1.19pp   -1.67pp 1e-32 1.74e-24 1e-32 {'rf_cls': 3, 'rf_reg': 1, 'gbr_reg': 1}
-easyocr      39.82% 40.06% 40.23% 40.06% 40.85% 39.22%  -0.23pp   -0.41pp   -0.23pp 0.000318 1.67e-16 0.000318 {'ridge_reg': 3, 'gbr_reg': 2}
+Engine      Chosen  Top1   Agree  Fixed  NoPre  Best3  Sel-Top1 Sel-Agree Sel-Fixed pTop1 pAgree pFixed Choices
+---------------------------------------------------------------------------------------------------------------
+tesseract    45.09% 46.83% 46.24% 46.83% 50.58% 44.25%  -1.73pp   -1.15pp   -1.73pp 4.07e-34 8.03e-24 4.07e-34 {'rf_cls': 3, 'gbr_reg': 2}
+easyocr      39.75% 40.02% 40.19% 40.02% 40.79% 39.17%  -0.26pp   -0.43pp   -0.26pp 5.7e-06 2.16e-15 5.7e-06 {'rf_cls': 1, 'ridge_reg': 4}
 
 Selected rank counts
-  tesseract: {'1': 229, '2': 250, '3': 147}
-  easyocr: {'3': 163, '2': 154, '1': 309}
+  tesseract: {'3': 142, '2': 246, '1': 228}
+  easyocr: {'1': 358, '3': 159, '2': 99}

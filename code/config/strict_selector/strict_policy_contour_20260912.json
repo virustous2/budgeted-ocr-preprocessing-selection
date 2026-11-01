@@ -1,0 +1,15 @@
+{
+  "setting": "contour",
+  "data_path": "outputs_contour/multiengine_data_level1_fix_contour_g13757_nested_cohort300_v2/preprocessing_data.csv",
+  "nopre_path": "outputs_contour/default_output_contour_20260821_cohort300_v2/default_cer_vn_cohort300_v2.csv",
+  "images_folder": "datasets/300_images_contour/300_images",
+  "seed_cache": "outputs_contour/strict_nested_selector_contour_cohort300_v2_20260906/ocr_cache.csv",
+  "output_dir": "outputs_contour/strict_nested_policy_controls_contour_cohort300_v2_20260912",
+  "engines": [
+    "vietocr",
+    "tesseract",
+    "easyocr"
+  ],
+  "n_folds": 5,
+  "seed": 42
+}

@@ -7,11 +7,11 @@ Missing OCR cache rows: 0
 
 Engine      Chosen  Top1   Agree  Fixed  NoPre  Best3  Sel-Top1 Sel-Agree Sel-Fixed p<Top1 p<Agree p<Fixed Choices
 ------------------------------------------------------------------------------------------------------------------
-vietocr       4.73%  5.05%  4.73%  4.63%  4.70%  4.20%  -0.32pp   -0.01pp   +0.10pp 1.98e-05 0.6 0.789 {'gbr_reg': 1, 'ridge_reg': 4}
-tesseract     9.31%  9.96%  9.42%  9.29%  9.82%  8.40%  -0.65pp   -0.11pp   +0.02pp 1.73e-07 0.119 0.401 {'ridge_reg': 4, 'gbr_reg': 1}
-easyocr      15.33% 16.06% 15.54% 15.19% 15.44% 14.52%  -0.73pp   -0.21pp   +0.13pp 3.25e-08 0.0115 0.946 {'rf_cls': 3, 'logreg_cls': 2}
+vietocr       4.73%  5.02%  4.72%  4.68%  4.69%  4.20%  -0.29pp   +0.01pp   +0.05pp 0.000109 0.432 0.653 {'ridge_reg': 3, 'rf_cls': 1, 'gbr_reg': 1}
+tesseract     9.17%  9.73%  9.26%  9.12%  9.58%  8.18%  -0.57pp   -0.09pp   +0.04pp 1.97e-05 0.121 0.452 {'ridge_reg': 3, 'rf_reg': 2}
+easyocr      15.41% 15.96% 15.38% 15.09% 15.34% 14.41%  -0.56pp   +0.02pp   +0.32pp 7.89e-06 0.536 0.999 {'logreg_cls': 3, 'ridge_reg': 1, 'rf_cls': 1}
 
 Selected rank counts
-  vietocr: {'3': 113, '1': 100, '2': 87}
-  tesseract: {'2': 97, '1': 120, '3': 83}
-  easyocr: {'1': 75, '3': 107, '2': 118}
+  vietocr: {'3': 99, '2': 102, '1': 99}
+  tesseract: {'2': 112, '1': 108, '3': 80}
+  easyocr: {'2': 126, '1': 83, '3': 91}

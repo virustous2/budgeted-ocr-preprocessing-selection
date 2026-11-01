@@ -1,0 +1,20 @@
+{
+  "protocol": "strict_selector_public_release_v1",
+  "experiment_protocol": "strict_nested_policy_selectors_v2",
+  "setting": "sroie",
+  "source_relative_path": "SROIRE_COMPARISON/output_sroire/strict_nested_policy_controls_sroie_all616_20260912/nn_k",
+  "source_candidate_sha256": "51c49c0148bd5e55403f7ae2b549fdf2a42e08e0c868b13901a5f37df41cdc10",
+  "sanitized_candidate_sha256": "733f11ef7903ab3e56e7e128007222f971a650e5229b0386c1433137099cc910",
+  "rows": 3696,
+  "engine_page_groups": 1232,
+  "removed_columns": [
+    "ocr_text"
+  ],
+  "contains_ocr_text": false,
+  "copied_files": {
+    "nested_selector_inner_validation.csv": "e4d539a07cd54c4b7632d2876e5546a29c5002e7319afb5eb8acb428ab82b1a1",
+    "nested_selector_report.txt": "8ae82956bfe0e3d8f995d2e4b8f31b6d41d138ff49360900c213e72b3854cd8e",
+    "nested_selector_summary.csv": "1f62ae58a24dd043b46ef75ea078630b512b294189253691d236d790b3fa67c9",
+    "nested_selector_summary.json": "0b8dd8eff20dbca8e57e5679702b37d2685ea41bc7c49ea3bf1486d87523fc04"
+  }
+}

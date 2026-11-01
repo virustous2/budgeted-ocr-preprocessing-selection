@@ -1,0 +1,26 @@
+{
+  "scope": "raw only; diagnostic, not ground-truth skew or deskew benefit",
+  "complete_cohort": true,
+  "pages": 300,
+  "median_abs_deg": 0.14999999999999947,
+  "max_abs_deg": 1.4,
+  "above_1_deg": 7,
+  "above_2_deg": 0,
+  "flags": [],
+  "seconds": 364.5885908920027,
+  "config": {
+    "output_dir": "analysis/outputs/vn_projection_skew_raw_20261011_v1",
+    "limit": 300,
+    "max_width": 1000,
+    "bound": 5,
+    "step": 0.05
+  },
+  "script_sha256": "83c07b357d94d2fff08f5edd2232c3516e2d86c8d7667a2cf1ea836e05a3c5d9",
+  "cohort_sha256": "fd598c97264050fcc4707f51789259f3c3140e6e8b4a606b89461d08dc06afca",
+  "opencv": "4.10.0",
+  "opencv_threads": 2,
+  "files": {
+    "per_page.csv": "c240c2dd3f7be89d5caaadf99588377a112f2c7afe3a49ee54f43560fb41b8cd",
+    "angle_scores.csv": "379becce3d755bd6ed3138dd4cc7b4d98f2fe3a33057c676fd3a84e5fdd9ce28"
+  }
+}

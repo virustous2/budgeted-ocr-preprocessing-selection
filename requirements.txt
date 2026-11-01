@@ -12,6 +12,9 @@ xgboost>=2.0
 lightgbm>=4.0
 
 # Image processing and document parsing
+# OpenCV wheel variants share cv2. OCR dependencies may install another variant;
+# this broad range is not an exact lock. See environment-experiment.txt and
+# validate the final interpreter with check_opencv_environment.py.
 opencv-python>=4.8
 Pillow>=10.0
 python-docx>=1.0

@@ -1,0 +1,39 @@
+{
+  "protocol": "strict_selector_static_comparison_v1",
+  "families": {
+    "surrogate_vs_agreement": 8,
+    "surrogate_vs_fixedbest": 8,
+    "surrogate_vs_nopre": 8,
+    "surrogate_vs_top1": 8
+  },
+  "holm_rule": "Four separate eight-test families, one per static comparator",
+  "test": "paired two-sided Wilcoxon signed-rank, scipy default zero_method=wilcox",
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 42,
+    "interval": "percentile CI for mean paired CER difference"
+  },
+  "sources": {
+    "raw": {
+      "path": "outputs/strict_nested_selector_raw_v3_20261006_v1/full/nested_selector_candidate_scores.csv",
+      "sha256": "df61ac003a29e73bd86e7e2200b931ce12fa8b2ae970fdc908cd08430643cc95"
+    },
+    "contour": {
+      "path": "outputs_contour/strict_nested_selector_contour_v3_20261006_v1/full/nested_selector_candidate_scores.csv",
+      "sha256": "027d7970a8c38b0e0a9521b72d6c87b9a0ca3eb553354f91c125f964a2d56e08"
+    },
+    "sroie": {
+      "path": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_casefold_20261008_v1/full/nested_selector_candidate_scores.csv",
+      "sha256": "58e1fd675d2c7ba1446da47b849652e13d72da105a2e245f974a33ad6a56fd50"
+    }
+  },
+  "script_sha256": "745e20e43f408c0a4cf5ec7cffd641f6138e8d0cbd2aca2d2cc36fee520b2483",
+  "config": {
+    "path": "analysis/strict_selector_comparison_v3_casefold_20261010.json",
+    "sha256": "0c59ecb321d908a4a01810c8b9d7ae98b38e610a33f724092d37b9561d3d1161"
+  },
+  "dependency_sha256": {
+    "compare_strict_policy_selectors.py": "6bc523d96dc5e700f3ec8d0436c589a1f3c09e3f242a33d534be43813068209c",
+    "compare_policy_matched_top3_selectors.py": "eef61e284ea2acbd25a79c3ffb3a34296d72d23b124fcea1d5dfd9e7f4126753"
+  }
+}

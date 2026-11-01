@@ -1,0 +1,40 @@
+========================================================================
+PREPROCESSING BENEFIT ANALYSIS (CONTOUR)
+Date: 2026-08-23 08:20:43
+Images matched: 300
+
+Sources:
+  Oracle CSV:  outputs_contour/multiengine_data_level1_fix_contour_g13757_nested_cohort300_v2/preprocessing_data.csv
+  NoPre CSV:   outputs_contour/default_output_contour_20260821_cohort300_v2/default_cer_vn_cohort300_v2.csv
+  Metrics JSON:outputs_contour/surrogate_multiengine_kfold_level1_fix_contour_g13757_nested_fixedtopk_perpage_v2_cohort300_v2/metrics.json
+========================================================================
+
+0. WITHIN-IMAGE CER VARIATION ACROSS THE 50-CANDIDATE POOL
+   (page-level sample CV = sample standard deviation / mean; ddof=1)
+
+Engine          Pages      Mean CV
+------------------------------------
+  vietocr         300        69.0%
+  tesseract       300        78.1%
+  easyocr         300        29.4%
+
+1. PER-IMAGE: Sampled-Pool Oracle vs Exact NoPre
+   (oracle = best CER across the sampled 50-candidate pool; NoPre = exact default run)
+
+Engine       Benefit        Mean rel.imp     Median rel.imp
+------------------------------------------------------------
+  vietocr    282/300 (94%)     +27.1%           +25.5%
+  tesseract  287/300 (96%)     +38.3%           +40.5%
+  easyocr    270/300 (90%)     +16.6%           +15.6%
+
+  Note: 'rel. improvement' = (NoPre - Oracle) / NoPre per image, then averaged.
+
+2. AGGREGATE: Nested K-fold baselines vs Exact NoPre
+
+Engine          NoPre  FixedBest  FB vs NoPre   Surr K=3  Surr vs NoPre
+------------------------------------------------------------------------
+  vietocr       3.16%      3.22%        +2.0%      2.96%          -6.3%
+  tesseract     7.48%      7.02%        -6.1%      5.97%         -20.1%
+  easyocr      13.17%     13.00%        -1.3%     12.23%          -7.2%
+
+========================================================================

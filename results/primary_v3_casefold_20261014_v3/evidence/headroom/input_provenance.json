@@ -1,0 +1,76 @@
+{
+  "k_values": [
+    3,
+    5,
+    10,
+    15
+  ],
+  "inputs": [
+    {
+      "dataset": "Vietnamese",
+      "setting": "raw",
+      "path": "outputs/nn_shortlist_raw_v3_paired_20261006_v1/nn_per_image.csv",
+      "sha256": "e687ca27011863b3733c13bf69dc5e77d845daec0a8de171590782030003ada8"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "raw",
+      "path": "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_vietocr.csv",
+      "sha256": "d5090c8fc4362cdd8bf03557ae2a7ca63766496edfc7acd365b09f0d6705c68d"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "raw",
+      "path": "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_tesseract.csv",
+      "sha256": "c354fd5450729c386279034d8861320822cfd617fd1f27d5c2769e205777eebd"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "raw",
+      "path": "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_easyocr.csv",
+      "sha256": "354cea3cdc502091068b489cd39571733fd070e08170ea19f855a36f0cddd194"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "contour",
+      "path": "outputs_contour/nn_shortlist_contour_v3_paired_20261006_v1/nn_per_image.csv",
+      "sha256": "6e650533d848cf15dd878bb1699dc817d0bc41e6b1b8e09d4ee9a289332ff841"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "contour",
+      "path": "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_vietocr.csv",
+      "sha256": "74ed86793b719bf071311845de36f460d7e3e820b7966bc78050c730b6e9f3da"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "contour",
+      "path": "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_tesseract.csv",
+      "sha256": "344de346effc0b205c22907910b41c5378e601b59cf7b491e681e7f348099823"
+    },
+    {
+      "dataset": "Vietnamese",
+      "setting": "contour",
+      "path": "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_easyocr.csv",
+      "sha256": "1bb096856af6dea81b9494a1127ae07cedb5ec523421f72202c17f114c926abb"
+    },
+    {
+      "dataset": "SROIE",
+      "setting": "raw",
+      "path": "SROIRE_COMPARISON/output_sroire/nn_shortlist_sroie_all616_casefold_sensitivity_20260926_v1/nn_per_image.csv",
+      "sha256": "6322bb7c04b513901c0d21923f6d65c5110a26af00f5221743e10813ab775867"
+    },
+    {
+      "dataset": "SROIE",
+      "setting": "raw",
+      "path": "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/per_page_results_tesseract.csv",
+      "sha256": "81dbcb3b7c05169a4db5413d7461233626785655898afee803dcde27478fa332"
+    },
+    {
+      "dataset": "SROIE",
+      "setting": "raw",
+      "path": "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/per_page_results_easyocr.csv",
+      "sha256": "4de17801bd18cb4ec6a8de7e64b84d8f2e3eeb895bdb036242e7ff4ebbf8a3f0"
+    }
+  ]
+}

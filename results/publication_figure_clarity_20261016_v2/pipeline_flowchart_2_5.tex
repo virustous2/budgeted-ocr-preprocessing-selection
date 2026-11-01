@@ -1,0 +1,20 @@
+\pdfminorversion=7
+\documentclass[border=0pt]{standalone}
+\usepackage{graphicx,tikz,helvet}
+\usetikzlibrary{arrows.meta}
+\pagestyle{empty}
+\begin{document}
+\begin{tikzpicture}[x=1bp,y=-1bp]
+\useasboundingbox (0,0) rectangle (464.879970,679.919980);
+\node[anchor=north west,inner sep=0] at (0,0)
+{\includegraphics[width=464.879970bp,height=679.919980bp]{pipeline_base.pdf}};
+\definecolor{artifactfill}{HTML}{FAECE7}
+\definecolor{artifactstroke}{HTML}{993C1D}
+\definecolor{artifacttext}{HTML}{712B13}
+\path[fill=artifactfill,draw=artifactstroke,line width=.697bp,rounded corners=2.8bp] (37.471672,252.453387) rectangle (427.786072,294.272787);
+\draw[black,line width=.697bp,-{Stealth[length=4.4bp,width=3.4bp]}] (232.628872,226.664757) -- (232.628872,252.453387);
+\node[text=artifacttext,inner sep=0,font=\sffamily\bfseries\fontsize{8.36}{9.36}\selectfont] at (232.628872,260.817267) {Training artifacts:};
+\node[text=artifacttext,inner sep=0,font=\sffamily\bfseries\fontsize{6.97}{7.97}\selectfont] at (232.628872,272.666097) {Surrogate model + FixedTopK list + NN training pages};
+\node[text=artifacttext,inner sep=0,font=\sffamily\bfseries\fontsize{6.97}{7.97}\selectfont] at (232.628872,283.817937) {Output selector trained offline on labeled training shortlists};
+\end{tikzpicture}
+\end{document}

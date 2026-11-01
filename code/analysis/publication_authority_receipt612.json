@@ -1,0 +1,14 @@
+{
+  "change": "CHG-20261019-06",
+  "kind": "corrected_receipt612_publication",
+  "bundle": "outputs/primary_receipt612_20261019_v3",
+  "public_bundle": "ijdar_public_release/results/primary_receipt612_20261019_v3",
+  "figures": "outputs/publication_figures_receipt612_20261019_v2",
+  "public_figures": "ijdar_public_release/results/publication_figures_receipt612_20261019_v2",
+  "statistics": "outputs/sroie_receipt_statistics_20261019_v1",
+  "independent_verification": "analysis/outputs/sroie_receipt_statistics_verification_20261019_v1/verification.json",
+  "historical_authority": "analysis/publication_authority_v3.json",
+  "counts": {"raw": 300, "contour": 300, "sroie": 612},
+  "metric": {"raw": "case-sensitive VN v3", "contour": "case-sensitive VN v3", "sroie": "Unicode casefold both sides"},
+  "scope": "Current local publication checkpoint; not online synchronization or submission-readiness certification"
+}

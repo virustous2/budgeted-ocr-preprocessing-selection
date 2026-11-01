@@ -1,0 +1,30 @@
+{
+  "sources": {
+    "outputs/vn_v3_case_sensitive_raw_20260930_v1/preprocessing_data.csv": "f1672ea9c1c5daca10acbbb88ce421922f6b828c1791138f44ba5c3a7fe3e24e",
+    "outputs/vn_v3_case_sensitive_raw_20260930_v1/default_cer_vn_v3.csv": "d8c95be2034e240f2937c09854061699ab870b0e393a9c357de65a0a48823598",
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/metrics.json": "260feb44843fd844f64adf421f95b69af03ba2359af6caf3bf769a69c1f0d452",
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_vietocr.csv": "d5090c8fc4362cdd8bf03557ae2a7ca63766496edfc7acd365b09f0d6705c68d",
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_tesseract.csv": "c354fd5450729c386279034d8861320822cfd617fd1f27d5c2769e205777eebd",
+    "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_easyocr.csv": "354cea3cdc502091068b489cd39571733fd070e08170ea19f855a36f0cddd194",
+    "outputs_contour/vn_v3_case_sensitive_contour_20261001_v2/preprocessing_data.csv": "3690cf940622035e54ac3ffa128be4038b4b63dd7c73cb65dc14ef3c4488c7b7",
+    "outputs_contour/vn_v3_case_sensitive_contour_20261001_v2/default_cer_vn_v3.csv": "c02baa345ce0568143094d7d744a64b7afe011be3aafdfd5da4e648c355daf94",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/metrics.json": "4b16244b58d87ed8690bba3e3546dbcae97610c8673c461ec6bd771bd3e50371",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_vietocr.csv": "74ed86793b719bf071311845de36f460d7e3e820b7966bc78050c730b6e9f3da",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_tesseract.csv": "344de346effc0b205c22907910b41c5378e601b59cf7b491e681e7f348099823",
+    "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_easyocr.csv": "1bb096856af6dea81b9494a1127ae07cedb5ec523421f72202c17f114c926abb",
+    "SROIRE_COMPARISON/output_sroire/casefold_training_inputs_20260926_v2/preprocessing_data.csv": "b49d628770529bde44013c29fea331c09b69ba6e23ce3b61e5da75d54e50b27f",
+    "SROIRE_COMPARISON/output_sroire/casefold_training_inputs_20260926_v2/default_cer_sroie_all616_casefold.csv": "4b388e18b8809cd6e9241e898868e8773658c91f5dcdee0cec108b07f48c8de4",
+    "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/metrics.json": "d621a1af5858989bfaff0763647de6d1b5b25bb1882413b6a566a383da38a645",
+    "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/per_page_results_tesseract.csv": "81dbcb3b7c05169a4db5413d7461233626785655898afee803dcde27478fa332",
+    "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/per_page_results_easyocr.csv": "4de17801bd18cb4ec6a8de7e64b84d8f2e3eeb895bdb036242e7ff4ebbf8a3f0"
+  },
+  "config_sha256": "1ad9a76351e8a831b07e39095f8bd4311313263ca2f5fd8b1717577ae2abca31",
+  "script_sha256": "6316319441e5a5787740c864b2506ed9d70f796ac0e1094ff8d6cb89eb59855f",
+  "helper_sha256": "11222d754c7ce3142a4e9f54504a061f6937e10c525c1bb8d4e86555c610bd6a",
+  "outputs": {
+    "preprocessing_benefit.csv": "a760a7768ef8a8331229cca90f92631e23f4f55c95622dc511b48c27f9f73dc6",
+    "model_quality.csv": "d28e154794abb6ae55f56386e5ec5429288afb4a5eeb89ea3a2ba82bf63153cb",
+    "oracle_nopre_per_page.csv": "eec4d340627828912f0d16be3b28c5b6fe3ce50d003c8a30a0b04528355fd68f"
+  },
+  "definitions": "sample within-page CV ddof=1; mean page-relative oracle improvement; model quality saved fold aggregates"
+}

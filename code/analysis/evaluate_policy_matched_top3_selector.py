@@ -434,7 +434,13 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="With --fill-missing-cache, stop after writing OCR cache and coverage artifacts.",
     )
-    return parser.parse_args()
+    parser.add_argument("--allow-legacy-pooled-oof", action="store_true",
+                        help="Historical reproduction only; strict policy controls need upstream exclusions")
+    args = parser.parse_args()
+    if not args.allow_legacy_pooled_oof:
+        parser.error("This pooled-OOF learned policy selector is not end-to-end nested. "
+                     "Strict policy controls are pending; --allow-legacy-pooled-oof is historical only.")
+    return args
 
 
 def main() -> None:

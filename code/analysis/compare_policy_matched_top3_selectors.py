@@ -31,8 +31,7 @@ import pandas as pd
 from scipy.stats import wilcoxon
 
 
-RELEASE_ROOT = Path(__file__).resolve().parents[2]
-SELECTOR_RESULTS = RELEASE_ROOT / "results" / "oracle_free_selector"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 K = 3
 
 
@@ -41,16 +40,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=SELECTOR_RESULTS / "policy_comparisons" / "recomputed",
+        default=PROJECT_ROOT / "outputs/policy_matched_selector_comparison",
     )
-    parser.add_argument("--surrogate-raw", type=Path, default=SELECTOR_RESULTS / "raw/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--surrogate-contour", type=Path, default=SELECTOR_RESULTS / "contour/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--surrogate-sroie", type=Path, default=SELECTOR_RESULTS / "sroie/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--nn-raw", type=Path, default=SELECTOR_RESULTS / "policy_matched/raw/nn_k/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--nn-contour", type=Path, default=SELECTOR_RESULTS / "policy_matched/contour/nn_k/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--fixed-raw", type=Path, default=SELECTOR_RESULTS / "policy_matched/raw/fixed_topk/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--fixed-contour", type=Path, default=SELECTOR_RESULTS / "policy_matched/contour/fixed_topk/nested_selector_candidate_scores_sanitized.csv")
-    parser.add_argument("--fixed-sroie", type=Path, default=SELECTOR_RESULTS / "policy_matched/sroie/fixed_topk/nested_selector_candidate_scores_sanitized.csv")
+    parser.add_argument("--surrogate-raw", type=Path, default=PROJECT_ROOT / "outputs/oracle_free_top3_selector_nested_raw_g03757/nested_selector_candidate_scores.csv")
+    parser.add_argument("--surrogate-contour", type=Path, default=PROJECT_ROOT / "outputs_contour/oracle_free_top3_selector_nested_contour_g13757_filled/nested_selector_candidate_scores.csv")
+    parser.add_argument("--surrogate-sroie", type=Path, default=PROJECT_ROOT / "SROIRE_COMPARISON/output_sroire/oracle_free_top3_selector_nested_sroie_all616_g1/nested_selector_candidate_scores.csv")
+    parser.add_argument("--nn-raw", type=Path, default=PROJECT_ROOT / "outputs/policy_matched_selector_raw/nn_k/nested_selector_candidate_scores.csv")
+    parser.add_argument("--nn-contour", type=Path, default=PROJECT_ROOT / "outputs_contour/policy_matched_selector_contour/nn_k/nested_selector_candidate_scores.csv")
+    parser.add_argument("--fixed-raw", type=Path, default=PROJECT_ROOT / "outputs/policy_matched_selector_raw/fixed_topk/nested_selector_candidate_scores.csv")
+    parser.add_argument("--fixed-contour", type=Path, default=PROJECT_ROOT / "outputs_contour/policy_matched_selector_contour/fixed_topk/nested_selector_candidate_scores.csv")
+    parser.add_argument("--fixed-sroie", type=Path, default=PROJECT_ROOT / "SROIRE_COMPARISON/output_sroire/policy_matched_selector_sroie/fixed_topk/nested_selector_candidate_scores.csv")
     parser.add_argument(
         "--feature-matched-raw",
         type=Path,

@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
@@ -38,6 +39,11 @@ from scipy.stats import wilcoxon
 from sklearn.metrics import pairwise_distances
 from sklearn.model_selection import GroupKFold
 from sklearn.preprocessing import StandardScaler
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from main.random_baseline import expected_minimum_without_replacement
 
 
 GROUP_COL = "image_name"
@@ -111,9 +117,13 @@ def safe_wilcoxon(a: Iterable[float], b: Iterable[float], alternative: str = "tw
     mask = np.isfinite(x) & np.isfinite(y)
     x = x[mask]
     y = y[mask]
-    if len(x) == 0 or np.allclose(x, y):
+    if len(x) == 0:
         return {"stat": math.nan, "p": math.nan, "n": int(len(x)), "alternative": alternative}
-    stat, p_value = wilcoxon(x, y, alternative=alternative)
+    if np.all(x == y):
+        # Project convention for a nonempty degenerate all-zero comparison.
+        # Near-equal but nonzero differences must still enter the test.
+        return {"stat": 0.0, "p": 1.0, "n": int(len(x)), "alternative": alternative}
+    stat, p_value = wilcoxon(x, y, alternative=alternative, zero_method="wilcox")
     return {"stat": float(stat), "p": float(p_value), "n": int(len(x)), "alternative": alternative}
 
 
@@ -357,12 +367,11 @@ def evaluate_engine(
                 fixed_shortlist = fixed_combos[:k]
                 row[f"nn_k{k}_cer"] = cer_for_shortlist(image_combo_cer, nn_shortlist)
                 row[f"fixed_topk_k{k}_cer"] = cer_for_shortlist(image_combo_cer, fixed_shortlist)
-                random_scores = []
                 image_group = image_groups[image_name]
-                for seed in range(random_trials):
-                    sampled = image_group.sample(min(k, len(image_group)), random_state=seed)
-                    random_scores.append(float(sampled[target_col].min()))
-                row[f"random_k{k}_cer"] = float(np.mean(random_scores))
+                row[f"random_k{k}_cer"] = expected_minimum_without_replacement(
+                    image_group[target_col].to_numpy(dtype=float),
+                    min(k, len(image_group)),
+                )
                 row[f"nn_minus_fixed_topk_k{k}"] = row[f"nn_k{k}_cer"] - row[f"fixed_topk_k{k}_cer"]
                 row[f"nn_minus_random_k{k}"] = row[f"nn_k{k}_cer"] - row[f"random_k{k}_cer"]
 
@@ -503,8 +512,8 @@ def write_report(
                 nn_surr = summary["wilcoxon"][nn_surr_key]
                 surr_nn = summary["wilcoxon"][f"surrogate_vs_nn_k{k}"]
                 line += (
-                    f", NN<Surrogate p={nn_surr['p']:.6g}, "
-                    f"Surrogate<NN p={surr_nn['p']:.6g}"
+                    f", NN vs Surrogate p={nn_surr['p']:.6g}, "
+                    f"Surrogate vs NN p={surr_nn['p']:.6g}"
                 )
             lines.append(line)
         lines.append("")

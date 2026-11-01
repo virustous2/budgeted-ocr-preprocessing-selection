@@ -1,0 +1,25 @@
+{
+  "change": "CHG-20261019-05",
+  "verified_utc": "2026-10-19T06:30:00.441135+00:00",
+  "checks_passed": 4704,
+  "checks_failed": 0,
+  "maximum_absolute_numeric_delta": 7.105427357601002e-15,
+  "bestk_direct_metric_comparisons_replayed": 664,
+  "selector_comparisons_replayed": 64,
+  "holm_families_replayed": 87,
+  "headroom_correlations_replayed": 192,
+  "headroom_quartiles_replayed": 384,
+  "old_new_selector_classification_changes": {
+    "policy": 0,
+    "static": 3
+  },
+  "A_classification_changes": 7,
+  "source_manifest_sha256": "3195f00aa1e874ab51a8184cfd6bb65fb920e081ce747941de43cec3504b2c1f",
+  "verifier_sha256": "0a01277c3e5b7f1f74ec19837883f8269855d06e903b7f978096c1a4d829bd95",
+  "limitations": [
+    "Arithmetic/source/provenance checks,not scientific validity,nominal CI coverage,refit/seed uncertainty or receipt-screen recall.",
+    "Saved model quality is extracted,not independently rebuilt from unavailable raw OOF/model objects.",
+    "No manuscript/publication authority promotion in this verification."
+  ],
+  "verification_scope": "Private independent source replay; not scientific validity or screening-recall certificate"
+}

@@ -1,3 +1,3 @@
 engine,required_candidate_engine_rows,complete_cached_rows,missing_candidate_engine_rows,coverage_pct
-easyocr,1878,1878,0,100.0
-tesseract,1878,1878,0,100.0
+easyocr,1848,1848,0,100.0
+tesseract,1848,1848,0,100.0

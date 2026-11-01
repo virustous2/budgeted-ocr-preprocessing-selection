@@ -2,8 +2,10 @@
   "policy": "fixed-topk",
   "setting": "sroie",
   "k": 3,
+  "n_pages": 616,
   "candidate_scores": "Sanitized: OCR transcript field removed.",
   "selector_protocol": "The same nested selector protocol was refit for this policy-specific top-3 shortlist.",
   "policy_score": "Within-policy order 1, 2, 3, not a continuous CER prediction.",
+  "cohort_audit_manifest": "data/cohort_manifests/sroie_excluded_exact_duplicate_clusters.csv",
   "source_documents_and_ocr_output_text": "Not distributed in this release."
 }

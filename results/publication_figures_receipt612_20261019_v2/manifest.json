@@ -1,0 +1,27 @@
+{
+  "change": "CHG-20261019-06",
+  "bundle_manifest_sha256": "c5b56a6c6ff478abffb28b628d88d99d177befddaee45f923229287e80cc942c",
+  "previous_figure_manifest_sha256": "3805a2ca3272121786cbbfbab4b58967eead42328bded6134fc1379195d9409e",
+  "exporter_sha256": "02b794ffc27c8a0f21694095e51c521139f0947c579f6e7565f83e6b4bf9aa1a",
+  "plot_helper_sha256": "1693634637bee0e053a1b7f73b121d605f8573b4677ac933955d92263b2441eb",
+  "paper_assets": [
+    "raw_pareto_multiengine.png",
+    "contour_pareto_multiengine.png",
+    "pipeline_flowchart_2_5.pdf",
+    "headroom_policy_controls.pdf",
+    "headroom_policy_controls.png"
+  ],
+  "files": {
+    "contour_pareto_multiengine.png": "fbdc8ccc8a8637de759347bbf6f9d2ba228a7d020ec74de38d94d2308faf8453",
+    "curve_points.csv": "c8371f5f9087e772423d94718f6cc697c6c8b0b273645fd7a727628358566f22",
+    "headroom_nonshared_controls_allK.csv": "4865c16db43959f4e1868d76765f6a6fa4dc999d348b485f3902ac86abc4ae39",
+    "headroom_policy_controls.pdf": "8bb04b0fcb50c1fec3a8d020ba9e85264dae89d47411aea51242c99145bf4216",
+    "headroom_policy_controls.png": "0a3843b654b4a768d57395bb2bacc821cc5c00bfb4d24a5ad2e161bb4ae439f1",
+    "headroom_policy_summary_allK.csv": "7bebfb846680d5bc88975ba83551d271fad9d1e668bd982e5c4cc957927be0f5",
+    "pipeline_base.pdf": "d45bdeb4ba77bedf40b61e227be97015e66fbe7d25564b6e5acd4933c3f866d2",
+    "pipeline_flowchart.drawio": "e12da5d89ab473770e83eb40be017002772065eb33e7545d0159582e2228076a",
+    "pipeline_flowchart_2_5.pdf": "a216b83d6c7ac4896359a7bc5101ebebd377b247984e4851b695689dc11d7a0a",
+    "pipeline_flowchart_2_5.tex": "a86a49dd2621b9567f06fd13bda791884666108186b624816be6bb79f435dc7a",
+    "raw_pareto_multiengine.png": "f77b2651feb1c340af18be00a7b6f28e80af275c820c04d574cab55b298a7a60"
+  }
+}

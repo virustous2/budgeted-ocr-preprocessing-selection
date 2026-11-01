@@ -1,0 +1,26 @@
+{
+  "kind": "supplementary_best_of_K_not_primary",
+  "change": "CHG-20261014-03",
+  "created_utc": "2026-10-14T00:26:15.890739+00:00",
+  "source_analysis_manifest_sha256": "ca79a5e7bf47ffdad54b902bcea3b055df5f433eb063508e63a25365137800c2",
+  "source_verification_sha256": "8c65002de08d4306858d9a6b9d5d551f4d30e308dc1dbaed30a1f6c353b63a56",
+  "full_vs_primary_changes": 0,
+  "drop_vs_full_changes": 10,
+  "files": {
+    "NOISE_FEATURE_SENSITIVITY_PROTOCOL.md": "4ee3923f937059a5a636fb5d5dbdc3a721fa2e037a60b200916c243318a7a1eb",
+    "README.md": "114db5ed7a2bd387f5af3dfe1cf4546e97d03bccab1c78d6375f37cf929b2779",
+    "direct_drop_minus_full.csv": "741adf3cf45089c48ededbcc9c382c838b30386de6afda9fef9a479dd3573e80",
+    "drop_orig_noise/statistics.csv": "3960f0ec86f0bad09450ce2951fa743d03106476367040c8e3cbe8ee1f60d3bd",
+    "full/statistics.csv": "01e15e73be865125322c82d81c3a4c3ee2c92444ebdcf1b69660d7b2419b5f96",
+    "full_vs_primary_model_families.csv": "a5d650e8d0755f424c89dd23f6a3221d11ffe47758eb7dd1ae30cbc73f6128d7",
+    "full_vs_primary_perpage_drift.csv": "edee17f72061d7057c270d4b822e82cdd0d7d4b8349db188731922b9d25b01a3",
+    "holm_changes_drop_vs_full.csv": "ce64178abe6e037603ba0686598dfd6e404d55f4eb9f39c648b609822762b128",
+    "holm_changes_full_vs_primary.csv": "d380b9591f7a69ac50ef5c40b7ee890552afbd3a9859e7adb98776a318550075",
+    "noise_feature_tables.tex": "ae061a55b509073a01fce837aa8503da46037cd0cf6fd3417403522d2830ccd2",
+    "paired_conditions.csv": "07091bcb32e4f1d478a9a3e3c05b460109ccf75feba55ac498a49c18aa9ed93f",
+    "primary_statistics.csv": "01e15e73be865125322c82d81c3a4c3ee2c92444ebdcf1b69660d7b2419b5f96",
+    "verification.json": "8c65002de08d4306858d9a6b9d5d551f4d30e308dc1dbaed30a1f6c353b63a56"
+  },
+  "exporter_sha256": "072669525061ebba1f02a64c89c429c5162191bc95922643a5f31f23f11a2875",
+  "scope": "Post hoc best-of-K; primary/strict selectors unchanged; no equivalence/coverage claim"
+}

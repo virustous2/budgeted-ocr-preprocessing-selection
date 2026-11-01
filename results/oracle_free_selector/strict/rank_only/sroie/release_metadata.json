@@ -1,0 +1,20 @@
+{
+  "protocol": "strict_selector_public_release_v1",
+  "experiment_protocol": "strict_nested_surrogate_selector_v1",
+  "setting": "sroie",
+  "source_relative_path": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_all616_20260906/rank_only",
+  "source_candidate_sha256": "217060c31a51438c80a89a3acaf827de5818e41be972a645afaae00bc1806bcc",
+  "sanitized_candidate_sha256": "e31e838d683e8a395ee4f83303fda5f6d2f71f9e9380cbf0c2d98fc0a12a8cab",
+  "rows": 3696,
+  "engine_page_groups": 1232,
+  "removed_columns": [
+    "ocr_text"
+  ],
+  "contains_ocr_text": false,
+  "copied_files": {
+    "nested_selector_inner_validation.csv": "2e3e29d09c3ea2329055ca8d413c1b317fa63d1b2241fe8039dd4b06a46a3b06",
+    "nested_selector_report.txt": "e2b7ba96d07760a33753f0ba990489ebb8e7db1558b0cb55339852f608008725",
+    "nested_selector_summary.csv": "a8686293b9ce5518a05529140af4e3c02b00a53082eaee925996d51e617667af",
+    "nested_selector_summary.json": "c77b814781c413dd9496a1562127d1c51ff3cda5add8f3861ccdfaacfe16e58f"
+  }
+}

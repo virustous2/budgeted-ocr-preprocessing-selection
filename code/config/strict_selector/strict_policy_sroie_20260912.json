@@ -1,0 +1,14 @@
+{
+  "setting": "sroie",
+  "data_path": "SROIRE_COMPARISON/output_sroire/lhs_data_sroie_level1_fix_all616_g1/preprocessing_data.csv",
+  "nopre_path": "SROIRE_COMPARISON/output_sroire/default_output_sroie_level1_fix_all616/default_cer_sroie_all616.csv",
+  "images_folder": "SROIRE_COMPARISON/sroie_dataset/images",
+  "seed_cache": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_all616_20260906/ocr_cache.csv",
+  "output_dir": "SROIRE_COMPARISON/output_sroire/strict_nested_policy_controls_sroie_all616_20260912",
+  "engines": [
+    "tesseract",
+    "easyocr"
+  ],
+  "n_folds": 5,
+  "seed": 42
+}

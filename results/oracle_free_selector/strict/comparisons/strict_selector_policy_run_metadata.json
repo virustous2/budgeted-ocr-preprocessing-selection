@@ -1,0 +1,72 @@
+{
+  "protocol": "strict_selector_policy_comparison_v1",
+  "tests": {
+    "primary_policy_comparison": 16,
+    "rank_only_sensitivity": 16
+  },
+  "holm_rule": "Holm across all 16 two-sided tests separately within each analysis_set",
+  "sensitivity": "Surrogate rank-only inputs retain the same candidate shortlists",
+  "test": "paired two-sided Wilcoxon signed-rank, scipy default zero_method=wilcox",
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 42,
+    "interval": "percentile CI for mean paired CER difference"
+  },
+  "sources": {
+    "raw": {
+      "surrogate_full": {
+        "path": "outputs/strict_nested_selector_raw_cohort300_v2_20260906/full/nested_selector_candidate_scores.csv",
+        "sha256": "4f50f7cfe858854af3d3e7d6b5a617a797e4874d5b01d2a0898d1d9f38565336"
+      },
+      "surrogate_rank": {
+        "path": "outputs/strict_nested_selector_raw_cohort300_v2_20260906/rank_only/nested_selector_candidate_scores.csv",
+        "sha256": "89f2b04ba559fdbf3977b0d333b7f709f5ef144453f51b955fbd8f81304d1ed5"
+      },
+      "nn_k": {
+        "path": "outputs/strict_nested_policy_controls_raw_cohort300_v2_20260912_v2/nn_k/nested_selector_candidate_scores.csv",
+        "sha256": "85679d6d9979fc845d4e7f08a07482de3bb64e46c48c2098e3bfd505e18d9fe7"
+      },
+      "fixed_topk": {
+        "path": "outputs/strict_nested_policy_controls_raw_cohort300_v2_20260912_v2/fixed_topk/nested_selector_candidate_scores.csv",
+        "sha256": "5da1c754e87716dc987cda4831956b6b996ef81d7574434006563448d546da3b"
+      }
+    },
+    "contour": {
+      "surrogate_full": {
+        "path": "outputs_contour/strict_nested_selector_contour_cohort300_v2_20260906/full/nested_selector_candidate_scores.csv",
+        "sha256": "14b6f00d60a73501c0aa593a906cc64d3813b3132d2d19148be1b2f9bed2b775"
+      },
+      "surrogate_rank": {
+        "path": "outputs_contour/strict_nested_selector_contour_cohort300_v2_20260906/rank_only/nested_selector_candidate_scores.csv",
+        "sha256": "3dfc772ff218d8faed6bf84d40e0f91987c66368201bd365803e1bf4bfba63ca"
+      },
+      "nn_k": {
+        "path": "outputs_contour/strict_nested_policy_controls_contour_cohort300_v2_20260912/nn_k/nested_selector_candidate_scores.csv",
+        "sha256": "5fd359747a3bda9eb8d69612e63a5265c0e882867e3c86abeb7bc6718b1f011c"
+      },
+      "fixed_topk": {
+        "path": "outputs_contour/strict_nested_policy_controls_contour_cohort300_v2_20260912/fixed_topk/nested_selector_candidate_scores.csv",
+        "sha256": "cd6d067fe28b2b97b3804b986d1cdd8ba67fbb8d7c4e215a8930a9af8f406bec"
+      }
+    },
+    "sroie": {
+      "surrogate_full": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_all616_20260906/full/nested_selector_candidate_scores.csv",
+        "sha256": "4d50153e20fd43643ee4939d62c7b323328532dec304c3096301ea975dee8881"
+      },
+      "surrogate_rank": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_selector_sroie_all616_20260906/rank_only/nested_selector_candidate_scores.csv",
+        "sha256": "217060c31a51438c80a89a3acaf827de5818e41be972a645afaae00bc1806bcc"
+      },
+      "nn_k": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_policy_controls_sroie_all616_20260912/nn_k/nested_selector_candidate_scores.csv",
+        "sha256": "51c49c0148bd5e55403f7ae2b549fdf2a42e08e0c868b13901a5f37df41cdc10"
+      },
+      "fixed_topk": {
+        "path": "SROIRE_COMPARISON/output_sroire/strict_nested_policy_controls_sroie_all616_20260912/fixed_topk/nested_selector_candidate_scores.csv",
+        "sha256": "c964cb9a08de596e3360a9d9d4cbe233a06096569eca385d4c0fc2de49ffd793"
+      }
+    }
+  },
+  "script_sha256": "b59291516d07ead68bb76579f5a2e1e250a970e038de13d6a539ab363b746f18"
+}

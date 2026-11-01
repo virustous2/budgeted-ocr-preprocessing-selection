@@ -1,0 +1,23 @@
+{
+  "change": "CHG-20261011-01",
+  "compact_sroie": true,
+  "numeric_bundle": "outputs/publication_v3_casefold_20261010_v2",
+  "numeric_bundle_manifest_sha256": "44625836a5894072cd9f9456356b139a2e89e857eabe1507b4f5649ce5a74656",
+  "selector_statistics_sha256": "d1f465dc6c92b3b00db26db6304141bc3afa0f06962fb284daeb46febee61481",
+  "renderer_sha256": "60182065c0b1e49b3e70bf96132d1800180314a37285ac3ed5804ad8825ba544",
+  "files": {
+    "fixedtopk.tex": "e6076fb6e43ddeb7fe2d55ab3236909d98a4d766e685c3eae1542395ee6a5083",
+    "full_policy.tex": "72b47c8adf220d99c53433331b09be30c3ad01cb49161d2a171f2f79fb486335",
+    "headroom.tex": "9ac97a166e4393b06d4e59d9e545b6a2fa4882ee621a4d40ba05d4e06efd25f4",
+    "headroom_budget.tex": "4f5d01d125a8cefeeecf2978a46f88af6e5a0457870eb7e6e90551d79761a992",
+    "model_quality.tex": "a5dc4364e2495bbd57b338cda4d0fcbebee9d554781344e89f2f58cdd9765fa5",
+    "oracle_improvement.tex": "40f8b5c0a96094692d3b2f4df2982323fd8637e17fc826226fad32c30235d803",
+    "policy_counts.tex": "b8ba7bed9214de9678e7b848ebe2c531aeee913f036f21d12eeb2ca3c28cc924",
+    "rank_only_policy.tex": "4c93cc1b0542e34e74c8ed1207943babb3e97295dda5fd779312f6f7a5e28c32",
+    "selector.tex": "8cc73f5de42e21a1aeb47f0620b304ab6e9eeb150f0c3dc2770909b4a92d1fe7",
+    "sroie_intermediate.tex": "744066f98791cbd53fd898253b3f73fd047d2a279b9fa87e357083d278ed8d77",
+    "sroie_results.tex": "93fa333086b90908be35a96161631bf236cffa1bd68c1eee229ee137b8b8e142",
+    "vn_bestk.tex": "31f76e176eb122de98d27e0187504ed2ad4c96cfeaf89e4015836bba48f34860",
+    "zero_sensitivity.tex": "798f777db7295ebfec684660d3b04c6db6e53754ec52ef27ce922bf8a071361e"
+  }
+}

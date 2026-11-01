@@ -1,0 +1,40 @@
+=================================================================
+CONTOUR REMOVAL THRESHOLD ROBUSTNESS CHECK
+Images: 30 | Date: 2026-08-23 08:56:10
+Default CER: 2.72%
+=================================================================
+
+  Parameter: area
+    area=   500  CER=2.72%  delta=+0.00% ← default
+    area=  1000  CER=2.73%  delta=+0.01%
+    area=  1500  CER=3.01%  delta=+0.29%
+    area=  2000  CER=3.08%  delta=+0.36%
+    area=  3000  CER=3.28%  delta=+0.56%
+  Max |delta|: 0.56%  → SENSITIVE ⚠
+
+  Parameter: aspect_max
+    aspect_max=   3.0  CER=2.78%  delta=+0.06%
+    aspect_max=   4.0  CER=2.72%  delta=+0.00%
+    aspect_max=   5.0  CER=2.72%  delta=+0.00% ← default
+    aspect_max=   6.0  CER=2.74%  delta=+0.02%
+    aspect_max=   8.0  CER=2.74%  delta=+0.02%
+  Max |delta|: 0.06%  → ROBUST ✓
+
+  Parameter: min_w
+    min_w=    50  CER=2.97%  delta=+0.25%
+    min_w=    60  CER=2.89%  delta=+0.17%
+    min_w=    80  CER=2.72%  delta=+0.00% ← default
+    min_w=   100  CER=2.71%  delta=-0.01%
+    min_w=   120  CER=2.68%  delta=-0.04%
+  Max |delta|: 0.25%  → SENSITIVE ⚠
+
+  Parameter: min_h
+    min_h=    15  CER=3.01%  delta=+0.29%
+    min_h=    20  CER=3.01%  delta=+0.29%
+    min_h=    30  CER=2.72%  delta=+0.00% ← default
+    min_h=    40  CER=2.70%  delta=-0.02%
+    min_h=    50  CER=2.68%  delta=-0.04%
+  Max |delta|: 0.29%  → SENSITIVE ⚠
+
+=================================================================
+CSV: analysis/outputs/contour_robustness/robustness_20260823_085610.csv

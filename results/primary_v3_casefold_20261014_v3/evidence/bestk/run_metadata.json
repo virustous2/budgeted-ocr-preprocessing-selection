@@ -1,0 +1,50 @@
+{
+  "protocol": "bestk_paired_statistics_v1",
+  "sources": {
+    "raw": {
+      "outputs/nn_shortlist_raw_v3_paired_20261006_v1/nn_per_image.csv": "e687ca27011863b3733c13bf69dc5e77d845daec0a8de171590782030003ada8",
+      "outputs/vn_v3_case_sensitive_raw_20260930_v1/fold_assignments.csv": "3f5e992633442abc588470f096b545f308949d5c4c51293e4d00e51e0b7a85e5",
+      "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_vietocr.csv": "d5090c8fc4362cdd8bf03557ae2a7ca63766496edfc7acd365b09f0d6705c68d",
+      "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_tesseract.csv": "c354fd5450729c386279034d8861320822cfd617fd1f27d5c2769e205777eebd",
+      "outputs/surrogate_multiengine_kfold_raw_v3_20261001_v1/per_page_results_easyocr.csv": "354cea3cdc502091068b489cd39571733fd070e08170ea19f855a36f0cddd194"
+    },
+    "contour": {
+      "outputs_contour/nn_shortlist_contour_v3_paired_20261006_v1/nn_per_image.csv": "6e650533d848cf15dd878bb1699dc817d0bc41e6b1b8e09d4ee9a289332ff841",
+      "outputs_contour/vn_v3_case_sensitive_contour_20261001_v2/fold_assignments.csv": "3f5e992633442abc588470f096b545f308949d5c4c51293e4d00e51e0b7a85e5",
+      "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_vietocr.csv": "74ed86793b719bf071311845de36f460d7e3e820b7966bc78050c730b6e9f3da",
+      "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_tesseract.csv": "344de346effc0b205c22907910b41c5378e601b59cf7b491e681e7f348099823",
+      "outputs_contour/surrogate_multiengine_kfold_contour_v3_20261002_v1/per_page_results_easyocr.csv": "1bb096856af6dea81b9494a1127ae07cedb5ec523421f72202c17f114c926abb"
+    },
+    "sroie": {
+      "SROIRE_COMPARISON/output_sroire/nn_shortlist_sroie_all616_casefold_sensitivity_20260926_v1/nn_per_image.csv": "6322bb7c04b513901c0d21923f6d65c5110a26af00f5221743e10813ab775867",
+      "SROIRE_COMPARISON/output_sroire/casefold_training_inputs_20260926_v2/fold_assignments.csv": "d65876c58838e20a1f0bb735843a9882eb3b0c08d327c0a410c8128a8ee0ed2e",
+      "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/per_page_results_tesseract.csv": "81dbcb3b7c05169a4db5413d7461233626785655898afee803dcde27478fa332",
+      "SROIRE_COMPARISON/output_sroire/surrogate_kfold_sroie_all616_casefold_sensitivity_20260926_v1/per_page_results_easyocr.csv": "4de17801bd18cb4ec6a8de7e64b84d8f2e3eeb895bdb036242e7ff4ebbf8a3f0"
+    }
+  },
+  "config": {
+    "path": "analysis/bestk_sources_v3_casefold_20261010.json",
+    "sha256": "1ad9a76351e8a831b07e39095f8bd4311313263ca2f5fd8b1717577ae2abca31"
+  },
+  "scripts": {
+    "analysis/export_bestk_paired_statistics.py": "7220fb9efb7cc9a0e5ecc5955663e0e83631ee3a78bb98df3d291009ee1f7da0",
+    "export_sroie_casefold_sensitivity.py": "f6060f6318c6aedd1cf27d4a76822596eb16d1a61529b2484f29dbd2a52e0ff9"
+  },
+  "outputs": {
+    "paired_values.csv": "46b28a3a0768b4e4fd92d1013e1c5d056c50fd3b3bbd55516009bb62063a5d66",
+    "statistics.csv": "01e15e73be865125322c82d81c3a4c3ee2c92444ebdcf1b69660d7b2419b5f96",
+    "baseline_means.csv": "0d5538c68c694b7b0cc93fe97d70b53e27ce9ca58845c4dcb45aa23f61e7294f"
+  },
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3"
+  },
+  "metric": {
+    "raw": "VN v3 NFC/whitespace case-sensitive",
+    "contour": "VN v3 NFC/whitespace case-sensitive",
+    "sroie": "NFC/whitespace casefold; primary transition pending publication sync"
+  },
+  "bootstrap": "10,000 paired percentile resamples; per-row stored seed; pointwise 95%, not adjusted",
+  "holm": "Separate policy-contrast/evaluation-block families; VN12, SROIE8; no reverse duplicates"
+}

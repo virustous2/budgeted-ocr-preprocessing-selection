@@ -12,6 +12,7 @@ import time
 import csv
 import argparse
 import random
+import unicodedata
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
@@ -42,8 +43,8 @@ def read_txt_gt(path: str) -> str:
 
 
 def compute_cer(prediction: str, ground_truth: str) -> float:
-    pred = " ".join(prediction.split())
-    gt = " ".join(ground_truth.split())
+    pred = " ".join(unicodedata.normalize("NFC", prediction).split())
+    gt = " ".join(unicodedata.normalize("NFC", ground_truth).split())
     if len(gt) == 0:
         return 1.0 if len(pred) > 0 else 0.0
     return cer(gt, pred)

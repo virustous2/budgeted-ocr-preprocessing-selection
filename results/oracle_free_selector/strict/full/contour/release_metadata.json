@@ -1,0 +1,20 @@
+{
+  "protocol": "strict_selector_public_release_v1",
+  "experiment_protocol": "strict_nested_surrogate_selector_v1",
+  "setting": "contour",
+  "source_relative_path": "outputs_contour/strict_nested_selector_contour_cohort300_v2_20260906/full",
+  "source_candidate_sha256": "14b6f00d60a73501c0aa593a906cc64d3813b3132d2d19148be1b2f9bed2b775",
+  "sanitized_candidate_sha256": "41de6e835ffa2166a4b26a3ce59cbb600235f3bc697ed92aeab7e44cddecf36d",
+  "rows": 2700,
+  "engine_page_groups": 900,
+  "removed_columns": [
+    "ocr_text"
+  ],
+  "contains_ocr_text": false,
+  "copied_files": {
+    "nested_selector_inner_validation.csv": "ebddac2442213c32b1266e69ad38392244c4e5671c8f85bca9401efeef7da4a2",
+    "nested_selector_report.txt": "fc6db019e27369b15d7308c80b740e67cf17d2325e1a8a0053adfab4bfedc0ac",
+    "nested_selector_summary.csv": "57485b8d5267ab6ace7a84bcf5204beee0ada83124774cabeaddc29995eb31e0",
+    "nested_selector_summary.json": "cf76a4f6d45efff5d0c3fb3ea31222c2b2b60ce48c8b1ac4f2a0f8514aaeb553"
+  }
+}

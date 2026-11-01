@@ -34,6 +34,8 @@ from sklearn.model_selection import GroupKFold
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from main.random_baseline import expected_minimum_without_replacement
+
 GROUP_COL = "image_name"
 
 FEATURE_COLS_BASE = [
@@ -164,11 +166,9 @@ def reconstruct_per_image_results(
                     sample_size = min(k, len(group_actual))
                     top_k = group_pred.nsmallest(sample_size, "pred_cer")
                     surr_cer = float(top_k[target_col].min())
-                    random_cers = [
-                        float(group_actual.sample(sample_size, random_state=s)[target_col].min())
-                        for s in range(random_trials)
-                    ]
-                    rand_cer = float(np.mean(random_cers))
+                    rand_cer = expected_minimum_without_replacement(
+                        group_actual[target_col].to_numpy(dtype=float), sample_size
+                    )
 
                     fixed_topk_mask = np.zeros(len(group_actual), dtype=bool)
                     for combo_vals in fixed_topk_combos[k]:
@@ -336,7 +336,7 @@ def main() -> None:
         "engines": args.engines,
         "k_values": args.k_values,
         "n_folds": args.n_folds,
-        "random_trials": args.random_trials,
+        "random_method": "exact_uniform_subset_expected_minimum_without_replacement",
         "n_bootstrap": args.n_bootstrap,
         "seed": args.seed,
         "alpha": args.alpha,
@@ -344,11 +344,11 @@ def main() -> None:
         "estimand": (
             "Bootstrap CIs are computed over paired page-level differences "
             "between Surrogate K and each comparator's best-of-K CER. Random K is "
-            "estimated as the mean over random_trials reproducible random draws "
-            "from each page's already evaluated candidate pool; FixedTopK is the "
+            "the exact expected minimum of a uniformly sampled size-K subset without "
+            "replacement from each page's fixed candidate pool; FixedTopK is the "
             "fold-specific static shortlist of K best-average training candidates. "
-            "The CI reflects uncertainty across pages rather than random-draw "
-            "Monte Carlo variance."
+            "The CI reflects uncertainty across pages; Random K has no Monte Carlo "
+            "sampling variance."
         ),
     }
     metadata_path = args.output_dir / "bootstrap_metadata.json"

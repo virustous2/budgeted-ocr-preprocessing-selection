@@ -1,0 +1,20 @@
+{
+  "protocol": "strict_selector_public_release_v1",
+  "experiment_protocol": "strict_nested_policy_selectors_v2",
+  "setting": "raw",
+  "source_relative_path": "outputs/strict_nested_policy_controls_raw_cohort300_v2_20260912_v2/fixed_topk",
+  "source_candidate_sha256": "5da1c754e87716dc987cda4831956b6b996ef81d7574434006563448d546da3b",
+  "sanitized_candidate_sha256": "7fe46fea1aece5f1a2e0961366d9ef28c3fefc05b9b484981137525a0fa96fca",
+  "rows": 2700,
+  "engine_page_groups": 900,
+  "removed_columns": [
+    "ocr_text"
+  ],
+  "contains_ocr_text": false,
+  "copied_files": {
+    "nested_selector_inner_validation.csv": "ae1e2b4e9186a030fef9b1f7fd64d3951e87c8288dd1aa3df0d937c0f7b1eda3",
+    "nested_selector_report.txt": "8ebb811b029d7267cae4cbbe67a36c0c0de0d577d805780a7acdfca2dc8e2d2a",
+    "nested_selector_summary.csv": "d9220d1b576cadba0c4813de4287d73c7712923966d56bea26db53de0a24db2c",
+    "nested_selector_summary.json": "c0c278ea6f1f08553957c53de364082b54fbfaafc218511535a9ade69a897534"
+  }
+}

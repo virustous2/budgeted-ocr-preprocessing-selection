@@ -1,6 +1,6 @@
 ======================================================================
 MULTI-ENGINE SURROGATE COMPARISON REPORT
-Date: 2026-04-10 15:58:57
+Date: 2026-08-23 06:45:45
 ======================================================================
 
 Engines: ['vietocr', 'tesseract', 'easyocr']
@@ -8,30 +8,32 @@ Input features: 22
 
 1. BEST MODEL PER ENGINE
 --------------------------------------------------
-  vietocr     : LightGBM
-  tesseract   : LightGBM
-  easyocr     : LightGBM
+  vietocr     : Stacking
+  tesseract   : Stacking
+  easyocr     : Stacking
 
 2. TEST SET METRICS
-  Engine            MAE       R²   Spearman    Pearson
-  ------------------------------------------------
-  vietocr        0.0189   0.5549     0.5621     0.7450
-  tesseract      0.0479   0.7157     0.7107     0.8471
-  easyocr        0.0359   0.6215     0.7241     0.8030
+   Spearman-global is computed over all held-out rows.
+   Spearman-per-image is the mean within-page candidate-rank correlation.
+  Engine            MAE       R²  SpearGlob   SpearImg    Pearson
+  --------------------------------------------------------------
+  vietocr        0.0192   0.5496     0.5896     0.6925     0.7594
+  tesseract      0.0511   0.5279     0.6805     0.5478     0.7354
+  easyocr        0.0366   0.5571     0.7058     0.7790     0.7630
 
 2b. TRAIN vs TEST MAE (Overfitting Check)
   Engine        Train MAE   Test MAE    Ratio     Status
   ----------------------------------------------------
-  vietocr          0.0094     0.0189     2.00x   OVERFIT?
-  tesseract        0.0181     0.0479     2.64x   OVERFIT?
-  easyocr          0.0153     0.0359     2.35x   OVERFIT?
+  vietocr          0.0090     0.0192     2.14x   OVERFIT?
+  tesseract        0.0191     0.0511     2.67x   OVERFIT?
+  easyocr          0.0167     0.0366     2.19x   OVERFIT?
 
 3. BASELINE CERs
   Engine         Oracle  FixedBest    NoPre
   ------------------------------------------
-  vietocr        0.0207     0.0304   0.0294
-  tesseract      0.0610     0.0809   0.0841
-  easyocr        0.1090     0.1279   0.1302
+  vietocr        0.0203     0.0296   0.0288
+  tesseract      0.0506     0.0692   0.0720
+  easyocr        0.1057     0.1246   0.1277
 
 3b. SURROGATE FILTER vs FIXED BEST-AVERAGE
   (Fixed best-average = best single combo from training, applied uniformly)
@@ -39,30 +41,30 @@ Input features: 22
   K=3:
     Engine        FixedBest     Surr     Diff
     ------------------------------------------
-    vietocr          0.0304   0.0265  -0.0040
-    tesseract        0.0809   0.0711  -0.0098
-    easyocr          0.1279   0.1202  -0.0077
+    vietocr          0.0296   0.0235  -0.0061
+    tesseract        0.0692   0.0617  -0.0076
+    easyocr          0.1246   0.1165  -0.0081
 
   K=5:
     Engine        FixedBest     Surr     Diff
     ------------------------------------------
-    vietocr          0.0304   0.0252  -0.0052
-    tesseract        0.0809   0.0691  -0.0118
-    easyocr          0.1279   0.1178  -0.0101
+    vietocr          0.0296   0.0230  -0.0066
+    tesseract        0.0692   0.0585  -0.0108
+    easyocr          0.1246   0.1138  -0.0108
 
   K=10:
     Engine        FixedBest     Surr     Diff
     ------------------------------------------
-    vietocr          0.0304   0.0234  -0.0071
-    tesseract        0.0809   0.0656  -0.0154
-    easyocr          0.1279   0.1127  -0.0152
+    vietocr          0.0296   0.0223  -0.0074
+    tesseract        0.0692   0.0550  -0.0142
+    easyocr          0.1246   0.1091  -0.0155
 
   K=15:
     Engine        FixedBest     Surr     Diff
     ------------------------------------------
-    vietocr          0.0304   0.0226  -0.0079
-    tesseract        0.0809   0.0637  -0.0172
-    easyocr          0.1279   0.1116  -0.0163
+    vietocr          0.0296   0.0220  -0.0077
+    tesseract        0.0692   0.0537  -0.0155
+    easyocr          0.1246   0.1077  -0.0169
 
 4. SURROGATE FILTER vs RANDOM SEARCH
   (Mean CER, lower is better)
@@ -70,36 +72,36 @@ Input features: 22
   K=3:
     Engine           Surr     Rand     Diff    p-value   Sig
     -----------------------------------------------------
-    vietocr        0.0265   0.0289  -0.0025   0.000010   ***
-    tesseract      0.0711   0.0796  -0.0084   0.000001   ***
-    easyocr        0.1202   0.1348  -0.0146   0.000000   ***
+    vietocr        0.0235   0.0285  -0.0050   0.000000   ***
+    tesseract      0.0617   0.0686  -0.0069   0.000048   ***
+    easyocr        0.1165   0.1318  -0.0153   0.000000   ***
 
   K=5:
     Engine           Surr     Rand     Diff    p-value   Sig
     -----------------------------------------------------
-    vietocr        0.0252   0.0264  -0.0012   0.011461     *
-    tesseract      0.0691   0.0747  -0.0055   0.000031   ***
-    easyocr        0.1178   0.1289  -0.0112   0.000000   ***
+    vietocr        0.0230   0.0259  -0.0028   0.000000   ***
+    tesseract      0.0585   0.0639  -0.0055   0.000082   ***
+    easyocr        0.1138   0.1258  -0.0120   0.000000   ***
 
   K=10:
     Engine           Surr     Rand     Diff    p-value   Sig
     -----------------------------------------------------
-    vietocr        0.0234   0.0243  -0.0009   0.003851    **
-    tesseract      0.0656   0.0688  -0.0033   0.000155   ***
-    easyocr        0.1127   0.1211  -0.0084   0.000000   ***
+    vietocr        0.0223   0.0238  -0.0015   0.000006   ***
+    tesseract      0.0550   0.0583  -0.0033   0.000089   ***
+    easyocr        0.1091   0.1179  -0.0088   0.000000   ***
 
   K=15:
     Engine           Surr     Rand     Diff    p-value   Sig
     -----------------------------------------------------
-    vietocr        0.0226   0.0232  -0.0006   0.000229   ***
-    tesseract      0.0637   0.0665  -0.0028   0.000028   ***
-    easyocr        0.1116   0.1178  -0.0062   0.000000   ***
+    vietocr        0.0220   0.0227  -0.0007   0.000080   ***
+    tesseract      0.0537   0.0561  -0.0024   0.000631   ***
+    easyocr        0.1077   0.1146  -0.0068   0.000000   ***
 
 5. CROSS-ENGINE SUMMARY
 --------------------------------------------------
-  vietocr     : R²=0.555, Significant K: 4/4
-  tesseract   : R²=0.716, Significant K: 4/4
-  easyocr     : R²=0.622, Significant K: 4/4
+  vietocr     : R²=0.550, GlobalSpearman=0.590, PerImageSpearman=0.693, Significant K: 4/4
+  tesseract   : R²=0.528, GlobalSpearman=0.681, PerImageSpearman=0.548, Significant K: 4/4
+  easyocr     : R²=0.557, GlobalSpearman=0.706, PerImageSpearman=0.779, Significant K: 4/4
 
 CONCLUSION
 --------------------------------------------------

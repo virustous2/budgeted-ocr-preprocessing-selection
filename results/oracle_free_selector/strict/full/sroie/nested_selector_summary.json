@@ -1,0 +1,67 @@
+[
+  {
+    "agreement_mean": 0.45590122876747985,
+    "bestof3_mean": 0.4325934382767594,
+    "engine": "tesseract",
+    "fixedbest_mean": 0.4682730919229201,
+    "n_features": 36,
+    "n_images": 616,
+    "nopre_mean": 0.5057809261317155,
+    "p_agreement_less_selector": 1.0,
+    "p_selector_less_agreement": 1.8610961491683514e-22,
+    "p_selector_less_fixedbest": 1.9981614933816952e-38,
+    "p_selector_less_nopre": 2.0788186916122055e-62,
+    "p_selector_less_top1": 1.1121254620746271e-33,
+    "p_top1_less_selector": 1.0,
+    "protocol": "strict_nested_surrogate_selector_v1",
+    "selected_best_accuracy": 0.6883116883116883,
+    "selected_rank_counts": {
+      "1": 231,
+      "2": 209,
+      "3": 176
+    },
+    "selector_choice_counts": {
+      "gbr_reg": 1,
+      "logreg_cls": 3,
+      "rf_reg": 1
+    },
+    "selector_mean": 0.44145614170318775,
+    "selector_minus_agreement": -0.014445087064292166,
+    "selector_minus_bestof3": 0.008862703426428283,
+    "selector_minus_fixedbest": -0.026816950219732336,
+    "selector_minus_top1": -0.02204706683415545,
+    "top1_mean": 0.4635032085373432
+  },
+  {
+    "agreement_mean": 0.3988562039186546,
+    "bestof3_mean": 0.3899951883151645,
+    "engine": "easyocr",
+    "fixedbest_mean": 0.40018445935036273,
+    "n_features": 36,
+    "n_images": 616,
+    "nopre_mean": 0.4079152756662787,
+    "p_agreement_less_selector": 0.9988248499792273,
+    "p_selector_less_agreement": 0.0011751500207727427,
+    "p_selector_less_fixedbest": 4.145334251959629e-05,
+    "p_selector_less_nopre": 1.681119586034934e-23,
+    "p_selector_less_top1": 8.379675614292698e-05,
+    "p_top1_less_selector": 0.9999162032438571,
+    "protocol": "strict_nested_surrogate_selector_v1",
+    "selected_best_accuracy": 0.44642857142857145,
+    "selected_rank_counts": {
+      "1": 216,
+      "2": 195,
+      "3": 205
+    },
+    "selector_choice_counts": {
+      "rf_reg": 2,
+      "ridge_reg": 3
+    },
+    "selector_mean": 0.39720297412104416,
+    "selector_minus_agreement": -0.0016532297976103786,
+    "selector_minus_bestof3": 0.007207785805879695,
+    "selector_minus_fixedbest": -0.0029814852293185406,
+    "selector_minus_top1": -0.0026789935016747297,
+    "top1_mean": 0.39988196762271894
+  }
+]

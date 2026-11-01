@@ -1,0 +1,23 @@
+{
+  "protocol": "standalone_noise_bestk_sensitivity_v1",
+  "output_dir": "outputs/noise_feature_sensitivity_20261012_v1",
+  "primary_config": "analysis/bestk_sources_v3_casefold_20261010.json",
+  "primary_statistics": "outputs/bestk_statistics_v3_casefold_20261010_v1/statistics.csv",
+  "blocks": {
+    "raw": {
+      "data": "outputs/vn_v3_case_sensitive_raw_20260930_v1/preprocessing_data.csv",
+      "nopre": "outputs/vn_v3_case_sensitive_raw_20260930_v1/default_cer_vn_v3.csv",
+      "folds": "outputs/vn_v3_case_sensitive_raw_20260930_v1/fold_assignments.csv"
+    },
+    "contour": {
+      "data": "outputs_contour/vn_v3_case_sensitive_contour_20261001_v2/preprocessing_data.csv",
+      "nopre": "outputs_contour/vn_v3_case_sensitive_contour_20261001_v2/default_cer_vn_v3.csv",
+      "folds": "outputs_contour/vn_v3_case_sensitive_contour_20261001_v2/fold_assignments.csv"
+    },
+    "sroie": {
+      "data": "SROIRE_COMPARISON/output_sroire/casefold_training_inputs_20260926_v2/preprocessing_data.csv",
+      "nopre": "SROIRE_COMPARISON/output_sroire/casefold_training_inputs_20260926_v2/default_cer_sroie_all616_casefold.csv",
+      "folds": "SROIRE_COMPARISON/output_sroire/casefold_training_inputs_20260926_v2/fold_assignments.csv"
+    }
+  }
+}
