@@ -1,6 +1,6 @@
 # Oracle-Free Selector Results
 
-This directory contains public, sanitized outputs for the deployable top-3 selector analyses reported in the manuscript. The source documents, reference transcriptions, OCR crops, OCR caches, and OCR output text are not distributed. Every `nested_selector_candidate_scores_sanitized.csv` file omits the original OCR transcript field while retaining the numeric and derived features needed for aggregate checks.
+This directory contains public, sanitized outputs for the oracle-free top-3 output-selection analyses reported in the manuscript. The source documents, reference transcriptions, OCR crops, OCR caches, and OCR output text are not distributed. Every `nested_selector_candidate_scores_sanitized.csv` file omits the original OCR transcript field while retaining the numeric and derived features needed for aggregate checks.
 
 - `raw/`, `contour/`, and `sroie/` contain the original Surrogate top-3 selector outputs.
 - `policy_matched/` contains the same nested selector protocol applied separately to NN-K and FixedTopK top-3 shortlists. SROIE NN-K is omitted because the historical shortlist cannot be reconstructed exactly for three EasyOCR pages.
